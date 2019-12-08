@@ -1,48 +1,54 @@
 <!DOCTYPE HTML>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="eng" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="utf-8" />
-	<title> The art of clipping salon. </title>
-	<link rel="stylesheet" href="../../static/user/register.css">
-	<link rel="icon" href="../../static/img/scissors.ico" type="image/x-icon"/>
-	<link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script type = "text/javascript" src="../../static/registerCode.js">
-	</script>
+    <meta charset="utf-8"/>
+    <link rel="icon" href="../../static/img/scissors.ico" type="image/x-icon"/>
+
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../../static/user/register.css" th:href="@{/user/register.css}">
+    <script type="text/javascript" src="../../static/user/registerCode.js">
+    </script>
+
+    <title> The art of clipping salon. </title>
 </head>
 
 <body>
 
 <form th:object="${user}" th:action="@{/user/}" method="post">
-	<div class="container">
+    <div class="container">
 
-		<i class="fa fa-user-circle-o" aria-hidden="true" style="font-size:22px;"></i> 
-		</br>
-		<h1> Create an account. </h1>
-		<div class="form-group">
-	    	<label for="inputName">Name</label>
-	    	<input type="text" class="form-control" th:field="*{name}" id="inputName" placeholder="Name">
-	  	</div>
-	  	<div class="form-group">
-	    	<label for="inputSurname">Surname</label>
-	    	<input type="text" class="form-control" th:field="*{secondName}" id="inputSurname" placeholder="Surname">
-	 	 </div>
-	  	<div class="form-row">
-	    <div class="form-group col-md-6">
-	      <label for="inputEmail">Email</label>
-	      <input type="email" class="form-control" th:field="*{email}" id="inputEmail" placeholder="Email">
-	    </div>
-	    <div class="form-group col-md-6">
-	      <label for="inputPassword">Password</label>
-	      <input type="password" class="form-control" th:field="*{password}" id="inputPassword" placeholder="Password">
-	    </div>
-	  	</div>
-  		<input type="submit" class="button" value="Sign in"></br>
-  		
-  		<a href="../index.html">
-  			<i class="fa fa-home" aria-hidden="true" id="home"></i> 
-  		</a>
-  	</div>
+        <i class="fa fa-user-circle-o" aria-hidden="true" style="font-size:22px;"></i>
+        </br>
+        <h1> Create an account. </h1>
+        <div class="form-group">
+            <label for="inputName">Name</label>
+            <input type="text" class="form-control" th:field="*{name}" id="inputName" placeholder="Name">
+        </div>
+        <div class="form-group">
+            <label for="inputSurname">Surname</label>
+            <input type="text" class="form-control" th:field="*{secondName}" id="inputSurname" placeholder="Surname">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputEmail">Email</label>
+                <input type="email" class="form-control" th:field="*{email}" id="inputEmail" placeholder="Email">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPassword">Password</label>
+                <input type="password" class="form-control" th:field="*{password}" id="inputPassword"
+                       placeholder="Password">
+            </div>
+        </div>
+        <input type="submit" class="button" value="Sign in"></br>
+
+        <a href="../index.html">
+            <i class="fa fa-home" aria-hidden="true" id="home"></i>
+        </a>
+    </div>
 </form>
 
 </body>
