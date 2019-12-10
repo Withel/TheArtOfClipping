@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title> The art of clipping salon. </title>
+    <link rel="stylesheet" href="../../static/loginForm/login.css">
+    <link rel="icon" href="../../static/img/scissors.ico" type="image/x-icon"/>
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="../../static/loginForm/loginCode.js">
+    </script>
+</head>
+
+<body>
+<form th:action="@{/login}" method="POST" class="form-signin">
+    <div class="container">
+        <div class="form">
+            <i class="fa fa-user-circle-o" aria-hidden="true" style="font-size:22px;"></i> </br>
+            <label for="email">Email address</label>
+            <!--<input type="email" class="form-control" id="email" name="password" aria-describedby="emailHelp" placeholder="Enter email">-->
+            <input type="text" id="email" name="email" th:placeholder="Email" class="form-control"/>
+        </div>
+        </br>
+        <small id="emailHelp" class="form-text text-muted"> We'll never share your email with anyone else.</small>
+        <div class="form">
+            <label for="password">Password</label>
+            <!--<input type="password" class="form-control" id="password" name="password" placeholder="Password">-->
+            <input type="password" th:placeholder="Password" id="password" name="password" class="form-control"/>
+        </div>
+        <!--<input type="Submit" class="button" value="Log in"></br>-->
+        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
+                th:text="Login"></button>
+        </br>
+        <small id="accCreate" class="form-text text-muted"> You can create an account here.</small>
+        </br>
+        <a href="../register">
+            <input type="button" class="button" value="Register"></br>
+        </a>
+        <a href="../index.html">
+            <i class="fa fa-home" aria-hidden="true" id="home"></i>
+        </a>
+
+    </div>
+</form>
+
+<!--<form th:action="@{/login}" method="POST" class="form-signin">-->
+<!--<h3 class="form-signin-heading" th:text="Welcome"></h3>-->
+<!--<br/>-->
+
+<!--<input type="text" id="email" name="email"  th:placeholder="Email"-->
+<!--class="form-control" /> <br/>-->
+<!--<input type="password"  th:placeholder="Password"-->
+<!--id="password" name="password" class="form-control" /> <br />-->
+
+<!--<div align="center" th:if="${param.error}">-->
+<!--<p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>-->
+<!--</div>-->
+<!--<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>-->
+<!--</form>-->
+
+</body>
+
+</html>

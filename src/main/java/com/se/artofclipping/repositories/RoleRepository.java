@@ -1,11 +1,11 @@
 package com.se.artofclipping.repositories;
 
-import com.se.artofclipping.model.User;
+import com.se.artofclipping.model.Role;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface RoleRepository extends CrudRepository<Role, Long> {
 
-    User findByEmail(String email);
+    Role findByRole(String role);
 }

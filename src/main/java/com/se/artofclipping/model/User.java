@@ -7,6 +7,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -17,6 +18,9 @@ public class User {
     private String secondName;
     private String email;
     private String password;
+    //@TODO discover why this fucking shit doesnt work without this FFS
+    // field is for checking if user is active in our database
+    private int active;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
