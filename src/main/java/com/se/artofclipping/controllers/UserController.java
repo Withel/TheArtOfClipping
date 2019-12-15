@@ -3,7 +3,6 @@ package com.se.artofclipping.controllers;
 import com.se.artofclipping.model.User;
 import com.se.artofclipping.services.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,8 +20,18 @@ import java.util.Set;
 @Slf4j
 public class UserController {
 
-    @Autowired
+    //@Autowired
     private UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    //@TODO change this name to smething relevant
+    @GetMapping("user")
+    public String goTo(){
+        return "user/user";
+    }
 
     @GetMapping("login")
     public String login(){
