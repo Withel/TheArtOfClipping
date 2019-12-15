@@ -1,13 +1,18 @@
 <!DOCTYPE HTML>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8" />
 	<title> The art of clipping salon. </title>
-	<link rel="stylesheet" href="../../static/css/calendar.css">
+
 	<link rel="icon" href="img/scissors.ico" type="image/x-icon"/>
 	<link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	
+
+    <!--Bootstrap 4.4.1-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../../static/css/calendar.css" th:href="@{css/calendar.css}">
 
 </head>
 
@@ -19,9 +24,9 @@
 				The art of clipping</h1>
 	    <p>Select day from the calendar</p>
 	</header>
-	<main>	
+	<main>
 		<article>
-			<a href="../user/loginForm.html">
+			<a href="/login">
 			<div class="account">
 		 		<h4><i class="fa fa-user-circle-o" aria-hidden="true" style="font-size:22px;"></i> My Account</h4>
 		 	</div>
@@ -31,29 +36,38 @@
 				<div class="day-slider">
 		 			<a onclick="moveBackward()"> <i class="fa fa-arrow-left" id="prev" aria-hidden="true"style="font-size:34px;"></i></a>
 		 			<div class="day-wrapper">
-		 				<div class="day"><h3><div class="dayN" id="dayN0">1 </div><div class="dayNb" id="day0"> </div><div class="month" id="month0"> </div></h3></div>	
+		 				<div class="day"><h3><div class="dayN" id="dayN0">1 </div><div class="dayNb" id="day0"> </div><div class="month" id="month0"> </div></h3></div>
 		 				<div class="day"><h3><div class="dayN" id="dayN1">2 </div><div class="dayNb" id="day1"> </div><div class="month" id="month1"> </div></h3></div>
 		 				<div class="day"><h3><div class="dayN" id="dayN2">3 </div><div class="dayNb" id="day2"> </div><div class="month" id="month2"> </div></h3></div>
 		 				<div class="day"><h3><div class="dayN" id="dayN3">4 </div><div class="dayNb" id="day3"> </div><div class="month" id="month3"> </div></h3></div>
-		 				<div class="day"><h3><div class="dayN" id="dayN4">5 </div><div class="dayNb" id="day4"> </div><div class="month" id="month4"> </div></h3></div>	
-		 				<div class="day"><h3><div class="dayN" id="dayN5">6 </div><div class="dayNb" id="day5"> </div><div class="month" id="month5"> </div></h3></div>	
+		 				<div class="day"><h3><div class="dayN" id="dayN4">5 </div><div class="dayNb" id="day4"> </div><div class="month" id="month4"> </div></h3></div>
+		 				<div class="day"><h3><div class="dayN" id="dayN5">6 </div><div class="dayNb" id="day5"> </div><div class="month" id="month5"> </div></h3></div>
 		 				<div class="day"><h3><div class="dayN" id="dayN6">7 </div><div class="dayNb" id="day6"> </div><div class="month" id="month6"> </div></h3></div>
-		 				
+
 		 			</div>
 		 			<a onclick="moveForward()"> <i class="fa fa-arrow-right" id="next" aria-hidden="true"style="font-size:34px;"></i></a>
 		 		</div>
 		 	</div>
 		 	</div>
-			
+
 		</article>
 	</main>
 
-		<script src="../../static/calendar/jquery-3.4.1.min.js"></script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+
 		<script src="../../static/js/calendarKod.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 		<script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
 	</body>
-
-
 
 </html>
