@@ -36,6 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/css/**",
             "/images/**",
             "/webjars/**",
+            "/h2-console/**",
             "/",
             "/login",
             "/register",
@@ -70,6 +71,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/").and().exceptionHandling()
                 .accessDeniedPage("/access-denied");
+
+        http.
+                headers()
+                .frameOptions()
+                .disable();
 
 //        http.
 //                authorizeRequests()
