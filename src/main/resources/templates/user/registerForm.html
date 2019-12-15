@@ -37,18 +37,17 @@
             <label for="inputSurname">Surname</label>
             <input type="text" class="form-control" th:field="*{secondName}" id="inputSurname" placeholder="Surname">
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputEmail">Email</label>
-                <input type="email" class="form-control" th:field="*{email}" id="inputEmail" placeholder="Email">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputPassword">Password</label>
-                <input type="password" class="form-control" th:field="*{password}" id="inputPassword"
-                       placeholder="Password">
-            </div>
+
+        <div class="form-group">
+             <label for="inputEmail">Email</label>
+             <input type="email" class="form-control" th:field="*{email}" id="inputEmail" placeholder="Email">
         </div>
-        <input type="submit" class="button" value="Sign in"></br>
+        <div class="form-group">
+             <label for="inputPassword">Password</label>
+             <input type="password" class="form-control" th:field="*{password}" id="inputPassword"
+                   placeholder="Password">
+        </div>
+        <input type="submit" class="buttonReg" value="Sign in">
 
         <a href="/">
             <i class="fa fa-home" aria-hidden="true" id="home"></i>

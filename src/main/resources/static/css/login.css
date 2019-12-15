@@ -12,8 +12,8 @@ a {
 }
 
 .container {
-    width: 600px;
-    height: 600px;
+    width: 40%;
+    height: auto;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -23,27 +23,23 @@ a {
     margin-top: 3%;
 }
 
-.form {
-    width: 100%;
-    height: 20%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    background-color: #FFFFFF;
-    margin-top: 20px;
-    font-weight: bold;
+#emailHelp{
+    margin-bottom: 20px;
 }
 
 .form-control {
     width: 90%;
     height: 20%;
     margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.button {
+.buttReg {
     font-family: 'Poiret One', serif;
     font-weight: bold;
-    width: 20%;
+    width: 25%;
     height: 10%;
     background-color: #E9EBEE;
     border: 2px solid #000000;
@@ -52,11 +48,11 @@ a {
     cursor: pointer;
     text-align: center;
     font-size: 30px;
-    margin-bottom: 5px;
-    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-top: 25px;
 }
 
-.button:hover {
+.buttReg:hover {
     filter: brightness(100%);
     border: 3px solid #393939;
 }
@@ -64,9 +60,8 @@ a {
 #home {
     font-size: 26px;
     float: left;
-    margin-bottom: 20px;
-    margin-top: 15px;
-    margin-left: 15px;
+    margin-bottom: 15px;
+    margin-top: 40px;
     cursor: pointer;
     filter: brightness(90%);
 }
