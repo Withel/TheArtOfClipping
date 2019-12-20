@@ -1,7 +1,7 @@
 package com.se.artofclipping.controllers;
 
 import com.se.artofclipping.model.User;
-import com.se.artofclipping.services.UserService;
+import com.se.artofclipping.services.GuestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,18 +13,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Controller
 @Slf4j
-public class UserController {
+public class GuestController {
 
     //@Autowired
-    private UserService userService;
+    private GuestService guestService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public GuestController(GuestService guestService) {
+        this.guestService = guestService;
     }
 
     //@TODO change this name to smething relevant
@@ -46,14 +43,14 @@ public class UserController {
         // for testing purposes
         // just printing out every user in database
 
-        Set<User> users = new HashSet<>();
-
-        userService.getUserRepository().findAll().iterator()
-                .forEachRemaining(users::add);
-
-        for(User u : users){
-            System.out.println(u);
-        }
+//        Set<User> users = new HashSet<>();
+//
+//        guestService.getUserRepository().findAll().iterator()
+//                .forEachRemaining(users::add);
+//
+//        for(User u : users){
+//            System.out.println(u);
+//        }
 
         return "user/registerForm";
     }
@@ -63,9 +60,9 @@ public class UserController {
     @PostMapping("registration")
     public String createNewUser(@ModelAttribute User user, BindingResult bindingResult,
                                       Model model) {
-        System.out.println(user.getEmail());
+        log.debug(user.getEmail());
 //        ModelAndView modelAndView = new ModelAndView();
-        User userExists = userService.findUserByEmail(user.getEmail());
+        User userExists = guestService.findUserByEmail(user.getEmail());
         if (userExists != null) {
             bindingResult
                     .rejectValue("email", "error.user",
@@ -75,7 +72,7 @@ public class UserController {
 //            modelAndView.setViewName("registration");
             return "registration";
         } else {
-            userService.saveUser(user);
+            guestService.saveUser(user);
             model.addAttribute("user", new User());
 //            modelAndView.addObject("successMessage", "User has been registered successfully");
 //            modelAndView.addObject("user", new User());
@@ -89,7 +86,7 @@ public class UserController {
 //        System.out.println(user.getEmail());
 //        System.out.println(user.getName());
 //        System.out.println(user.getPassword());
-//        System.out.println(user.getSecondName());
+//        System.out.println(user.getSurname());
 
 
         return "user/registerForm";
@@ -101,7 +98,7 @@ public class UserController {
     @RequestMapping("secretpage")
     public String showSecretPage(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
+        User user = guestService.findUserByEmail(auth.getName());
         model.addAttribute(user);
         return "secretpage";
     }

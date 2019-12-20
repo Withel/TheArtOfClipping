@@ -15,7 +15,7 @@ public class User {
     private Long id;
 
     private String name;
-    private String secondName;
+    private String surname;
     private String email;
     private String password;
     //@TODO discover why this fucking shit doesnt work without this FFS
