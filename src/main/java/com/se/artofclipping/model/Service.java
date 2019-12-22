@@ -3,7 +3,6 @@ package com.se.artofclipping.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 @Data
 @Entity
@@ -17,7 +16,8 @@ public class Service {
     private String name;
     private Double price;
 
-    private Date durationMinutes;
+    private Integer durationMinutes;
+    private Character type;
 
     private Boolean isActive;
 }

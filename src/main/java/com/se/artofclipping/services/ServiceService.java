@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface ServiceService {
 
+    List<Service> listService(Character type);
     void addService();
     void changeDuration(Service service);
     void changeName(Service service);
     void changePrice(Service service);
     void deprecateService(Service service);
-    List<Service> listService();
 }

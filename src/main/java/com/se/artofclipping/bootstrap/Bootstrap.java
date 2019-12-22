@@ -1,8 +1,10 @@
 package com.se.artofclipping.bootstrap;
 
 import com.se.artofclipping.model.Role;
+import com.se.artofclipping.model.Service;
 import com.se.artofclipping.model.User;
 import com.se.artofclipping.repositories.RoleRepository;
+import com.se.artofclipping.repositories.ServiceRepository;
 import com.se.artofclipping.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
@@ -18,26 +20,29 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class RoleBootstrap implements ApplicationListener<ContextRefreshedEvent> {
+public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
+    private final ServiceRepository serviceRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public RoleBootstrap(RoleRepository roleRepository, UserRepository userRepository,
-                         BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public Bootstrap(RoleRepository roleRepository, UserRepository userRepository,
+                     ServiceRepository serviceRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
+        this.serviceRepository = serviceRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent){
+        log.debug("Loading bootstrap data.");
         roleRepository.saveAll(getRoles());
         userRepository.saveAll(getAdmins());
         userRepository.saveAll(getCustomers());
-        log.debug("Loading bootstrap data.");
+        serviceRepository.saveAll(getServices());
     }
 
     private List<Role> getRoles(){
@@ -99,5 +104,61 @@ public class RoleBootstrap implements ApplicationListener<ContextRefreshedEvent>
         customers.add(customer);
 
         return customers;
+    }
+
+    private List<Service> getServices(){
+        List<Service> services = new ArrayList<>();
+
+        // Male services
+        Service service = new Service();
+        service.setName("Haircut");
+        service.setIsActive(true);
+        service.setDurationMinutes(30);
+        service.setPrice(40D);
+        service.setType(Character.toUpperCase('M'));
+        services.add(service);
+
+        service = new Service();
+        service.setName("Beardcut");
+        service.setIsActive(true);
+        service.setDurationMinutes(30);
+        service.setPrice(40D);
+        service.setType(Character.toUpperCase('M'));
+        services.add(service);
+
+        service = new Service();
+        service.setName("Combo (beard+Hair)");
+        service.setIsActive(true);
+        service.setDurationMinutes(60);
+        service.setPrice(70D);
+        service.setType(Character.toUpperCase('M'));
+        services.add(service);
+
+        // Female services
+        service = new Service();
+        service.setName("Haircut");
+        service.setIsActive(true);
+        service.setDurationMinutes(30);
+        service.setPrice(40D);
+        service.setType(Character.toUpperCase('F'));
+        services.add(service);
+
+        service = new Service();
+        service.setName("Color");
+        service.setIsActive(true);
+        service.setDurationMinutes(90);
+        service.setPrice(80D);
+        service.setType(Character.toUpperCase('F'));
+        services.add(service);
+
+        service = new Service();
+        service.setName("Haircut + Stylisation");
+        service.setIsActive(true);
+        service.setDurationMinutes(120);
+        service.setPrice(120D);
+        service.setType(Character.toUpperCase('F'));
+        services.add(service);
+
+        return services;
     }
 }
