@@ -39,29 +39,13 @@ public class GuestController {
     public String newUser(Model model){
         model.addAttribute("user", new User());
 
-        //@TODO remove later
-        // for testing purposes
-        // just printing out every user in database
-
-//        Set<User> users = new HashSet<>();
-//
-//        guestService.getUserRepository().findAll().iterator()
-//                .forEachRemaining(users::add);
-//
-//        for(User u : users){
-//            System.out.println(u);
-//        }
-
         return "user/registerForm";
     }
-
-    // commented parts of that function are my "old" way of doing that
 
     @PostMapping("registration")
     public String createNewUser(@ModelAttribute User user, BindingResult bindingResult,
                                       Model model) {
         log.debug(user.getEmail());
-//        ModelAndView modelAndView = new ModelAndView();
         User userExists = guestService.findUserByEmail(user.getEmail());
         if (userExists != null) {
             bindingResult
@@ -69,25 +53,12 @@ public class GuestController {
                             "There is already a user registered with the email provided");
         }
         if (bindingResult.hasErrors()) {
-//            modelAndView.setViewName("registration");
             return "registration";
         } else {
             guestService.saveUser(user);
             model.addAttribute("user", new User());
-//            modelAndView.addObject("successMessage", "User has been registered successfully");
-//            modelAndView.addObject("user", new User());
-//            modelAndView.setViewName("user/registerForm");
-
         }
         log.debug("REGISTERED SUCCESSFULLY FFS");
-
-        // for testing purposes
-//        System.out.println(user.getId());
-//        System.out.println(user.getEmail());
-//        System.out.println(user.getName());
-//        System.out.println(user.getPassword());
-//        System.out.println(user.getSurname());
-
 
         return "user/registerForm";
     }
