@@ -5,6 +5,7 @@ import com.se.artofclipping.model.User;
 import com.se.artofclipping.repositories.RoleRepository;
 import com.se.artofclipping.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,12 @@ import java.util.HashSet;
 //@TODO probably will have to split this into more interfaces
 
 @Service
+@Primary
 public class GuestServiceImpl implements GuestService {
 
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    protected UserRepository userRepository;
+    protected RoleRepository roleRepository;
+    protected BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public GuestServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
@@ -26,12 +28,6 @@ public class GuestServiceImpl implements GuestService {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
-
-    //@TODO remove later -> also for testing purposes
-
-    public UserRepository getUserRepository() {
-        return userRepository;
     }
 
     public User findUserByEmail(String email) {
@@ -44,6 +40,5 @@ public class GuestServiceImpl implements GuestService {
         Role userRole = roleRepository.findByRole("CUSTOMER");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         userRepository.save(user);
-
     }
 }
