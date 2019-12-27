@@ -11,7 +11,7 @@
 
     <!--Bootstrap 4.4.1-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <link rel="stylesheet" href="../static/css/main.css" th:href="@{css/main.css}">
 
@@ -20,40 +20,49 @@
 </head>
 
 <body>
-<nav class="navbar navbar-default border">
-    <div class="navbar-header">
-        <a href="#" id="contact" class="navbar-brand"><h4><i class="fa fa-scissors" style="font-size:20px;"></i>AoCSalon
-        </h4></a>
+<header>
+    <!––navigation bar for the page––>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
+        <a class="navbar-brand" href="#"><img src="../static/img/scissors.png" width="30" height="30"
+                                              class="d-inline-block align-top" alt="">
+            AoCSalon</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon pull-left"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Features</a>
+                <a class="nav-item nav-link" href="#">Pricing</a>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <a class="btn btn-secondary pull-right accountButton" href="/user">
+                <h3><i class="fa fa-user-circle-o" aria-hidden="true"></i>Account</h3>
+            </a>
+
+        </div>
+    </nav>
+    <!––header, title of the page––>
+    <div class="page-header">
+        <h1>The art of clipping salon.</h1>
+        <p>Please choose the type of service.</p>
     </div>
-    <ul class="nav navbar-nav">
-        <li class="navbar-li">
-            <a href="#" id="about"> About</a>
-            <a href="#" id="contact"> Contact </a>
-        </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li><a class="account" href="/user">Account</a></li>
-    </ul>
-
-</nav>
-
-<h1 class="d-flex justify-content-center"><i class="fa fa-scissors" style="font-size:50px;"></i>
-    The art of clipping</h1>
-<p class="d-flex justify-content-center">Please choose the type of service.</p>
+</header>
 
 <main>
     <article>
-
-        <div class="container row d-flex justify-content-center">
-            <div class="buttons col d-flex justify-content-center">
-                <div class="type" id="female">
+        <div class="container mainContainer">
+            <div class="container buttonsContainer">
+                <div class="btn btn-secondary btn-lg typeButton" id="female">
                     <h2>Ladies</h2>
                 </div>
-                <div class="type justify-content-end" id="male">
+                <div class="btn btn-secondary btn-lg typeButton" id="male">
                     <h2>Gentlemen</h2>
                 </div>
             </div>
-            <div class="w-100"></div>
             <div class="services col d-flex justify-content-center">
                 <div class="table-responsive" th:if="${not #lists.isEmpty(services)}">
                     <table class="table table-hover">
@@ -80,7 +89,6 @@
                 </div>
             </div>
         </div>
-
     </article>
 </main>
 

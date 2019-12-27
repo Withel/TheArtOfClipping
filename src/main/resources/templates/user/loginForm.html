@@ -19,40 +19,59 @@
 </head>
 
 <body>
-<form th:action="@{/login}" method="POST" class="form-signin">
-    <div class="container">
+<header>
+    <!––navigation bar for the page––>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
+        <a class="navbar-brand" href="#"><img src="../../static/img/scissors.png" width="30" height="30"
+                                              class="d-inline-block align-top" alt="">
+            AoCSalon</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon pull-left"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Features</a>
+                <a class="nav-item nav-link" href="#">Pricing</a>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <a class="btn btn-secondary pull-right accountButton" href="/user">
+                <h3><i class="fa fa-user-circle-o" aria-hidden="true"></i>Account</h3>
+            </a>
+
+        </div>
+    </nav>
+</header>
+<form th:action="@{/login}" method="POST" class="form-signin">
+    </br>
+    <div class="container mainContainer">
         <!--THIS DIV MAKES IT IMPOSSIBLE TO WRITE EMAL?????-->
         <div class="emailContainer">
-            <i class="fa fa-user-circle-o" aria-hidden="true" style="font-size:22px;"></i> </br>
-            <label for="email">Email address</label>
+            <i class="fa fa-user-circle-o" aria-hidden="true" style="margin-top: 10px; font-size:22px;"></i> </br>
+            <label for="email"><h2>Email address</h2></label>
             <!--<input type="email" class="form-control" id="email" name="password" aria-describedby="emailHelp" placeholder="Enter email">-->
             <input type="email" class="form-control" id="email" name="email" th:placeholder="Email"/>
         </div>
-
         <div class="passContainer">
-            <small id="emailHelp" class="form-text text-muted"> We'll never share your email with anyone else.</small>
-
-
+            <small id="emailHelp" class="form-text text-muted"><h1>We'll never share your email with anyone else.</h1>
+            </small>
             <div class="form">
-                <label for="password">Password</label>
+                <label for="password"><h2>Password</h2></label>
                 <!--<input type="password" class="form-control" id="password" name="password" placeholder="Password">-->
                 <input type="password" class="form-control" th:placeholder="Password" id="password" name="password"/>
             </div>
-            <input type="Submit" class="buttReg" value="Login">
+            <input type="submit" class="btn btn-secondary btn-lg typeButton" value="Login">
         </div>
         <div class="buttonsContainer">
-
-            <small id="accCreate" class="form-text text-muted"> You can create an account here.</small>
-
+            <small id="accCreate" class="form-text text-muted"><h1> You can create an account here.</h1></small>
             <a href="/register">
-                <input type="button" class="buttReg register"  value="Register">
-            </a>
-
-            <a href="/">
-                <i class="fa fa-home" aria-hidden="true" id="home"></i>
+                <input type="button" class="btn btn-secondary btn-lg typeButton" value="Register">
             </a>
         </div>
+        </br>
     </div>
 </form>
 

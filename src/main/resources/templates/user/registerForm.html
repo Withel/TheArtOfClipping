@@ -22,36 +22,61 @@
 </head>
 
 <body>
+<header>
+    <!––navigation bar for the page––>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
+        <a class="navbar-brand" href="#"><img src="../../static/img/scissors.png" width="30" height="30"
+                                              class="d-inline-block align-top" alt="">
+            AoCSalon</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon pull-left"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Features</a>
+                <a class="nav-item nav-link" href="#">Pricing</a>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <a class="btn btn-secondary pull-right accountButton" href="/user">
+                <h3><i class="fa fa-user-circle-o" aria-hidden="true"></i>Account</h3>
+            </a>
+
+        </div>
+    </nav>
+</header>
 <form th:object="${user}" th:action="@{/registration}" method="post">
-    <div class="container">
-
-        <i class="fa fa-user-circle-o" aria-hidden="true" style="font-size:22px;"></i>
+    </br>
+    <div class="container mainContainer">
+        <i class="fa fa-user-circle-o" aria-hidden="true" style="margin-top: 10px; font-size:22px;"></i>
         </br>
-        <h1> Create an account. </h1>
+        <h2> Create an account. </h2>
         <div class="form-group">
-            <label for="inputName">Name</label>
+            <label for="inputName"><h1>Name</h1></label>
             <input type="text" class="form-control" th:field="*{name}" id="inputName" placeholder="Name">
         </div>
         <div class="form-group">
-            <label for="inputSurname">Surname</label>
+            <label for="inputSurname"><h1>Surname</h1></label>
             <input type="text" class="form-control" th:field="*{surname}" id="inputSurname" placeholder="Surname">
         </div>
 
         <div class="form-group">
-             <label for="inputEmail">Email</label>
-             <input type="email" class="form-control" th:field="*{email}" id="inputEmail" placeholder="Email">
+            <label for="inputEmail"><h1>Email</h1></label>
+            <input type="email" class="form-control" th:field="*{email}" id="inputEmail" placeholder="Email">
         </div>
         <div class="form-group">
-             <label for="inputPassword">Password</label>
-             <input type="password" class="form-control" th:field="*{password}" id="inputPassword"
+            <label for="inputPassword"><h1>Password</h1></label>
+            <input type="password" class="form-control" th:field="*{password}" id="inputPassword"
                    placeholder="Password">
         </div>
-        <input type="submit" class="buttonReg" value="Sign in">
 
-        <a href="/">
-            <i class="fa fa-home" aria-hidden="true" id="home"></i>
-        </a>
+        <div class="buttonsContainer">
+            <input type="submit" class="btn btn-secondary btn-lg typeButton" value="Sign in">
+        </div>
+        </br>
     </div>
 </form>
 
