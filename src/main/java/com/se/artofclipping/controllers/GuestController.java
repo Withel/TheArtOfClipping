@@ -27,7 +27,13 @@ public class GuestController {
     //@TODO change this name to smething relevant
     @GetMapping("user")
     public String goTo(){
-        return "user/user";
+        //@TODO change it for query with admin role
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.getName().equals("admin@admin.com")){
+            return "admin/adminpage";
+        } else{
+            return "user/user";
+        }
     }
 
     @GetMapping("login")

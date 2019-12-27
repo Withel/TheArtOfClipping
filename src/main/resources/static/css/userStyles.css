@@ -4,57 +4,62 @@ body
 	background-color: #E9EBEE;
 	color: 	#000000;
 	font-family: 'Poiret One', serif;
-    font-size: 25px;
-
-}
-
-a
-{
-	color:black;
+	font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
 }
 
 h1
 {
- 	font-size: 50px;
-  	font-weight: bold;
+	font-size: calc(40px + (70 - 40) * ((100vw - 300px) / (1600 - 300)));
+	font-weight: bold;
 	text-align: center;
-	letter-spacing:  10px;
- 	margin-bottom:35px; 
- 	margin-top:10px;	
+	letter-spacing:  5px;
+	margin-bottom:0px;
+	margin-top:10px;
+}
+
+h2{
+	font-size: calc(17px + (30 - 17) * ((100vw - 300px) / (1600 - 300)));
+	text-align: center;
+	letter-spacing:  1px;
+	margin-bottom:0px;
+	margin-top:2px;
+}
+
+h3{
+	font-size: calc(15px + (24 - 15) * ((100vw - 300px) / (1600 - 300)));
+	text-align: center;
+	letter-spacing:  1px;
+	margin-top:2px;
 }
 
 p
 {
 	font-weight: bold;
 	text-align: center;
- 	letter-spacing:  2px;
- 	margin-bottom:15px; 
- 	margin-top:10px;	
+	letter-spacing:  2px;
+	margin-bottom:25px;
+	margin-top:5px;
 }
-
-h2
+.accountButton
 {
-	font-size: 20px;
-	font-weight: bold;
-	text-align: center;
- 	letter-spacing:  2px;
- 	margin-bottom:15px; 
- 	margin-top:5px;	
+	background-color: #E9EBEE;
+	border: 1px solid #747474;
+	border-radius: 2px;
+	filter: brightness(95%);
+	border-radius: 10px;
+	color: black;
 }
 
-h3{
-	font-size: 24px;
-	font-weight: bold;
-	text-align: center;
- 	letter-spacing:  2px;
- 	margin-bottom:5px; 
- 	margin-top:5px;	
-}
-
-.container
+.accountButton:hover
 {
-	width: 600px;
-	height:600px;
+	filter: brightness(100%);
+	border: 1px solid #c3c5c8;
+}
+
+.mainContainer
+{
+	max-width: 800px;
+	min-height: 400px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -63,55 +68,42 @@ h3{
 	border-radius: 10px;
 }
 
-.account{
-	width: 80%;
-	height:20%;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	margin-right: auto; 
-	margin-left: auto;
-}
-
-.buttons{
-	width: 100%;
-	height:65%;
-
-}
-
-.type
+.buttonContainer
 {
-	width: 40%;
-	height:10%;
+	width: 100%;
+}
+
+.iconContainer
+{
+	width: 30%;
+	display: inline-block;
+	float: left;
+}
+
+.textContainer
+{
+	float: left;
+}
+
+.typeButton
+{
+	width: 50%;
+	max-heigt: 60px;
 	background-color: #E9EBEE;
 	border: 2px solid #747474;
-	border-radius: 15px; 
+	border-radius: 15px;
 	filter: brightness(95%);
 	cursor: pointer;
 	text-align: center;
-	margin-top: 20px;
-	margin-right:auto;
-	margin-left: auto;
-	font-weight: bold;
-}
-
-.type:hover{
-	filter: brightness(100%);
-	border: 3px solid #4A4A4A;
-}
-
-
-#home
-{
-	font-size:26px;
-	float:left;
-	margin-bottom: 20px;
-	margin-top: 25px;
+	margin-top: 10px;
+	margin-right: 15px;
 	margin-left: 15px;
-	cursor: pointer;
-	filter: brightness(90%);
+	font-weight: bold;
+	color: black;
 }
 
-#home:hover{
+.typeButton:hover{
 	filter: brightness(100%);
-	font-size:30px;
+	border: 2px solid #c3c5c8;
 }
+
