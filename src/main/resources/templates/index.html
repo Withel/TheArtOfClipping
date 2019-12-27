@@ -56,12 +56,12 @@
     <article>
         <div class="container mainContainer">
             <div class="container buttonsContainer">
-                <div class="btn btn-secondary btn-lg typeButton" id="female">
+                <button class="btn btn-secondary btn-lg typeButton" onclick="LadiesServices()" id="female">
                     <h2>Ladies</h2>
-                </div>
-                <div class="btn btn-secondary btn-lg typeButton" id="male">
+                </button>
+                <button class="btn btn-secondary btn-lg typeButton" onclick="gentelmanServices()" id="male">
                     <h2>Gentlemen</h2>
-                </div>
+                </button>
             </div>
             <div class="services col d-flex justify-content-center">
                 <div class="table-responsive" th:if="${not #lists.isEmpty(services)}">

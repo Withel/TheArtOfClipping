@@ -31,7 +31,7 @@
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="#">Features</a>
                 <a class="nav-item nav-link" href="#">Pricing</a>
             </div>
@@ -51,7 +51,7 @@
         <div class="container mainContainer">
             <div class="container accountContainer">
                 <i class="fa fa-user-circle-o" aria-hidden="true" style="margin-top: 10px; font-size:30px;"></i>
-                <h2>Welcome to your personal account!</h2>
+                <h2 th:text="'You are logged as ' + ${(user.name)}+ ${(user.surname)}"></h2>
             </div>
             <div class="container">
                 <p>What You wish to do:</p>
@@ -92,6 +92,7 @@
                     </div>
                 </div>
                 <div class="buttonContainer">
+                    <a href="/logout">
                     <div class="btn btn-secondary btn-lg typeButton">
                         <h3>
                             <div class="iconContainer"><i class="fa fa-sign-out" aria-hidden="true"
@@ -99,6 +100,7 @@
                             <div class="textContainer">Log Out</div>
                         </h3>
                     </div>
+                    </a>
                 </div>
             </div>
             </br>
