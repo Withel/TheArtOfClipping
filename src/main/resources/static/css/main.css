@@ -59,6 +59,7 @@ p
 {
 	max-width: 800px;
 	min-height: 400px;
+	max-height: 500px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -99,4 +100,18 @@ p
 {
 	width: 100%;
 	height:80%;
+}
+
+.invisible{
+	display:none;
+}
+
+/*table*/
+.my-custom-scrollbar {
+	position: relative;
+	max-height: 300px;
+	overflow: auto;
+}
+.table-wrapper-scroll-y {
+	display: block;
 }

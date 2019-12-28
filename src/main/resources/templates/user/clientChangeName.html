@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title> The art of clipping salon. </title>
-    <link rel="icon" href="../../static/img/scissors.ico" type="image/x-icon"/>
+    <link rel="icon" href="../../static/img/scissors.ico" type="image/x-icon" th:href="@{../img/scissors.ico}"/>
     <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../../static/css/userStyles.css" th:href="@{css/userStyles.css}">
+    <link rel="stylesheet" href="../../static/css/clientStyles.css" th:href="@{../css/clientStyles.css}">
 </head>
 
 <body>
@@ -22,7 +22,7 @@
     <!––navigation bar for the page––>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
         <a class="navbar-brand" href="#"><img src="../../static/img/scissors.png" width="30" height="30"
-                                              class="d-inline-block align-top" alt="">
+                                              class="d-inline-block align-top" alt="" th:src="@{../img/scissors.png}">
             AoCSalon</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,57 +51,21 @@
         <div class="container mainContainer">
             <div class="container accountContainer">
                 <i class="fa fa-user-circle-o" aria-hidden="true" style="margin-top: 10px; font-size:30px;"></i>
-                <h2 th:text="'You are logged as ' + ${(user.name)}+ ${(user.surname)}"></h2>
+
             </div>
             <div class="container">
-                <p>What You wish to do:</p>
-                <div class="buttonContainer">
-                    <div class="btn btn-secondary btn-lg typeButton">
-                        <h3>
-                            <div class="iconContainer"><i class="fa fa-pencil-square-o" aria-hidden="true"
-                                                          style="font-size:20px;"></i></div>
-                            <div class="textContainer">Modify Profile</div>
-                        </h3>
+                <h2 th:text="'Your current name is: ' + ${(user.name)}+' '+${(user.surname)}"></h2>
+                <p>Type Your New Name:</p>
+                <form th:object="${newUser}" th:action="@{/changeName}" method="POST" class="form-signin">
+                    <div class="form-group">
+                        <label for="inputName"><h1>Name</h1></label>
+                        <input type="text" class="form-control" th:field="*{name}" id="inputName" placeholder="Name">
                     </div>
-                </div>
+
                 <div class="buttonContainer">
-                    <div class="btn btn-secondary btn-lg typeButton">
-                        <h3>
-                            <div class="iconContainer"><i class="fa fa-plus-square" aria-hidden="true"
-                                                          style="font-size:20px;"></i></div>
-                            <div class="textContainer">Add New Visit</div>
-                        </h3>
-                    </div>
+                    <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Change Name">
                 </div>
-                <div class="buttonContainer">
-                    <div class="btn btn-secondary btn-lg typeButton">
-                        <h3>
-                            <div class="iconContainer"><i class="fa fa-eye" aria-hidden="true"
-                                                          style="font-size:20px;"></i></div>
-                            <div class="textContainer">View My Visits</div>
-                        </h3>
-                    </div>
-                </div>
-                <div class="buttonContainer">
-                    <div class="btn btn-secondary btn-lg typeButton">
-                        <h3>
-                            <div class="iconContainer"><i class="fa fa-minus-square" aria-hidden="true"
-                                                          style="font-size:20px;"></i></div>
-                            <div class="textContainer">Delete Visit</div>
-                        </h3>
-                    </div>
-                </div>
-                <div class="buttonContainer">
-                    <a href="/logout">
-                    <div class="btn btn-secondary btn-lg typeButton">
-                        <h3>
-                            <div class="iconContainer"><i class="fa fa-sign-out" aria-hidden="true"
-                                                          style="font-size:20px;"></i></div>
-                            <div class="textContainer">Log Out</div>
-                        </h3>
-                    </div>
-                    </a>
-                </div>
+                </form>
             </div>
             </br>
         </div>

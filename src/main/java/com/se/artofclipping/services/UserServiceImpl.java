@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changeName(User user) {
+    public void changeName(User user, String name) {
 
     }
 

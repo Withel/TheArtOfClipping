@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title> The art of clipping salon. </title>
 
-    <link rel="icon" href="../static/img/scissors.ico" type="image/x-icon"/>
+    <link rel="icon" href="../static/img/scissors.ico" type="image/x-icon" th:href="@{img/scissors.ico}"/>
 
     <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,16 +15,28 @@
 
     <link rel="stylesheet" href="../static/css/main.css" th:href="@{css/main.css}">
 
-    <script type="text/javascript" src="../static/js/mainCode.js">
-    </script>
-</head>
+    <script type="text/javascript">
 
-<body>
+        function gentlemanServices()
+        {
+            $('#maleServices').removeClass('invisible');
+            $('#femaleServices').addClass('invisible');
+        }
+        function ladiesServices()
+        {
+            $('#femaleServices').removeClass('invisible');
+            $('#maleServices').addClass('invisible');
+        }
+    </script>
+
+
+</head>
+<body onload="ladiesServices()">
 <header>
     <!––navigation bar for the page––>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
-        <a class="navbar-brand" href="#"><img src="../static/img/scissors.png" width="30" height="30"
-                                              class="d-inline-block align-top" alt="">
+        <a class="navbar-brand" href="#"><img src="../../static/img/scissors.png" width="30" height="30"
+                                              class="d-inline-block align-top" alt="" th:src="@{/img/scissors.png}">
             AoCSalon</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,42 +68,51 @@
     <article>
         <div class="container mainContainer">
             <div class="container buttonsContainer">
-                <button class="btn btn-secondary btn-lg typeButton" onclick="LadiesServices()" id="female">
+                <button class="btn btn-secondary btn-lg typeButton" id="female" onclick="ladiesServices()">
                     <h2>Ladies</h2>
                 </button>
-                <button class="btn btn-secondary btn-lg typeButton" onclick="gentelmanServices()" id="male">
+                <button class="btn btn-secondary btn-lg typeButton" id="male" onclick="gentlemanServices()">
                     <h2>Gentlemen</h2>
                 </button>
             </div>
             <div class="services col d-flex justify-content-center">
-                <div class="table-responsive" th:if="${not #lists.isEmpty(services)}">
-                    <table class="table table-hover">
+                <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar" >
+                    <!--Table for female services-->
+                    <table class="table table-hover mb-0" id="femaleServices">
                         <thead class="thead-inverse">
                         <tr>
                             <th>Name</th>
                             <th>Price</th>
                         </tr>
                         </thead>
-                        <!--THIS IS OPTIONAL-->
-                        <tr th:remove="all">
-                            <td th:text="${service.name}">Default Value 1 for name</td>
-                            <td th:text="${service.price}">Default Value 1 for price</td>
+                        <tbody>
+                        <tr th:each="service1 : ${servicesF}">
+                            <td th:text="${service1.name}">Default Value 3 for name</td>
+                            <td th:text="${service1.price}">Default Value 3 for price</td>
                         </tr>
-                        <tr th:remove="all">
-                            <td th:text="${service.name}">Default Value 2 for name</td>
-                            <td th:text="${service.price}">Default Value 2 for price</td>
+                        </tbody>
+                    </table>
+
+                    <!--Table for male services-->
+                    <table class="table table-hover mb-0" id="maleServices">
+                        <thead class="thead-inverse">
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
                         </tr>
-                        <tr th:each="service : ${services}">
+                        </thead>
+                        <tbody>
+                        <tr th:each="service : ${servicesM}">
                             <td th:text="${service.name}">Default Value 3 for name</td>
                             <td th:text="${service.price}">Default Value 3 for price</td>
                         </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </article>
 </main>
-
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -49,9 +49,8 @@ public class AdminController {
 
     @GetMapping("admin/listhairdressers")
     public String list(Model model){
-
         model.addAttribute("hairdressers", adminService.listHairdressers());
 
-        return "admin/list";
+        return "admin/adminListHairdressers";
     }
 }
