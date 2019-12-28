@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changeEmail(User user) {
+    public void changeEmail(User user, String email) {
 
     }
 
@@ -28,12 +28,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changePassword(User user) {
+    public void changePassword(User user, String password) {
 
     }
 
     @Override
-    public void changeSurname(User user) {
+    public void changeSurname(User user, String surname) {
 
     }
 }

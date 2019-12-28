@@ -41,14 +41,28 @@ public class ClientController {
 
     @PostMapping("user/changeName")
     public String clientChangeName(@ModelAttribute User newUser,Model model) {
-        //TODO code to change name
-        /*log.debug(newUser.getName());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = clientService.findUserByEmail(auth.getName());
-
         clientService.changeName(currentUser,newUser.getName());
-        //newUser = null;*/
+        model.addAttribute("user",currentUser);
         return "user/clientModifyProfile";
     }
 
+    @GetMapping("user/changeSurnameView")
+    public String clientChangeSurnameView(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = clientService.findUserByEmail(auth.getName());
+        model.addAttribute("user",user);
+        model.addAttribute("newUser",new User());
+        return "user/clientChangeSurname";
+    }
+
+    @PostMapping("user/changeSurname")
+    public String clientChangeSurname(@ModelAttribute User newUser,Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = clientService.findUserByEmail(auth.getName());
+        clientService.changeSurname(currentUser,newUser.getSurname());
+        model.addAttribute("user",currentUser);
+        return "user/clientModifyProfile";
+    }
 }

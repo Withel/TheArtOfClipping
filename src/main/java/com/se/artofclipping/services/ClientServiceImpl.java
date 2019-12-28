@@ -48,23 +48,25 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void changeEmail(User user) {
+    public void changeEmail(User user,String email) {
+
 
     }
 
     @Override
     public void changeName(User user, String name) {
-       // user.setName(name);
-        //userRepository.save(user);
+        user.setName(name);
+        userRepository.save(user);
     }
 
     @Override
-    public void changePassword(User user) {
+    public void changePassword(User user, String password) {
 
     }
 
     @Override
-    public void changeSurname(User user) {
-
+    public void changeSurname(User user,String surname) {
+        user.setSurname(surname);
+        userRepository.save(user);
     }
 }
