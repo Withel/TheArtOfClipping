@@ -111,51 +111,107 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
         // Male services
         Service service = new Service();
-        service.setName("Haircut");
+        service.setName("Clipper Cut");
         service.setIsActive(true);
-        service.setDurationMinutes(30);
-        service.setPrice(40D);
+        service.setDurationMinutes(15);
+        service.setPrice(18D);
         service.setType(Character.toUpperCase('M'));
         services.add(service);
 
         service = new Service();
-        service.setName("Beardcut");
+        service.setName("Scissor Cut");
         service.setIsActive(true);
         service.setDurationMinutes(30);
-        service.setPrice(40D);
+        service.setPrice(20D);
         service.setType(Character.toUpperCase('M'));
         services.add(service);
 
         service = new Service();
-        service.setName("Combo (beard+Hair)");
+        service.setName("Cut & Beard Trim/Wash");
+        service.setIsActive(true);
+        service.setDurationMinutes(45);
+        service.setPrice(25D);
+        service.setType(Character.toUpperCase('M'));
+        services.add(service);
+
+        service = new Service();
+        service.setName("Cut & Beard Trim & Wash");
         service.setIsActive(true);
         service.setDurationMinutes(60);
+        service.setPrice(30D);
+        service.setType(Character.toUpperCase('M'));
+        services.add(service);
+
+        service = new Service();
+        service.setName("Cut & Style");
+        service.setIsActive(true);
+        service.setDurationMinutes(90);
+        service.setPrice(60D);
+        service.setType(Character.toUpperCase('M'));
+        services.add(service);
+
+        service = new Service();
+        service.setName("Cut & Wash & Style");
+        service.setIsActive(true);
+        service.setDurationMinutes(90);
         service.setPrice(70D);
         service.setType(Character.toUpperCase('M'));
         services.add(service);
 
         // Female services
         service = new Service();
-        service.setName("Haircut");
+        service.setName("Bang Trim");
+        service.setIsActive(true);
+        service.setDurationMinutes(15);
+        service.setPrice(10D);
+        service.setType(Character.toUpperCase('F'));
+        services.add(service);
+
+        service = new Service();
+        service.setName("Cut Only");
         service.setIsActive(true);
         service.setDurationMinutes(30);
+        service.setPrice(20D);
+        service.setType(Character.toUpperCase('F'));
+        services.add(service);
+
+        service = new Service();
+        service.setName("Wash & Style");
+        service.setIsActive(true);
+        service.setDurationMinutes(45);
+        service.setPrice(35D);
+        service.setType(Character.toUpperCase('F'));
+        services.add(service);
+
+        service = new Service();
+        service.setName("Wash & Style");
+        service.setIsActive(true);
+        service.setDurationMinutes(45);
+        service.setPrice(35D);
+        service.setType(Character.toUpperCase('F'));
+        services.add(service);
+
+        service = new Service();
+        service.setName("Wash & Cut");
+        service.setIsActive(true);
+        service.setDurationMinutes(45);
         service.setPrice(40D);
         service.setType(Character.toUpperCase('F'));
         services.add(service);
 
         service = new Service();
-        service.setName("Color");
+        service.setName("Wash & Cut & Style");
         service.setIsActive(true);
-        service.setDurationMinutes(90);
-        service.setPrice(80D);
+        service.setDurationMinutes(60);
+        service.setPrice(70D);
         service.setType(Character.toUpperCase('F'));
         services.add(service);
 
         service = new Service();
-        service.setName("Haircut + Stylisation");
+        service.setName("Wash & Cut & Color");
         service.setIsActive(true);
-        service.setDurationMinutes(120);
-        service.setPrice(120D);
+        service.setDurationMinutes(60);
+        service.setPrice(90D);
         service.setType(Character.toUpperCase('F'));
         services.add(service);
 

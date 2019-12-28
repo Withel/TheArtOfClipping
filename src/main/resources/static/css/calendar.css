@@ -4,49 +4,61 @@ body
 	background-color: #E9EBEE;
 	color: 	#000000;
 	font-family: 'Poiret One', serif;
-    font-size: 30px;
-
+	font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
 }
-
 
 h1
 {
- 	font-size: 70px;
-  	font-weight: bold;
+	font-size: calc(40px + (70 - 40) * ((100vw - 300px) / (1600 - 300)));
+	font-weight: bold;
 	text-align: center;
-	letter-spacing:  10px;
- 	margin-bottom:0px;
- 	margin-top:10px;
+	letter-spacing:  5px;
+	margin-bottom:0px;
+	margin-top:10px;
 }
 
-h3
-{
- 	font-size: 30px;
-  	font-weight: bold;
+h2{
+	font-size: calc(17px + (30 - 17) * ((100vw - 300px) / (1600 - 300)));
 	text-align: center;
 	letter-spacing:  1px;
- 	margin-bottom:0px;
- 	margin-top:1px;
+	margin-bottom:0px;
+	margin-top:2px;
+}
+
+h3{
+	font-size: calc(11px + (24 - 11) * ((100vw - 300px) / (1600 - 300)));
+	text-align: center;
+	letter-spacing:  1px;
+	margin-top:2px;
 }
 
 p
 {
 	font-weight: bold;
 	text-align: center;
- 	letter-spacing:  2px;
- 	margin-bottom:25px;
- 	margin-top:5px;
+	letter-spacing:  2px;
+	margin-bottom:25px;
+	margin-top:5px;
+}
+.accountButton
+{
+	background-color: #E9EBEE;
+	border: 1px solid #747474;
+	filter: brightness(95%);
+	border-radius: 10px;
+	color: black;
 }
 
-a
+.accountButton:hover
 {
-	color:black;
+	filter: brightness(100%);
+	border: 1px solid #c3c5c8;
 }
 
-.container
+.mainContainer
 {
-	width: 600px;
-	height:500px;
+	max-width: 800px;
+	min-height: 400px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -55,49 +67,23 @@ a
 	border-radius: 10px;
 }
 
-h4{
-	font-size: 22px;
-  	letter-spacing:  1px;
- 	margin-bottom:10px;
- 	margin-top:10px;
- 	margin-right:5px;
-}
-
-.account
-{
-	float: right;
-	margin-right: 40px;
-	width: 12%;
-	height:10%;
-	background-color: #E9EBEE;
-	border: 2px solid #000000;
-	border-radius: 15px;
-	filter: brightness(95%);
-	cursor: pointer;
-	text-align: center;
-}
-
-.account:hover{
-	filter: brightness(100%);
-	border: 3px solid #393939;
-}
-
-
 .day-slider{
 	position: relative;
-	border: 1px solid black;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	/*border: 1px solid black;*/
 }
 
 .day-slider .day-wrapper{
+	padding-top: 5px;
+	padding-bottom: 5px;
 	width: 80%;
-	height: 20%;
-	margin: 0px auto;
-	border: 1px dashed black;
+	/*border: 1px dashed black;*/
 	overflow: hidden;
 }
 
 .day-slider .day-wrapper .day{
-	height:100%;
+	color: black;
 	width:20%;
 	margin: 0px 5px;
 	display: inline-block;
@@ -111,10 +97,12 @@ h4{
 .day-slider .day-wrapper .day:hover
 {
 	filter: brightness(95%);
+	background-color: #535353;
+	color: white;
 }
 
 .dayN, .dayNb, .month{
-	height:30%;
+
 	width:100%;
 	font-size: 20px;
 }

@@ -60,7 +60,7 @@ public class AdminServiceImpl extends UserServiceImpl implements AdminService {
     }
 
     @Override
-    public void changeName(User user) {
+    public void changeName(User user, String name) {
 
     }
 

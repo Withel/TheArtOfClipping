@@ -30,11 +30,11 @@ public class GuestController {
         //@TODO change it for query with admin role
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = guestService.findUserByEmail(auth.getName());
-        model.addAttribute(user);
+        model.addAttribute("user",user);
         if(auth.getName().equals("admin@admin.com")){
             return "admin/adminpage";
         } else{
-            return "user/user";
+            return "user/client";
         }
     }
 
@@ -65,10 +65,8 @@ public class GuestController {
         } else {
             guestService.saveUser(user);
             model.addAttribute("user", new User());
+            return "user/loginForm";
         }
-        log.debug("REGISTERED SUCCESSFULLY FFS");
-
-        return "user/registerForm";
     }
 
     //@TODO remove later
@@ -78,7 +76,7 @@ public class GuestController {
     public String showSecretPage(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = guestService.findUserByEmail(auth.getName());
-        model.addAttribute(user);
+        model.addAttribute("user",user);
         return "secretpage";
     }
 }

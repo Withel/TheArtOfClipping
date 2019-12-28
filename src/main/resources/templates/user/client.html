@@ -3,26 +3,26 @@
 <head>
     <meta charset="utf-8"/>
     <title> The art of clipping salon. </title>
-
     <link rel="icon" href="../../static/img/scissors.ico" type="image/x-icon" th:href="@{img/scissors.ico}"/>
     <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script type="text/javascript" src="../../static/js/userCode.js">
+    </script>
 
     <!--Bootstrap 4.4.1-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../../static/css/calendar.css" th:href="@{css/calendar.css}">
-
+    <link rel="stylesheet" href="../../static/css/clientStyles.css" th:href="@{css/clientStyles.css}">
 </head>
 
 <body>
-
 <header>
     <!––navigation bar for the page––>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
-        <a class="navbar-brand" href="#"><img src="../static/img/scissors.png" style="width:30px;height:30px"
-                                              class="d-inline-block align-top" th:src="@{../img/scissors.png}">
+        <a class="navbar-brand" href="#"><img src="../../static/img/scissors.png" width="30" height="30"
+                                              class="d-inline-block align-top" alt="" th:src="@{../img/scissors.png}">
             AoCSalon</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,79 +43,73 @@
 
         </div>
     </nav>
-    <!––header, title of the page––>
-    <div class="page-header">
-        <h1>The art of clipping salon.</h1>
-        <p>Select date of Your visit.</p>
-    </div>
 </header>
 
 <main>
     <article>
+        </br>
         <div class="container mainContainer">
-            <div class="container day-slider">
-                <a onclick="moveBackward()"> <i class="fa fa-arrow-left" id="prev" aria-hidden="true"
-                                                style="font-size:34px;"></i></a>
-                <div class="container day-wrapper">
-                    <div class="btn btn-secondary day">
-                        <h3>
-                            <div class="dayN" id="dayN0">1</div>
-                            <div class="dayNb" id="day0"></div>
-                            <div class="month" id="month0"></div>
-                        </h3>
-                    </div>
-                    <div class="btn btn-secondary day">
-                        <h3>
-                            <div class="dayN" id="dayN1">2</div>
-                            <div class="dayNb" id="day1"></div>
-                            <div class="month" id="month1"></div>
-                        </h3>
-                    </div>
-                    <div class="btn btn-secondary day">
-                        <h3>
-                            <div class="dayN" id="dayN2">3</div>
-                            <div class="dayNb" id="day2"></div>
-                            <div class="month" id="month2"></div>
-                        </h3>
-                    </div>
-                    <div class="btn btn-secondary day">
-                        <h3>
-                            <div class="dayN" id="dayN3">4</div>
-                            <div class="dayNb" id="day3"></div>
-                            <div class="month" id="month3"></div>
-                        </h3>
-                    </div>
-                    <div class="btn btn-secondary day">
-                        <h3>
-                            <div class="dayN" id="dayN4">5</div>
-                            <div class="dayNb" id="day4"></div>
-                            <div class="month" id="month4"></div>
-                        </h3>
-                    </div>
-                    <div class="btn btn-secondary day">
-                        <h3>
-                            <div class="dayN" id="dayN5">6</div>
-                            <div class="dayNb" id="day5"></div>
-                            <div class="month" id="month5"></div>
-                        </h3>
-                    </div>
-                    <div class="btn btn-secondary day">
-                        <h3>
-                            <div class="dayN" id="dayN6">7</div>
-                            <div class="dayNb" id="day6"></div>
-                            <div class="month" id="month6"></div>
-                        </h3>
-                    </div>
-
-                </div>
-                <a onclick="moveForward()"> <i class="fa fa-arrow-right" id="next" aria-hidden="true"
-                                               style="font-size:34px;"></i></a>
+            <div class="container accountContainer">
+                <i class="fa fa-user-circle-o" aria-hidden="true" style="margin-top: 10px; font-size:30px;"></i>
+                <h2 th:text="'You are logged as ' + ${(user.name)}+ ${(user.surname)}"></h2>
             </div>
+            <div class="container">
+                <p>What You wish to do:</p>
+                <div class="buttonContainer">
+                    <a href="/user/modify">
+                    <div class="btn btn-secondary btn-lg typeButton">
+                        <h3>
+                            <div class="iconContainer"><i class="fa fa-pencil-square-o" aria-hidden="true"
+                                                          style="font-size:20px;"></i></div>
+                            <div class="textContainer">Modify Profile</div>
+                        </h3>
+                    </div>
+                    </a>
+                </div>
+                <div class="buttonContainer">
+                    <div class="btn btn-secondary btn-lg typeButton">
+                        <h3>
+                            <div class="iconContainer"><i class="fa fa-plus-square" aria-hidden="true"
+                                                          style="font-size:20px;"></i></div>
+                            <div class="textContainer">Add New Visit</div>
+                        </h3>
+                    </div>
+                </div>
+                <div class="buttonContainer">
+                    <div class="btn btn-secondary btn-lg typeButton">
+                        <h3>
+                            <div class="iconContainer"><i class="fa fa-eye" aria-hidden="true"
+                                                          style="font-size:20px;"></i></div>
+                            <div class="textContainer">View My Visits</div>
+                        </h3>
+                    </div>
+                </div>
+                <div class="buttonContainer">
+                    <div class="btn btn-secondary btn-lg typeButton">
+                        <h3>
+                            <div class="iconContainer"><i class="fa fa-minus-square" aria-hidden="true"
+                                                          style="font-size:20px;"></i></div>
+                            <div class="textContainer">Delete Visit</div>
+                        </h3>
+                    </div>
+                </div>
+                <div class="buttonContainer">
+                    <a href="/logout">
+                    <div class="btn btn-secondary btn-lg typeButton">
+                        <h3>
+                            <div class="iconContainer"><i class="fa fa-sign-out" aria-hidden="true"
+                                                          style="font-size:20px;"></i></div>
+                            <div class="textContainer">Log Out</div>
+                        </h3>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            </br>
         </div>
-        </div>
-
     </article>
 </main>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -128,10 +122,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-
-<script src="../../static/js/calendarKod.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
 </body>
 
 </html>
