@@ -1,5 +1,9 @@
-var femaleServices = ["Wash, Cut & Style","Cut Only","Cut & Blow Dry","Wash & Style",
-"Wash & Blow Dry","Wash Only","Bang Trim","Style"];
-var maleServices = [""];
-var femaleServicesPrices[""];
-var maleServicesPrices[""];
+function gentelmanServices()
+{
+  //  $("#serviceTable").append("<tr><td>"+nnnn+"</td></tr>");
+   // $("#serviceTable").append('<tr th:each=\"service : ${services}\">' +
+    //    '<td th:text="${service.name}"> Default Value 3 for name</td>'+
+     //   '<td th:text="${service.name}">Default Value 3 for name</td>'+
+      //  '</tr>');
+}
+
