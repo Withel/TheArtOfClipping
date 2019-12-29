@@ -63,15 +63,5 @@ public class AdminController {
         model.addAttribute("user",user);
         return "admin/adminModifyProfile";
     }
-
-//    @GetMapping("admin/changeEmailView")
-//    public String clientChangeEmailView(Model model){
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        User user = adminService.findUserByEmail(auth.getName());
-//        model.addAttribute("user",user);
-//        model.addAttribute("newUser",new User());
-//        return "user/userChangeEmail";
-//    }
-
 }
 
