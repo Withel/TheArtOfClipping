@@ -65,4 +65,24 @@ public class ClientController {
         model.addAttribute("user",currentUser);
         return "user/clientModifyProfile";
     }
+
+    @GetMapping("user/changeEmailView")
+    public String clientChangeEmailView(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = clientService.findUserByEmail(auth.getName());
+        model.addAttribute("user",user);
+        model.addAttribute("newUser",new User());
+        return "user/clientChangeEmail";
+    }
+
+    @PostMapping("user/changeEmail")
+    public String clientChangeEmail(@ModelAttribute User newUser,Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = clientService.findUserByEmail(auth.getName());
+        clientService.changeEmail(currentUser,newUser.getEmail());
+        model.addAttribute("user",currentUser);
+        return "user/clientModifyProfile";
+    }
+
+
 }
