@@ -32,7 +32,7 @@ public class GuestController {
         User user = guestService.findUserByEmail(auth.getName());
         model.addAttribute("user",user);
         if(auth.getName().equals("admin@admin.com")){
-            return "admin/adminpage";
+            return "user/admin/adminpage";
         } else{
             return "user/client";
         }
