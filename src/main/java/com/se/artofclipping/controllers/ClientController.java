@@ -87,6 +87,13 @@ public class ClientController {
         }
 
         clientService.changeEmail(currentUser,newUser.getPassword(),newUser.getEmail());
+
+        if(!currentUser.getEmail().equals(newUser.getEmail()) )
+        {
+            model.addAttribute("user",currentUser);
+            model.addAttribute("newUser",new User());
+            return "user/userChangeEmail";
+        }
         Authentication result = new UsernamePasswordAuthenticationToken(currentUser.getEmail(), currentUser.getPassword());
         SecurityContextHolder.getContext().setAuthentication(result);
 
@@ -107,7 +114,13 @@ public class ClientController {
     public String clientChangePassword(@ModelAttribute User newUser,Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = clientService.findUserByEmail(auth.getName());
-        clientService.changePassword(currentUser,newUser.getPassword());
+        String oldPassword = newUser.getName();
+
+        if(!clientService.changePassword(currentUser,oldPassword,newUser.getPassword())){
+            model.addAttribute("user",currentUser);
+            model.addAttribute("newUser",new User());
+            return "user/userChangePassword";
+        }
 
         Authentication result = new UsernamePasswordAuthenticationToken(currentUser.getEmail(), currentUser.getPassword());
         SecurityContextHolder.getContext().setAuthentication(result);
@@ -115,6 +128,4 @@ public class ClientController {
         model.addAttribute("user",currentUser);
         return "user/loginForm";
     }
-
-
 }

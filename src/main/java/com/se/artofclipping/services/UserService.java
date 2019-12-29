@@ -6,6 +6,6 @@ public interface UserService {
 
     void changeEmail(User user, String password, String email);
     void changeName(User user,String name);
-    void changePassword(User user,String password);
+    boolean changePassword(User user, String oldPassword,String newPassword);
     void changeSurname(User user, String surname);
 }

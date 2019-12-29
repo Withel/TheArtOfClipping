@@ -24,11 +24,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changeEmail(User user, String password,String email) {
-
-        //if(bCryptPasswordEncoder.encode(password) == bCryptPasswordEncoder.encode(user.getPassword())){
+       if(bCryptPasswordEncoder.matches(password, user.getPassword())){
             user.setEmail(email);
             userRepository.save(user);
-       // }
+       }
     }
 
     @Override
@@ -39,10 +38,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changePassword(User user, String password) {
-            user.setPassword(bCryptPasswordEncoder.encode(password));
+    public boolean changePassword(User user, String oldPassword,String newPassword) {
+        if(bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
+            user.setPassword(bCryptPasswordEncoder.encode(newPassword));
             userRepository.save(user);
-
+            return true;
+        }
+        return false;
     }
 
     @Override
