@@ -53,24 +53,4 @@ public class AdminServiceImpl extends UserServiceImpl implements AdminService {
     public void deleteAccount(User user) {
 
     }
-
-    @Override
-    public void changeEmail(User user,String email) {
-
-    }
-
-    @Override
-    public void changeName(User user, String name) {
-
-    }
-
-    @Override
-    public void changePassword(User user, String password) {
-
-    }
-
-    @Override
-    public void changeSurname(User user,String surname) {
-
-    }
 }

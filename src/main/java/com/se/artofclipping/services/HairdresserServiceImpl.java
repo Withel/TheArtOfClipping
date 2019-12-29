@@ -5,29 +5,10 @@ import com.se.artofclipping.model.Visit;
 
 import java.util.List;
 
-public class HairdresserServiceImpl implements HairdresserService {
+public class HairdresserServiceImpl extends UserServiceImpl implements HairdresserService {
     @Override
     public List<Visit> listVisits(User user) {
         return null;
     }
 
-    @Override
-    public void changeEmail(User user,String email) {
-
-    }
-
-    @Override
-    public void changeName(User user, String name) {
-
-    }
-
-    @Override
-    public void changePassword(User user, String password) {
-
-    }
-
-    @Override
-    public void changeSurname(User user,String surname) {
-
-    }
 }
