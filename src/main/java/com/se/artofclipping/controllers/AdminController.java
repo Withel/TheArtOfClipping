@@ -23,14 +23,14 @@ public class AdminController {
 
     @GetMapping("admin/adminpage")
     public String adminPage(){
-        return "admin/adminpage";
+        return "user/admin/adminpage";
     }
 
     @GetMapping("admin/addhairdresser")
     public String addHairdresser(Model model){
         model.addAttribute("user", new User());
 
-        return "admin/addHairdresser";
+        return "user/admin/addHairdresser";
     }
 
     @PostMapping("admin/register")
@@ -46,14 +46,14 @@ public class AdminController {
 
         log.debug("REGISTERED SUCCESSFULLY FFS");
 
-        return "admin/adminpage";
+        return "user/admin/adminpage";
     }
 
     @GetMapping("admin/listhairdressers")
     public String list(Model model){
         model.addAttribute("hairdressers", adminService.listHairdressers());
 
-        return "admin/adminListHairdressers";
+        return "user/admin/adminListHairdressers";
     }
 
     @GetMapping("admin/modify")
@@ -61,7 +61,8 @@ public class AdminController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = adminService.findUserByEmail(auth.getName());
         model.addAttribute("user",user);
-        return "admin/adminModifyProfile";
+        return "user/admin/adminModifyProfile";
     }
+
 }
 

@@ -26,7 +26,7 @@ public class ClientController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = clientService.findUserByEmail(auth.getName());
         model.addAttribute("user",user);
-        return "user/clientModifyProfile";
+        return "user/client/clientModifyProfile";
     }
 
     @GetMapping("user/changeNameView")
@@ -44,7 +44,7 @@ public class ClientController {
         User currentUser = clientService.findUserByEmail(auth.getName());
         clientService.changeName(currentUser,newUser.getName());
         model.addAttribute("user",currentUser);
-        return "user/clientModifyProfile";
+        return "user/client/clientModifyProfile";
     }
 
     @GetMapping("user/changeSurnameView")
@@ -62,7 +62,7 @@ public class ClientController {
         User currentUser = clientService.findUserByEmail(auth.getName());
         clientService.changeSurname(currentUser,newUser.getSurname());
         model.addAttribute("user",currentUser);
-        return "user/clientModifyProfile";
+        return "user/client/clientModifyProfile";
     }
 
     @GetMapping("user/changeEmailView")
