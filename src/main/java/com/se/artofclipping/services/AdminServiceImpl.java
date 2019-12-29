@@ -15,13 +15,13 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class AdminServiceImpl extends UserServiceImpl implements AdminService {
+public class AdminServiceImpl extends ClientServiceImpl implements AdminService {
 
     RoleRepository roleRepository;
 
     public AdminServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
                             RoleRepository roleRepository) {
-        super(userRepository, bCryptPasswordEncoder);
+        super(userRepository,roleRepository, bCryptPasswordEncoder);
         this.roleRepository = roleRepository;
     }
 
