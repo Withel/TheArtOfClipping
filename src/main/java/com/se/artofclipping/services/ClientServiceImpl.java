@@ -51,8 +51,8 @@ public class ClientServiceImpl implements ClientService {
     public void changeEmail(User user,String email) {
 
         //TODO
-        //user.setEmail(email);
-        //userRepository.save(user);
+        user.setEmail(email);
+        userRepository.save(user);
 
     }
 

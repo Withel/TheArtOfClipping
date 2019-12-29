@@ -4,6 +4,7 @@ import com.se.artofclipping.model.User;
 import com.se.artofclipping.services.UserService;
 import com.se.artofclipping.services.ClientService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -80,8 +81,12 @@ public class ClientController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = clientService.findUserByEmail(auth.getName());
         clientService.changeEmail(currentUser,newUser.getEmail());
+
+        Authentication result = new UsernamePasswordAuthenticationToken(currentUser.getEmail(), currentUser.getPassword());
+        SecurityContextHolder.getContext().setAuthentication(result);
+
         model.addAttribute("user",currentUser);
-        return "user/clientModifyProfile";
+        return "user/loginForm";
     }
 
 

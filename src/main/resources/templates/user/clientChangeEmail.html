@@ -55,10 +55,10 @@
             </div>
             <div class="container">
                 <h2 th:text="'Your email is: ' + ${(user.email)}"></h2>
-                <p>Type Your New Email:</p>
+                <p>After Email change You will be logged out.</p>
                 <form th:object="${newUser}" th:action="@{/user/changeEmail}" method="POST" class="form-signin">
                     <div class="form-group">
-                        <label for="inputEmail"><h1>Email</h1></label>
+                        <label for="inputEmail"><h1>New Email</h1></label>
                         <input type="text" class="form-control" th:field="*{email}" id="inputEmail" placeholder="Email">
                     </div>
 
