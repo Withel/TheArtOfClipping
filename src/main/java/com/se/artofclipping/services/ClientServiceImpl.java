@@ -50,11 +50,15 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void changeEmail(User user,String email) {
 
+        //TODO
+        user.setEmail(email);
+        userRepository.save(user);
 
     }
 
     @Override
     public void changeName(User user, String name) {
+        //TODO check if any new name is given
         user.setName(name);
         userRepository.save(user);
     }
