@@ -3,25 +3,25 @@
 <head>
     <meta charset="utf-8"/>
     <title> The art of clipping salon. </title>
-    <link rel="icon" href="../../static/img/scissors.ico" type="image/x-icon" th:href="@{../img/scissors.ico}"/>
+    <link rel="icon" href="../../../static/img/scissors.ico" type="image/x-icon" th:href="@{../img/scissors.ico}"/>
     <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <script type="text/javascript" src="../../static/js/userCode.js">
+    <script type="text/javascript" src="../../../static/js/userCode.js">
     </script>
 
     <!--Bootstrap 4.4.1-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../../static/css/clientStyles.css" th:href="@{../css/clientStyles.css}">
+    <link rel="stylesheet" href="../../../static/css/clientStyles.css" th:href="@{../../css/clientStyles.css}">
 </head>
 
 <body>
 <header>
     <!––navigation bar for the page––>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
-        <a class="navbar-brand" href="#"><img src="../../static/img/scissors.png" width="30" height="30"
+        <a class="navbar-brand" href="#"><img src="../../../static/img/scissors.png" width="30" height="30"
                                               class="d-inline-block align-top" alt="" th:src="@{../img/scissors.png}">
             AoCSalon</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -54,22 +54,17 @@
 
             </div>
             <div class="container">
-                <h2 th:text="'Your email is: ' + ${(user.email)}"></h2>
-                <p>After Email change You will be logged out.</p>
-                <form th:object="${newUser}" th:action="@{/user/changeEmail}" method="POST" class="form-signin">
+                <h2 th:text="'Your current name is: ' + ${(user.name)}+' '+${(user.surname)}"></h2>
+                <p>Type Your New Name:</p>
+                <form th:object="${newUser}" th:action="@{/user/client/changeName}" method="POST" class="form-signin">
                     <div class="form-group">
-                        <label for="inputEmail"><h1>New Email</h1></label>
-                        <input type="text" class="form-control" th:field="*{email}" id="inputEmail" placeholder="Email">
+                        <label for="inputName"><h1>Name</h1></label>
+                        <input type="text" class="form-control" th:field="*{name}" id="inputName" placeholder="Name">
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputPassword"><h1>Password</h1></label>
-                        <input type="password" class="form-control" th:field="*{password}" id="inputPassword"
-                               placeholder="Password">
-                    </div>
-                    <div class="buttonContainer">
-                        <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Change Email">
-                    </div>
+                <div class="buttonContainer">
+                    <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Change Name">
+                </div>
                 </form>
             </div>
             </br>

@@ -3,6 +3,7 @@ package com.se.artofclipping.controllers;
 import com.se.artofclipping.model.User;
 import com.se.artofclipping.services.AdminService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,12 +22,12 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @GetMapping("admin/adminpage")
+    @GetMapping("user/admin/adminpage")
     public String adminPage(){
         return "user/admin/adminpage";
     }
 
-    @GetMapping("admin/addhairdresser")
+    @GetMapping("user/admin/addhairdresser")
     public String addHairdresser(Model model){
         model.addAttribute("user", new User());
 
@@ -49,19 +50,83 @@ public class AdminController {
         return "user/admin/adminpage";
     }
 
-    @GetMapping("admin/listhairdressers")
+    @GetMapping("user/admin/listhairdressers")
     public String list(Model model){
         model.addAttribute("hairdressers", adminService.listHairdressers());
 
         return "user/admin/adminListHairdressers";
     }
 
-    @GetMapping("admin/modify")
-    public String clientModify(Model model){
+    @GetMapping("user/admin/modify")
+    public String adminModify(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = adminService.findUserByEmail(auth.getName());
         model.addAttribute("user",user);
         return "user/admin/adminModifyProfile";
+    }
+
+    @GetMapping("user/admin/changeEmailView")
+    public String adminChangeEmailView(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = adminService.findUserByEmail(auth.getName());
+        model.addAttribute("user",user);
+        model.addAttribute("newUser",new User());
+        return "user/admin/adminChangeEmail";
+    }
+
+    @PostMapping("user/admin/changeEmail")
+    public String adminChangeEmail(@ModelAttribute User newUser,Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = adminService.findUserByEmail(auth.getName());
+
+        User userExists = adminService.findUserByEmail(newUser.getEmail());
+        if (userExists != null) {
+            model.addAttribute("user",currentUser);
+            model.addAttribute("newUser",new User());
+            return "user/admin/adminChangeEmail";
+        }
+
+        adminService.changeEmail(currentUser,newUser.getPassword(),newUser.getEmail());
+
+        if(!currentUser.getEmail().equals(newUser.getEmail()) )
+        {
+            model.addAttribute("user",currentUser);
+            model.addAttribute("newUser",new User());
+            return "user/admin/adminChangeEmail";
+        }
+        Authentication result = new UsernamePasswordAuthenticationToken(currentUser.getEmail(), currentUser.getPassword());
+        SecurityContextHolder.getContext().setAuthentication(result);
+
+        model.addAttribute("user",currentUser);
+        return "user/loginForm";
+    }
+
+    @GetMapping("user/admin/changePasswordView")
+    public String adminChangePasswordView(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = adminService.findUserByEmail(auth.getName());
+        model.addAttribute("user",user);
+        model.addAttribute("newUser",new User());
+        return "user/admin/adminChangePassword";
+    }
+
+    @PostMapping("user/admin/changePassword")
+    public String adminChangePassword(@ModelAttribute User newUser,Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = adminService.findUserByEmail(auth.getName());
+        String oldPassword = newUser.getName();
+
+        if(!adminService.changePassword(currentUser,oldPassword,newUser.getPassword())){
+            model.addAttribute("user",currentUser);
+            model.addAttribute("newUser",new User());
+            return "user/admin/adminChangePassword";
+        }
+
+        Authentication result = new UsernamePasswordAuthenticationToken(currentUser.getEmail(), currentUser.getPassword());
+        SecurityContextHolder.getContext().setAuthentication(result);
+
+        model.addAttribute("user",currentUser);
+        return "user/loginForm";
     }
 
 }

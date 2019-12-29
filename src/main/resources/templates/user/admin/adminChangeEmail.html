@@ -3,25 +3,25 @@
 <head>
     <meta charset="utf-8"/>
     <title> The art of clipping salon. </title>
-    <link rel="icon" href="../../static/img/scissors.ico" type="image/x-icon" th:href="@{../img/scissors.ico}"/>
+    <link rel="icon" href="../../../static/img/scissors.ico" type="image/x-icon" th:href="@{../img/scissors.ico}"/>
     <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <script type="text/javascript" src="../../static/js/userCode.js">
+    <script type="text/javascript" src="../../../static/js/userCode.js">
     </script>
 
     <!--Bootstrap 4.4.1-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../../static/css/clientStyles.css" th:href="@{../css/clientStyles.css}">
+    <link rel="stylesheet" href="../../../static/css/clientStyles.css" th:href="@{../../css/clientStyles.css}">
 </head>
 
 <body>
 <header>
     <!––navigation bar for the page––>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
-        <a class="navbar-brand" href="#"><img src="../../static/img/scissors.png" width="30" height="30"
+        <a class="navbar-brand" href="#"><img src="../../../static/img/scissors.png" width="30" height="30"
                                               class="d-inline-block align-top" alt="" th:src="@{../img/scissors.png}">
             AoCSalon</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -54,22 +54,22 @@
 
             </div>
             <div class="container">
-                <p>After Password change You will be logged out.</p>
+                <h2 th:text="'Your email is: ' + ${(user.email)}"></h2>
+                <p>After Email change You will be logged out.</p>
+                <form th:object="${newUser}" th:action="@{/user/admin/changeEmail}" method="POST" class="form-signin">
+                    <div class="form-group">
+                        <label for="inputEmail"><h1>New Email</h1></label>
+                        <input type="text" class="form-control" th:field="*{email}" id="inputEmail" placeholder="Email">
+                    </div>
 
-                <form th:object="${newUser}" th:action="@{/user/changePassword}" method="POST" class="form-signin">
                     <div class="form-group">
-                        <label for="inputOldPassword"><h1>Old Password</h1></label>
-                        <input type="password" class="form-control" th:field="*{name}" id="inputOldPassword"
+                        <label for="inputPassword"><h1>Password</h1></label>
+                        <input type="password" class="form-control" th:field="*{password}" id="inputPassword"
                                placeholder="Password">
                     </div>
-                    <div class="form-group">
-                        <label for="inputNewPassword"><h1>New Password</h1></label>
-                        <input type="password" class="form-control" th:field="*{password}" id="inputNewPassword"
-                               placeholder="Password">
+                    <div class="buttonContainer">
+                        <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Change Email">
                     </div>
-                <div class="buttonContainer">
-                    <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Change Password">
-                </div>
                 </form>
             </div>
             </br>
