@@ -16,11 +16,11 @@ import java.util.HashSet;
 
 @Service
 @Primary
-public class ClientServiceImpl implements ClientService {
+public class ClientServiceImpl  extends UserServiceImpl implements ClientService{
 
-    protected UserRepository userRepository;
+    //protected UserRepository userRepository;
     protected RoleRepository roleRepository;
-    protected BCryptPasswordEncoder bCryptPasswordEncoder;
+   // protected BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public ClientServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
@@ -45,32 +45,5 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void deleteAccount(User user) {
 
-    }
-
-    @Override
-    public void changeEmail(User user,String email) {
-
-        //TODO
-        user.setEmail(email);
-        userRepository.save(user);
-
-    }
-
-    @Override
-    public void changeName(User user, String name) {
-        //TODO check if any new name is given
-        user.setName(name);
-        userRepository.save(user);
-    }
-
-    @Override
-    public void changePassword(User user, String password) {
-
-    }
-
-    @Override
-    public void changeSurname(User user,String surname) {
-        user.setSurname(surname);
-        userRepository.save(user);
     }
 }

@@ -11,29 +11,45 @@ public class UserServiceImpl implements UserService {
     protected UserRepository userRepository;
     protected BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    public UserServiceImpl(){
+
+    }
+
     public UserServiceImpl(UserRepository userRepository,
                            BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    @Override
-    public void changeEmail(User user, String email) {
 
+    @Override
+    public void changeEmail(User user, String password,String email) {
+       if(bCryptPasswordEncoder.matches(password, user.getPassword())){
+            user.setEmail(email);
+            userRepository.save(user);
+       }
     }
 
     @Override
     public void changeName(User user, String name) {
-
+        //TODO check if any new name is given
+        user.setName(name);
+        userRepository.save(user);
     }
 
     @Override
-    public void changePassword(User user, String password) {
-
+    public boolean changePassword(User user, String oldPassword,String newPassword) {
+        if(bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
+            user.setPassword(bCryptPasswordEncoder.encode(newPassword));
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void changeSurname(User user, String surname) {
-
+    public void changeSurname(User user,String surname) {
+        user.setSurname(surname);
+        userRepository.save(user);
     }
 }

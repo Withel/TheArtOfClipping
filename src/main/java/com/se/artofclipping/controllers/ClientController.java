@@ -1,7 +1,6 @@
 package com.se.artofclipping.controllers;
 
 import com.se.artofclipping.model.User;
-import com.se.artofclipping.services.UserService;
 import com.se.artofclipping.services.ClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -9,7 +8,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +35,7 @@ public class ClientController {
         User user = clientService.findUserByEmail(auth.getName());
         model.addAttribute("user",user);
         model.addAttribute("newUser",new User());
-        return "user/clientChangeName";
+        return "user/userChangeName";
     }
 
     @PostMapping("user/changeName")
@@ -55,7 +53,7 @@ public class ClientController {
         User user = clientService.findUserByEmail(auth.getName());
         model.addAttribute("user",user);
         model.addAttribute("newUser",new User());
-        return "user/clientChangeSurname";
+        return "user/userChangeSurname";
     }
 
     @PostMapping("user/changeSurname")
@@ -73,15 +71,29 @@ public class ClientController {
         User user = clientService.findUserByEmail(auth.getName());
         model.addAttribute("user",user);
         model.addAttribute("newUser",new User());
-        return "user/clientChangeEmail";
+        return "user/userChangeEmail";
     }
 
     @PostMapping("user/changeEmail")
     public String clientChangeEmail(@ModelAttribute User newUser,Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = clientService.findUserByEmail(auth.getName());
-        clientService.changeEmail(currentUser,newUser.getEmail());
 
+        User userExists = clientService.findUserByEmail(newUser.getEmail());
+        if (userExists != null) {
+            model.addAttribute("user",currentUser);
+            model.addAttribute("newUser",new User());
+            return "user/userChangeEmail";
+        }
+
+        clientService.changeEmail(currentUser,newUser.getPassword(),newUser.getEmail());
+
+        if(!currentUser.getEmail().equals(newUser.getEmail()) )
+        {
+            model.addAttribute("user",currentUser);
+            model.addAttribute("newUser",new User());
+            return "user/userChangeEmail";
+        }
         Authentication result = new UsernamePasswordAuthenticationToken(currentUser.getEmail(), currentUser.getPassword());
         SecurityContextHolder.getContext().setAuthentication(result);
 
@@ -89,5 +101,31 @@ public class ClientController {
         return "user/loginForm";
     }
 
+    @GetMapping("user/changePasswordView")
+    public String clientChangePasswordView(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = clientService.findUserByEmail(auth.getName());
+        model.addAttribute("user",user);
+        model.addAttribute("newUser",new User());
+        return "user/userChangePassword";
+    }
 
+    @PostMapping("user/changePassword")
+    public String clientChangePassword(@ModelAttribute User newUser,Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = clientService.findUserByEmail(auth.getName());
+        String oldPassword = newUser.getName();
+
+        if(!clientService.changePassword(currentUser,oldPassword,newUser.getPassword())){
+            model.addAttribute("user",currentUser);
+            model.addAttribute("newUser",new User());
+            return "user/userChangePassword";
+        }
+
+        Authentication result = new UsernamePasswordAuthenticationToken(currentUser.getEmail(), currentUser.getPassword());
+        SecurityContextHolder.getContext().setAuthentication(result);
+
+        model.addAttribute("user",currentUser);
+        return "user/loginForm";
+    }
 }
