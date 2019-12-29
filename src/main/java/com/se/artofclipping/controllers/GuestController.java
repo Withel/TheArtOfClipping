@@ -31,7 +31,9 @@ public class GuestController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = guestService.findUserByEmail(auth.getName());
         model.addAttribute("user",user);
-        if(auth.getName().equals("admin@admin.com")){
+
+
+        if(guestService.checkIfAdmin(auth.getName())){
             return "user/admin/adminpage";
         } else{
             return "user/client";

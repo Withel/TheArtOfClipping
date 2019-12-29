@@ -19,7 +19,6 @@ import java.util.HashSet;
 public class ClientServiceImpl  extends UserServiceImpl implements ClientService{
 
     //protected UserRepository userRepository;
-    protected RoleRepository roleRepository;
    // protected BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired

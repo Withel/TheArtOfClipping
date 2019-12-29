@@ -41,4 +41,13 @@ public class GuestServiceImpl implements GuestService {
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         userRepository.save(user);
     }
+
+    public boolean checkIfAdmin(String email){
+        Role userRole = roleRepository.findByRole("ADMIN");
+        User user = userRepository.findByEmail(email);
+            if(user.getRoles().contains(userRole)) {
+                return true;
+            }
+            else return false;
+    }
 }

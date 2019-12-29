@@ -17,8 +17,6 @@ import java.util.List;
 @Service
 public class AdminServiceImpl extends ClientServiceImpl implements AdminService {
 
-    RoleRepository roleRepository;
-
     public AdminServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
                             RoleRepository roleRepository) {
         super(userRepository,roleRepository, bCryptPasswordEncoder);
