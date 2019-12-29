@@ -3,6 +3,8 @@ package com.se.artofclipping.controllers;
 import com.se.artofclipping.model.User;
 import com.se.artofclipping.services.AdminService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,4 +55,13 @@ public class AdminController {
 
         return "admin/adminListHairdressers";
     }
+
+    @GetMapping("admin/modify")
+    public String clientModify(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = adminService.findUserByEmail(auth.getName());
+        model.addAttribute("user",user);
+        return "admin/adminModifyProfile";
+    }
 }
+
