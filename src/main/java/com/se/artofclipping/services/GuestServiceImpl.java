@@ -45,9 +45,17 @@ public class GuestServiceImpl implements GuestService {
     public boolean checkIfAdmin(String email){
         Role userRole = roleRepository.findByRole("ADMIN");
         User user = userRepository.findByEmail(email);
-            if(user.getRoles().contains(userRole)) {
-                return true;
-            }
-            else return false;
+        if(user.getRoles().contains(userRole)) {
+            return true;
+        }
+        else return false;
+    }
+    public boolean checkIfHairdresser(String email){
+        Role userRole = roleRepository.findByRole("EMPLOYEE");
+        User user = userRepository.findByEmail(email);
+        if(user.getRoles().contains(userRole)) {
+            return true;
+        }
+        else return false;
     }
 }

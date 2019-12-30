@@ -35,7 +35,9 @@ public class GuestController {
 
         if(guestService.checkIfAdmin(auth.getName())){
             return "user/admin/adminpage";
-        } else{
+        }else if(guestService.checkIfHairdresser(auth.getName())){
+            return "user/hairdresser/hairdresserPage";
+        } else {
             return "user/client";
         }
     }

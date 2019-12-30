@@ -32,6 +32,18 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
         userRepository.save(hairdresser);
     }
 
+//    @Override
+//    public boolean delHairdresser(User hairdresser, String adminPassword, String adminEmail) {
+//       //TODO make successful deletion of hairdressers
+//        User user = userRepository.findByEmail(adminEmail);
+//        if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword())) {
+//            hairdresser.setActive(0);
+//            userRepository.save(hairdresser);
+//            return true;
+//        }
+//        return false;
+//    }
+
     @Override
     public List<User> listHairdressers() {
 
