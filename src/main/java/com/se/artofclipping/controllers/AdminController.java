@@ -30,8 +30,7 @@ public class AdminController {
     @GetMapping("user/admin/addhairdresser")
     public String addHairdresser(Model model){
         model.addAttribute("user", new User());
-
-        return "user/admin/addHairdresser";
+        return "user/admin/adminAddHairdresser";
     }
 
     @PostMapping("admin/register")
@@ -42,12 +41,34 @@ public class AdminController {
             log.debug("User already exists.");
         }
 
-            adminService.saveHairdresser(user);
-            model.addAttribute("user", new User());
+        adminService.saveHairdresser(user);
+        model.addAttribute("user", new User());
 
         log.debug("REGISTERED SUCCESSFULLY FFS");
 
         return "user/admin/adminpage";
+    }
+
+    @GetMapping("user/admin/delhairdresser")
+    public String delHairdresser(Model model){
+        model.addAttribute("user", new User());
+        return "user/admin/adminDelHairdresser";
+    }
+
+    @PostMapping("user/admin/delete")
+    public String delete(@ModelAttribute User user, Model model){
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        User admin = adminService.findUserByEmail(auth.getName());
+//        User userExists = adminService.findUserByEmail(user.getEmail());
+//        if (userExists == null) {
+//            return "user/admin/adminDelHairdresser";
+//        }
+//
+//        else if(!adminService.delHairdresser(userExists,admin.getPassword(),admin.getEmail()))
+//        {
+            return "user/admin/adminDelHairdresser";
+//        }
+//        return "user/admin/adminpage";
     }
 
     @GetMapping("user/admin/listhairdressers")
