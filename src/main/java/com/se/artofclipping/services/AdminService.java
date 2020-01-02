@@ -7,7 +7,9 @@ import java.util.List;
 public interface AdminService extends ClientService {
 
     void saveHairdresser(User hairdresser);
-    //boolean delHairdresser(User hairdresser, String adminPassword, String adminEmail);
+    boolean delHairdresser(User hairdresser, String adminPassword, String adminEmail);
+    boolean changeHdsName(User hairdresser, String adminPassword, String adminEmail, String newName);
+    boolean changeHdsSurname(User hairdresser, String adminPassword, String adminEmail, String newSurname);
     List<User> listHairdressers();
     User findUserByEmail(String email);
 }

@@ -7,6 +7,9 @@
     <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <script type="text/javascript" src="../../../static/js/userCode.js">
+    </script>
+
     <!--Bootstrap 4.4.1-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -48,72 +51,51 @@
         <div class="container mainContainer">
             <div class="container accountContainer">
                 <i class="fa fa-user-circle-o" aria-hidden="true" style="margin-top: 10px; font-size:30px;"></i>
-                <h2> You are logged as an administrator.</h2>
+
             </div>
             <div class="container">
+                <h2>Choose an action with a hairdresser.</h2>
                 <p>What You wish to do:</p>
                 <div class="buttonContainer">
-                    <a href="/user/admin/modify">
+                    <a href="/user/admin/changeHdsNameView">
                     <div class="btn btn-secondary btn-lg typeButton">
                         <h3>
-                            <div class="iconContainer"><i class="fa fa-pencil-square-o" aria-hidden="true"
+                            <div class="iconContainer"><i class="fa fa-square-o" aria-hidden="true"
                                                           style="font-size:20px;"></i></div>
-                            <div class="textContainer">Modify Account</div>
+                            <div class="textContainer">Change Name</div>
                         </h3>
                     </div>
                     </a>
                 </div>
                 <div class="buttonContainer">
-                    <a href="/user/admin/addhairdresser">
+                    <a href="/user/admin/changeHdsSurnameView">
                     <div class="btn btn-secondary btn-lg typeButton">
                         <h3>
-                            <div class="iconContainer"><i class="fa fa-plus-square" aria-hidden="true"
+                            <div class="iconContainer"><i class="fa fa-square" aria-hidden="true"
                                                           style="font-size:20px;"></i></div>
-                            <div class="textContainer">Add New Hairdresser</div>
+                            <div class="textContainer">Change Surname</div>
                         </h3>
                     </div>
                     </a>
                 </div>
                 <div class="buttonContainer">
-                    <a href="/user/admin/manage">
+                    <a href="#">
                     <div class="btn btn-secondary btn-lg typeButton">
                         <h3>
-                            <div class="iconContainer"><i class="fa fa-address-card-o" aria-hidden="true"
+                            <div class="iconContainer"><i class="fa fa-square-o" aria-hidden="true"
                                                           style="font-size:20px;"></i></div>
-                            <div class="textContainer">Manage Hairdressers</div>
+                            <div class="textContainer">Change Email</div>
                         </h3>
                     </div>
                     </a>
                 </div>
                 <div class="buttonContainer">
-                    <a href="/user/admin/listhairdressers">
-                    <div class="btn btn-secondary btn-lg typeButton">
-                        <h3>
-                            <div class="iconContainer"><i class="fa fa-eye" aria-hidden="true"
-                                                          style="font-size:20px;"></i></div>
-                            <div class="textContainer">View Hairdressers</div>
-                        </h3>
-                    </div>
-                    </a>
-                </div>
-                <div class="buttonContainer">
-                    <a href="/user/admin/delhairdresser">
+                    <a href="#">
                         <div class="btn btn-secondary btn-lg typeButton">
                             <h3>
-                                <div class="iconContainer"><i class="fa fa-minus-square" aria-hidden="true"
+                                <div class="iconContainer"><i class="fa fa-square" aria-hidden="true"
                                                               style="font-size:20px;"></i></div>
-                                <div class="textContainer">Fire Hairdresser</div>
-                            </h3>
-                        </div>
-                    </a>
-                </div>
-                <div class="buttonContainer">
-                    <a href="/logout">
-                        <div class="btn btn-secondary btn-lg typeButton">
-                            <h3>
-                                <div class="iconContainer"><i class="fa fa-sign-out" aria-hidden="true"
-                                                              style="font-size:20px;"></i></div>
-                                <div class="textContainer">Log Out</div>
+                                <div class="textContainer">Change Password</div>
                             </h3>
                         </div>
                     </a>
