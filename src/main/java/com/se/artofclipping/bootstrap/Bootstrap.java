@@ -42,6 +42,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         roleRepository.saveAll(getRoles());
         userRepository.saveAll(getAdmins());
         userRepository.saveAll(getCustomers());
+        userRepository.saveAll(getHairdressers());
         serviceRepository.saveAll(getServices());
     }
 
@@ -104,6 +105,24 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         customers.add(customer);
 
         return customers;
+    }
+
+    private List<User> getHairdressers(){
+        List<User> hairdressers = new ArrayList<>();
+
+        User hairdresser = new User();
+        hairdresser.setEmail("hhh@hhh.com");
+        hairdresser.setPassword(bCryptPasswordEncoder.encode("hhh"));
+        hairdresser.setActive(1);
+        hairdresser.setName("hhh");
+        hairdresser.setSurname("hhh");
+
+        Role userRole = roleRepository.findByRole("EMPLOYEE");
+        hairdresser.setRoles(new HashSet<>(Arrays.asList(userRole)));
+
+        hairdressers.add(hairdresser);
+
+        return hairdressers;
     }
 
     private List<Service> getServices(){

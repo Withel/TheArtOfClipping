@@ -42,10 +42,12 @@ public class HairdresserController {
     public String hairdresserChangeName(@ModelAttribute User newUser,Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = hairdresserService.findUserByEmail(auth.getName());
+
         hairdresserService.changeName(currentUser,newUser.getName());
         model.addAttribute("user",currentUser);
         return "user/hairdresser/hairdresserModifyProfile";
     }
+
     @GetMapping("user/hairdresser/changeSurnameView")
     public String hairdresserChangeSurnameView(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

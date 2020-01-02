@@ -54,11 +54,14 @@
                         <thead class="thead-inverse">
                         <tr>
                             <th>Name</th>
-                            <th>Price</th>
+                            <th>Surname</th>
+                            <th>Email</th>
                         </tr>
                         </thead>
                         <!--THIS IS OPTIONAL-->
                         <tr th:each="hairdresser : ${hairdressers}">
+                            <td th:text="${hairdresser.name}">Default Value</td>
+                            <td th:text="${hairdresser.surname}">Default Value</td>
                             <td th:text="${hairdresser.email}">Default Value</td>
                         </tr>
                     </table>

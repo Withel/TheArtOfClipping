@@ -27,6 +27,12 @@ public class AdminController {
         return "user/admin/adminpage";
     }
 
+
+    @GetMapping("user/admin/manage")
+    public String adminManageHds(Model model){
+        return "user/admin/adminManageHairdressers";
+    }
+
     @GetMapping("user/admin/addhairdresser")
     public String addHairdresser(Model model){
         model.addAttribute("user", new User());
@@ -57,18 +63,17 @@ public class AdminController {
 
     @PostMapping("user/admin/delete")
     public String delete(@ModelAttribute User user, Model model){
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        User admin = adminService.findUserByEmail(auth.getName());
-//        User userExists = adminService.findUserByEmail(user.getEmail());
-//        if (userExists == null) {
-//            return "user/admin/adminDelHairdresser";
-//        }
-//
-//        else if(!adminService.delHairdresser(userExists,admin.getPassword(),admin.getEmail()))
-//        {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User userExists = adminService.findUserByEmail(user.getEmail());
+        if (userExists == null) {
             return "user/admin/adminDelHairdresser";
-//        }
-//        return "user/admin/adminpage";
+        }
+
+        else if(!adminService.delHairdresser(userExists,user.getPassword(),auth.getName()))
+        {
+            return "user/admin/adminDelHairdresser";
+        }
+        return "user/admin/adminpage";
     }
 
     @GetMapping("user/admin/listhairdressers")
@@ -85,6 +90,7 @@ public class AdminController {
         model.addAttribute("user",user);
         return "user/admin/adminModifyProfile";
     }
+
 
     @GetMapping("user/admin/changeEmailView")
     public String adminChangeEmailView(Model model){
@@ -148,6 +154,52 @@ public class AdminController {
 
         model.addAttribute("user",currentUser);
         return "user/loginForm";
+    }
+
+    @GetMapping("user/admin/changeHdsNameView")
+    public String adminChangeHdsNameView(Model model){
+        model.addAttribute("newUser",new User());
+        return "user/admin/adminChangeHdsName";
+    }
+
+    @PostMapping("user/admin/changeHdsName")
+    public String adminChangeHdsName(@ModelAttribute User user,Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User userExists = adminService.findUserByEmail(user.getEmail());
+        if (userExists == null) {
+            model.addAttribute("newUser",new User());
+            return "user/admin/adminChangeHdsName";
+        }
+
+        else if(!adminService.changeHdsName(userExists,user.getPassword(),auth.getName(),user.getName()))
+        {
+            model.addAttribute("newUser",new User());
+            return "user/admin/adminChangeHdsName";
+        }
+        return "user/admin/adminpage";
+    }
+
+    @GetMapping("user/admin/changeHdsSurnameView")
+    public String adminChangeHdsSurnameView(Model model){
+        model.addAttribute("newUser",new User());
+        return "user/admin/adminChangeHdsSurname";
+    }
+
+    @PostMapping("user/admin/changeHdsSurname")
+    public String adminChangeHdsSurname(@ModelAttribute User user,Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User userExists = adminService.findUserByEmail(user.getEmail());
+        if (userExists == null) {
+            model.addAttribute("newUser",new User());
+            return "user/admin/adminChangeHdsSurname";
+        }
+
+        else if(!adminService.changeHdsSurname(userExists,user.getPassword(),auth.getName(),user.getSurname()))
+        {
+            model.addAttribute("newUser",new User());
+            return "user/admin/adminChangeHdsSurname";
+        }
+        return "user/admin/adminpage";
     }
 
 }
