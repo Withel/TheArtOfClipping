@@ -65,7 +65,7 @@ public class GuestController {
                             "There is already a user registered with the email provided");
         }
         if (bindingResult.hasErrors()) {
-            return "registration";
+            return "user/registerForm";
         } else {
             guestService.saveUser(user);
             model.addAttribute("user", new User());

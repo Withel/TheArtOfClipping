@@ -57,11 +57,11 @@
                 <p>Type email of hairdresser You want to fire:</p>
 
                 <form th:object="${user}" th:action="@{/user/admin/delete}" method="POST" class="form-signin">
-                    <div class="form-group">
-                        <label for="email"><h1>Email</h1></label>
-                        <input type="email" class="form-control" th:field="*{email}" id="email"
-                               placeholder="Email">
-                    </div>
+                    <label for="inputEmail"><h1>Email</h1></label>
+                    <select  class="mdb-select md-form form-control" th:field="*{email}" id="inputEmail">
+                        <option value="" disabled selected>Choose hairdresser</option>
+                        <option th:value="${hd.getEmail()}" th:each="hd : ${listHds}" th:text="${hd.getEmail()}">One</option>
+                    </select >
                     <div class="form-group">
                         <label for="inputNewPassword"><h1>Your Password</h1></label>
                         <input type="password" class="form-control" th:field="*{password}" id="inputNewPassword"
