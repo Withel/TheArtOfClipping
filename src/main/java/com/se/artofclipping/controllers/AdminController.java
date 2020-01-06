@@ -44,7 +44,14 @@ public class AdminController {
         log.debug(user.getEmail());
         User userExists = adminService.findUserByEmail(user.getEmail());
         if (userExists != null) {
-            log.debug("User already exists.");
+            model.addAttribute("user", new User());
+            return "user/admin/adminAddHairdresser";
+        }
+        else if(user.getEmail().isEmpty() || user.getPassword().isEmpty() ||
+        user.getName().isEmpty() || user.getSurname().isEmpty())
+        {
+            model.addAttribute("user", new User());
+            return "user/admin/adminAddHairdresser";
         }
 
         adminService.saveHairdresser(user);
@@ -57,6 +64,7 @@ public class AdminController {
 
     @GetMapping("user/admin/delhairdresser")
     public String delHairdresser(Model model){
+        model.addAttribute("listHds",adminService.listHairdressers());
         model.addAttribute("user", new User());
         return "user/admin/adminDelHairdresser";
     }
@@ -66,11 +74,13 @@ public class AdminController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User userExists = adminService.findUserByEmail(user.getEmail());
         if (userExists == null) {
+            model.addAttribute("listHds",adminService.listHairdressers());
             return "user/admin/adminDelHairdresser";
         }
 
         else if(!adminService.delHairdresser(userExists,user.getPassword(),auth.getName()))
         {
+            model.addAttribute("listHds",adminService.listHairdressers());
             return "user/admin/adminDelHairdresser";
         }
         return "user/admin/adminpage";
@@ -159,21 +169,25 @@ public class AdminController {
     @GetMapping("user/admin/changeHdsNameView")
     public String adminChangeHdsNameView(Model model){
         model.addAttribute("newUser",new User());
+        model.addAttribute("listHds",adminService.listHairdressers());
         return "user/admin/adminChangeHdsName";
     }
 
     @PostMapping("user/admin/changeHdsName")
     public String adminChangeHdsName(@ModelAttribute User user,Model model) {
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User userExists = adminService.findUserByEmail(user.getEmail());
         if (userExists == null) {
             model.addAttribute("newUser",new User());
+            model.addAttribute("listHds",adminService.listHairdressers());
             return "user/admin/adminChangeHdsName";
         }
 
         else if(!adminService.changeHdsName(userExists,user.getPassword(),auth.getName(),user.getName()))
         {
             model.addAttribute("newUser",new User());
+            model.addAttribute("listHds",adminService.listHairdressers());
             return "user/admin/adminChangeHdsName";
         }
         return "user/admin/adminpage";
@@ -182,20 +196,24 @@ public class AdminController {
     @GetMapping("user/admin/changeHdsSurnameView")
     public String adminChangeHdsSurnameView(Model model){
         model.addAttribute("newUser",new User());
+        model.addAttribute("listHds",adminService.listHairdressers());
         return "user/admin/adminChangeHdsSurname";
     }
 
     @PostMapping("user/admin/changeHdsSurname")
     public String adminChangeHdsSurname(@ModelAttribute User user,Model model) {
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User userExists = adminService.findUserByEmail(user.getEmail());
         if (userExists == null) {
+            model.addAttribute("listHds",adminService.listHairdressers());
             model.addAttribute("newUser",new User());
             return "user/admin/adminChangeHdsSurname";
         }
 
         else if(!adminService.changeHdsSurname(userExists,user.getPassword(),auth.getName(),user.getSurname()))
         {
+            model.addAttribute("listHds",adminService.listHairdressers());
             model.addAttribute("newUser",new User());
             return "user/admin/adminChangeHdsSurname";
         }

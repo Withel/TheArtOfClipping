@@ -56,10 +56,11 @@
             <div class="container">
                 <p>Type email of hairdresser, and new surname.</p>
                 <form th:object="${newUser}" th:action="@{/user/admin/changeHdsSurname}" method="POST" class="form-signin">
-                    <div class="form-group">
-                        <label for="inputEmail"><h1>Email</h1></label>
-                        <input type="text" class="form-control" th:field="*{email}" id="inputEmail" placeholder="Email">
-                    </div>
+                    <label for="inputEmail"><h1>Email</h1></label>
+                    <select  class="mdb-select md-form form-control" id="inputEmail" >
+                        <option value="" disabled selected>Choose hairdresser</option>
+                        <option th:value="${hd.getEmail()}" th:field="*{email}" th:each="hd : ${listHds}" th:text="${hd.getEmail()}">One</option>
+                    </select >
 
                     <div class="form-group">
                         <label for="inputEmail"><h1>Surname</h1></label>

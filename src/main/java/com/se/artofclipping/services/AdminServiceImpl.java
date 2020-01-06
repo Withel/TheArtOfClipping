@@ -36,10 +36,8 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
     public boolean delHairdresser(User hairdresser, String adminPassword, String adminEmail) {
        //TODO make successful deletion of hairdressers
         User user = userRepository.findByEmail(adminEmail);
-        Role userRole = roleRepository.findByRole("EMPLOYEE");
 
-        if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword()) &&
-                hairdresser.getRoles().equals(new HashSet<>(Arrays.asList(userRole)))) {
+        if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword())) {
             hairdresser.setActive(0);
             userRepository.save(hairdresser);
             return true;
@@ -50,10 +48,8 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
     @Override
     public boolean changeHdsName(User hairdresser, String adminPassword, String adminEmail, String newName) {
         User user = userRepository.findByEmail(adminEmail);
-        Role userRole = roleRepository.findByRole("EMPLOYEE");
 
-        if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword()) &&
-                hairdresser.getRoles().equals(new HashSet<>(Arrays.asList(userRole)))) {
+        if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword())) {
 
             hairdresser.setName(newName);;
             userRepository.save(hairdresser);
@@ -65,10 +61,8 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
     @Override
     public boolean changeHdsSurname(User hairdresser, String adminPassword, String adminEmail, String newSurname) {
         User user = userRepository.findByEmail(adminEmail);
-        Role userRole = roleRepository.findByRole("EMPLOYEE");
 
-        if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword()) &&
-                hairdresser.getRoles().equals(new HashSet<>(Arrays.asList(userRole)))) {
+        if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword()) ) {
 
             hairdresser.setSurname(newSurname);;
             userRepository.save(hairdresser);
