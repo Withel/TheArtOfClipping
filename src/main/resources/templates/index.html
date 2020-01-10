@@ -87,7 +87,8 @@
                         </thead>
                         <tbody>
                         <tr th:each="service1 : ${servicesF}">
-                            <td th:text="${service1.name}">Default Value 3 for name</td>
+                            <!--<td th:text="${service1.name}">Default Value 3 for name</td>-->
+                            <td><a href="#" th:text="${service1.name}" th:href="@{'/rsvr/' + ${service1.id}}"></a></td>
                             <td th:text="${service1.price}">Default Value 3 for price</td>
                         </tr>
                         </tbody>
@@ -103,7 +104,10 @@
                         </thead>
                         <tbody>
                         <tr th:each="service : ${servicesM}">
-                            <td th:text="${service.name}">Default Value 3 for name</td>
+
+                            <!--<td><a href="#" th:href="@{'/rsvr/' + ${service.id} + '-' +${service.name}}">View</a></td>-->
+                            <td><a href="#" th:text="${service.name}" th:href="@{'/rsvr/' + ${service.id}}"></a></td>
+                            <!--<td th:text="${service.name}"><a href="#" th:href="@{'/rsvr/' + ${service.id} + '-' +${service.name}}"></a></td>-->
                             <td th:text="${service.price}">Default Value 3 for price</td>
                         </tr>
                         </tbody>

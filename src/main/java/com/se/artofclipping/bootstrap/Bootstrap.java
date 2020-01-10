@@ -3,9 +3,11 @@ package com.se.artofclipping.bootstrap;
 import com.se.artofclipping.model.Role;
 import com.se.artofclipping.model.Service;
 import com.se.artofclipping.model.User;
+import com.se.artofclipping.model.Visit;
 import com.se.artofclipping.repositories.RoleRepository;
 import com.se.artofclipping.repositories.ServiceRepository;
 import com.se.artofclipping.repositories.UserRepository;
+import com.se.artofclipping.repositories.VisitRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -25,28 +27,48 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final ServiceRepository serviceRepository;
+    private final VisitRepository visitRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public Bootstrap(RoleRepository roleRepository, UserRepository userRepository,
-                     ServiceRepository serviceRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public Bootstrap(RoleRepository roleRepository, UserRepository userRepository, ServiceRepository serviceRepository,
+                     VisitRepository visitRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
         this.serviceRepository = serviceRepository;
+        this.visitRepository = visitRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
     @Transactional
-    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent){
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         log.debug("Loading bootstrap data.");
         roleRepository.saveAll(getRoles());
         userRepository.saveAll(getAdmins());
         userRepository.saveAll(getCustomers());
         userRepository.saveAll(getHairdressers());
         serviceRepository.saveAll(getServices());
+        visitRepository.saveAll(getVisits());
     }
 
-    private List<Role> getRoles(){
+    //@TODO for testing purposes remove later
+    private List<Visit> getVisits() {
+
+        List<Visit> visits = new ArrayList<>();
+
+        Visit visit = new Visit();
+//        visit.setClient(new User());
+//        visit.setHairDresser(new User());
+        visit.setIsAvailable(true);
+        visit.setDay("12-12-12");
+        visit.setTime("10:30");
+
+        visits.add(visit);
+
+        return visits;
+    }
+
+    private List<Role> getRoles() {
         List<Role> roles = new ArrayList<>();
 
         Role adminRole = new Role();
@@ -70,7 +92,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         return roles;
     }
 
-    private List<User> getAdmins(){
+    private List<User> getAdmins() {
         List<User> admins = new ArrayList<>();
 
         User admin = new User();
@@ -89,7 +111,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         return admins;
     }
 
-    private List<User> getCustomers(){
+    private List<User> getCustomers() {
         List<User> customers = new ArrayList<>();
 
         User customer = new User();
@@ -107,7 +129,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         return customers;
     }
 
-    private List<User> getHairdressers(){
+    private List<User> getHairdressers() {
         List<User> hairdressers = new ArrayList<>();
 
         User hairdresser = new User();
@@ -125,7 +147,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         return hairdressers;
     }
 
-    private List<Service> getServices(){
+    private List<Service> getServices() {
         List<Service> services = new ArrayList<>();
 
         // Male services
