@@ -5,6 +5,7 @@ import com.se.artofclipping.repositories.ServiceRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @org.springframework.stereotype.Service
 public class ServiceServiceImpl implements ServiceService {
@@ -23,6 +24,12 @@ public class ServiceServiceImpl implements ServiceService {
         serviceRepository.findAllByType(type).iterator().forEachRemaining(services::add);
 
         return services;
+    }
+
+    @Override
+    public Service findById(Long id) {
+        Optional<Service> serviceOptional = serviceRepository.findById(id);
+        return serviceOptional.get();
     }
 
     @Override

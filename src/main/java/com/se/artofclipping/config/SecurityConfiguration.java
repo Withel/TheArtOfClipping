@@ -3,7 +3,6 @@ package com.se.artofclipping.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -42,6 +41,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/login",
             "/register",
             "/registration",
+            //@TODO change for correct loggin in later...
+            "/rsvr/**",
     };
 
     @Override

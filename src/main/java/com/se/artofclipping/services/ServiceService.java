@@ -7,6 +7,7 @@ import java.util.List;
 public interface ServiceService {
 
     List<Service> listService(Character type);
+    Service findById(Long id);
     void addService();
     void changeDuration(Service service);
     void changeName(Service service);

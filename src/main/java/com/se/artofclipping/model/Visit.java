@@ -22,8 +22,14 @@ public class Visit {
     @ManyToOne
     private User hairDresser;
 
+
+    //@TODO Discuss this
     @ManyToOne
     private Session session;
+
+    private String day;
+
+    private String time;
 
     @ManyToOne
     private Service service;
