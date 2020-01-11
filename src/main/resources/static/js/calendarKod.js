@@ -31,6 +31,7 @@ for (var i=0;i<dayNArray.length;i++){
 }
 
 function moveForward(){
+	console.log(forward);
 
 	if(forward < 52){
 		if(ifForwardLast==false){
@@ -54,7 +55,7 @@ function moveForward(){
 		$('#dayN'+i).html(dayNArray[currDay]);
 		$('#day'+i).html(auxDate.getDate());
 		$('#month'+i).html(monthArray[currMonth]);
-		$('#year'+i).html(date.getFullYear());
+		$('#year'+i).html(auxDate.getFullYear());
 		}
 
 		forward++;
@@ -63,6 +64,8 @@ function moveForward(){
 }
 
 function moveBackward(){
+	console.log("huja");
+	console.log(forward);
 
 	if(forward>0){
 
@@ -85,19 +88,18 @@ function moveBackward(){
 			$('#dayN'+i).html(dayNArray[currDay]);
 			$('#day'+i).html(auxDate.getDate());
 			$('#month'+i).html(monthArray[currMonth]);
-			$('#year'+i).html(date.getFullYear());
+			$('#year'+i).html(auxDate.getFullYear());
 			ifForwardLast= false;
 		}
 		
 	}
-
 }
 
 function returnDate(nb){
-	let dayNb = $('#day'+nb).html();
-	let month = $('#month'+nb).html();
-	let year = $('#year'+nb).html();
-	let monthNb;
+	var dayNb = $('#day'+nb).html();
+	var month = $('#month'+nb).html();
+	var year = $('#year'+nb).html();
+	var monthNb;
 
 	for(var i=0;i<monthArray.length;i++){
 		if(monthArray[i] === month){
@@ -105,7 +107,7 @@ function returnDate(nb){
 		}
 	}
 
-	let date = dayNb+"-"+monthNb+"-"+year;
+	var date = dayNb+"-"+monthNb+"-"+year;
 	$('#urlId'+nb).attr("href",date);
 }
 
