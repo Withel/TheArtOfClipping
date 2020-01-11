@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 var dayNArray = new Array("Sun","Mon","Tue","Wed","Thu","Fri","Sat");
 var monthArray = new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec");
-
+var href = window.location.href;
 var currDate = new Date();
 var auxDate = new Date();
 var date = new Date();
@@ -95,19 +95,71 @@ function moveBackward(){
 	}
 }
 
-function returnDate(nb){
-	var dayNb = $('#day'+nb).html();
-	var month = $('#month'+nb).html();
-	var year = $('#year'+nb).html();
-	var monthNb;
+function returnDate(nb)
+{
+    var dayNb = $('#day'+nb).html();
+    var month = $('#month'+nb).html();
+    var year = $('#year'+nb).html();
+    var monthNb;
 
-	for(var i=0;i<monthArray.length;i++){
-		if(monthArray[i] === month){
-			monthNb=i+1;
-		}
-	}
+    for(var i=0;i<monthArray.length;i++){
+        if(monthArray[i] === month){
+            monthNb=i+1;
+        }
+    }
 
-	var date = dayNb+"-"+monthNb+"-"+year;
-	$('#urlId'+nb).attr("href",date);
+    var date = dayNb+"-"+monthNb+"-"+year;
+
+    var url = new URL(window.location.href);
+    var query_string = url.search;
+    var search_params = new URLSearchParams(query_string);
+
+    // new value of "id" is set to "101"
+    search_params.set('date', date.toString());
+
+    // change the search property of the main url
+    url.search = search_params.toString();
+
+    // the new url string
+    var new_url = url.toString();
+    console.log(new_url);
+
+    $('#urlId'+nb).attr('href', new_url);
 }
+
+// function returnDate(nb){
+// 	var dayNb = $('#day'+nb).html();
+// 	var month = $('#month'+nb).html();
+// 	var year = $('#year'+nb).html();
+// 	var monthNb;
+//
+// 	for(var i=0;i<monthArray.length;i++){
+// 		if(monthArray[i] === month){
+// 			monthNb=i+1;
+// 		}
+// 	}
+
+    // var date = "/"+dayNb+"-"+monthNb+"-"+year;
+    // var _href = href.toString();
+    // var res = _href.split("/");
+    //
+    // var id = res[4];
+    // console.log(id);
+    // var dupa = res[0];
+    // console.log(dupa);
+    // var filipWKlapkachIBezKoszulki = res[2];
+    // console.log(filipWKlapkachIBezKoszulki);
+    //
+    // $('#urlId'+nb).attr("href",date);
+
+
+
+
+    // var date = dayNb+"-"+monthNb+"-"+year;
+    // var href = $('#urlId'+nb).attr("href");
+    // $('#urlId'+nb).attr(href+date);
+
+// 	var date = dayNb+"-"+monthNb+"-"+year;
+// 	$('#urlId'+nb).attr("href",date);
+// }
 

@@ -144,6 +144,17 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
         hairdressers.add(hairdresser);
 
+        hairdresser = new User();
+        hairdresser.setEmail("ggg@ggg.com");
+        hairdresser.setPassword(bCryptPasswordEncoder.encode("ggg"));
+        hairdresser.setActive(1);
+        hairdresser.setName("ggg");
+        hairdresser.setSurname("ggg");
+
+        hairdresser.setRoles(new HashSet<>(Arrays.asList(userRole)));
+
+        hairdressers.add(hairdresser);
+
         return hairdressers;
     }
 

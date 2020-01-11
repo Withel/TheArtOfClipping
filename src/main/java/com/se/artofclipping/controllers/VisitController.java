@@ -4,14 +4,17 @@ import com.se.artofclipping.model.Visit;
 import com.se.artofclipping.services.AdminService;
 import com.se.artofclipping.services.ServiceService;
 import com.se.artofclipping.services.VisitService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Controller
 public class VisitController {
 
@@ -26,19 +29,24 @@ public class VisitController {
         this.visitService = visitService;
     }
 
-    @GetMapping("rsvr/{id}")
-    public String showAvailable(@PathVariable String id, Model model){
+    @GetMapping("rsvr/")
+    public String showAvailable(@RequestParam String id,
+                                @RequestParam String date, Model model){
+
+        log.debug(id);
+        System.out.println(id);
+        System.out.println(date);
 
         model.addAttribute("service", serviceService.findById(Long.parseLong(id)));
 
-        return "visit1";
+        return "calendar/calendarSite";
     }
 
     @GetMapping("rsvr/{id}/{day}")
     public String day(@PathVariable String id,
                       @PathVariable String day, Model model){
 
-        model.addAttribute("service", serviceService.findById(Long.parseLong(id)));
+//        model.addAttribute("service", serviceService.findById(Long.parseLong(id)));
         model.addAttribute("hairdressers", adminService.listHairdressers());
 
         //TODO this is just ridiculous
@@ -64,6 +72,6 @@ public class VisitController {
         model.addAttribute("visits", visitService.listVisits());
         model.addAttribute("times", times);
 
-        return "visit2";
+        return "calendar/calendarSite";
     }
 }
