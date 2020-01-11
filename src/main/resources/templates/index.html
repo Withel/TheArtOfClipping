@@ -88,7 +88,7 @@
                         <tbody>
                         <tr th:each="service1 : ${servicesF}">
                             <!--<td th:text="${service1.name}">Default Value 3 for name</td>-->
-                            <td><a href="#" th:text="${service1.name}" th:href="@{'/rsvr/' + ${service1.id}}"></a></td>
+                            <td><a href="#" th:text="${service1.name}" th:href="@{/rsvr/(id=${service1.id},date='')}"></a></td>
                             <td th:text="${service1.price}">Default Value 3 for price</td>
                         </tr>
                         </tbody>
