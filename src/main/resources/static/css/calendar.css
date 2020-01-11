@@ -84,8 +84,6 @@ p
 
 .day-slider .day-wrapper .day{
 	color: black;
-	width:20%;
-	margin: 0px 5px;
 	display: inline-block;
 	background-color: #FFFFFF;
 	text-align: center;
@@ -102,7 +100,6 @@ p
 }
 
 .dayN, .dayNb, .month{
-
 	width:100%;
 	font-size: 20px;
 }
