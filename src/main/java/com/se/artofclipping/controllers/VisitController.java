@@ -1,21 +1,25 @@
 package com.se.artofclipping.controllers;
 
+import com.se.artofclipping.model.Service;
+import com.se.artofclipping.model.TempVisit;
+import com.se.artofclipping.model.User;
 import com.se.artofclipping.model.Visit;
 import com.se.artofclipping.services.AdminService;
 import com.se.artofclipping.services.ServiceService;
 import com.se.artofclipping.services.VisitService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 @Controller
+@SessionAttributes("tempVisit")
 public class VisitController {
 
     ServiceService serviceService;
@@ -23,33 +27,55 @@ public class VisitController {
     AdminService adminService;
     VisitService visitService;
 
-    public VisitController(ServiceService serviceService, AdminService adminService, VisitService visitService) {
+    private TempVisit tempVisit;
+
+    public VisitController(ServiceService serviceService, AdminService adminService, VisitService visitService, TempVisit tempVisit) {
         this.serviceService = serviceService;
         this.adminService = adminService;
         this.visitService = visitService;
+        this.tempVisit = tempVisit;
     }
+
 
     @GetMapping("rsvr/")
     public String showAvailable(@RequestParam String id,
-                                @RequestParam String date, Model model){
+                                @RequestParam String date,
+                                @ModelAttribute User user,
+                                Model model){
 
-        log.debug(id);
-        System.out.println(id);
-        System.out.println(date);
+        Service chosen = serviceService.findById(Long.parseLong(id));
 
-        model.addAttribute("service", serviceService.findById(Long.parseLong(id)));
+        model.addAttribute("service", chosen);
+        model.addAttribute("hairdresser", new User());
+
+        if(id != null) {
+            System.out.println(id);
+            tempVisit.setService(serviceService.findById(Long.parseLong(id)));
+        }
+
+        if(!date.equals("")) {
+            System.out.println(date);
+            tempVisit.setDay(date);
+            model.addAttribute("listHds", adminService.listHairdressers());
+            model.addAttribute("timeVisit", new Visit());
+            return "calendar/calendarSitePost";
+        } else {
+            model.addAttribute("listHds", new ArrayList<>());
+        }
 
         return "calendar/calendarSite";
     }
 
-    @GetMapping("rsvr/{id}/{day}")
-    public String day(@PathVariable String id,
-                      @PathVariable String day, Model model){
 
-//        model.addAttribute("service", serviceService.findById(Long.parseLong(id)));
-        model.addAttribute("hairdressers", adminService.listHairdressers());
+    @PostMapping("rsvr/chosetime")
+    public String time(@ModelAttribute User hairdresser,
+                       @ModelAttribute Visit timeVisit,
+                       Model model){
 
-        //TODO this is just ridiculous
+        System.out.println("Chosen hairdresser: " + hairdresser.getEmail());
+        System.out.println("Chosen time: " + timeVisit.getTime());
+
+        //@TODO WTF IS GOING ON HERE XDDDDD
         List<String> times = new ArrayList<>();
         times.add("10:00");
         times.add("10:30");
@@ -57,21 +83,125 @@ public class VisitController {
         times.add("11:30");
         times.add("12:00");
         times.add("12:30");
+        times.add("13:00");
+        times.add("13:30");
+        times.add("14:00");
+        times.add("14:30");
+        times.add("15:00");
+        times.add("15:30");
+        times.add("16:00");
+        times.add("16:30");
+        times.add("17:00");
+        times.add("17:30");
 
-        List<String> toRemove = new ArrayList<>();
+        List<Visit> availableVisits = visitService.findByDay(tempVisit.getDay());
 
-        for(String time : times){
-            for(Visit visit : visitService.listVisits())
-            if(time.equals(visit.getTime())){
-                toRemove.add(time);
+
+        System.out.println("ALL VISITS THIS DAY");
+        for(Visit visit : availableVisits){
+            System.out.println("============================");
+            System.out.println(visit.getDay());
+            System.out.println(visit.getTime());
+            System.out.println(visit.getHairDresser().getEmail());
+        }
+
+        List<Visit> visitsToRemove = new ArrayList<>();
+
+
+        // removing visits for another hairdressers
+        for(Visit visit : availableVisits){
+            if(!visit.getHairDresser().getEmail().equals(hairdresser.getEmail())){
+                visitsToRemove.add(visit);
             }
         }
 
-        times.removeAll(toRemove);
+        availableVisits.removeAll(visitsToRemove);
 
-        model.addAttribute("visits", visitService.listVisits());
+        System.out.println("VISITS FOR CHOSEN HAIRDRESSER");
+        for(Visit visit : availableVisits){
+            System.out.println("============================");
+            System.out.println(visit.getDay());
+            System.out.println(visit.getTime());
+        }
+
+        System.out.println("ALL TIMES");
+        for(String currentTime : times){
+            System.out.println(currentTime);
+        }
+
+        List<String> timesToRemove = new ArrayList<>();
+
+        // removing times for current day and hairdresser
+        for(String currentTime : times){
+            for(Visit visit : availableVisits)
+                if(currentTime.equals(visit.getTime())){
+                    timesToRemove.add(currentTime);
+                }
+        }
+
+        times.removeAll(timesToRemove);
+
+        System.out.println("TIMES AVAILABLE FOR CURRENT DAY AND CHOSEN HAIRDRESSER");
+        for(String currentTime : times){
+            System.out.println(currentTime);
+        }
+
+        List<Visit> visitTimesOnly = new ArrayList<>();
+
+        Visit visitTime;
+
+        for(int i=0; i<times.size(); i++){
+            visitTime = new Visit();
+            visitTime.setTime(times.get(i));
+            visitTimesOnly.add(visitTime);
+        }
+
+
         model.addAttribute("times", times);
+//        model.addAttribute("times", visitTimesOnly);
+        model.addAttribute("timeVisit", new Visit());
 
-        return "calendar/calendarSite";
+        User hds = adminService.findUserByEmail(hairdresser.getEmail());
+
+        model.addAttribute("hairdresser", hds);
+
+        tempVisit.setHairDresser(hds);
+
+        model.addAttribute("listHds", adminService.listHairdressers());
+
+        return "calendar/calendarSitePost";
+    }
+
+
+    @PostMapping("confirmation")
+    public String confirmation(@ModelAttribute Visit timeVisit, Model model){
+
+
+//        System.out.println(tempVisit.getTemp1());
+//        System.out.println(tempVisit.getTemp2());
+//        boolean checkIfGood = tempVisit.check();
+//        System.out.println(todos.get(1));
+//        System.out.println(todos.get(1));
+//        System.out.println(todos.get(1));
+
+        tempVisit.setTime(timeVisit.getTime());
+        Visit newVisit = tempVisit.convertToVisit();
+
+        System.out.println(newVisit.getHairDresser().getEmail());
+        System.out.println(newVisit.getDay());
+        System.out.println(newVisit.getTime());
+        System.out.println(newVisit.getService().getName());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = adminService.findUserByEmail(auth.getName());
+        newVisit.setClient(user);
+
+        visitService.addNewVisit(newVisit);
+
+        model.addAttribute("visit", newVisit);
+
+//        visitService.addNewVisit(visit);
+
+        return "calendar/confirmation";
     }
 }

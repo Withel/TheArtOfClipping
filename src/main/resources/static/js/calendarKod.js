@@ -64,7 +64,6 @@ function moveForward(){
 }
 
 function moveBackward(){
-	console.log("huja");
 	console.log(forward);
 
 	if(forward>0){

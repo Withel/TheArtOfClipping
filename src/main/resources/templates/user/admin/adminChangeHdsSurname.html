@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8"/>
     <title> The art of clipping salon. </title>
-    <link rel="icon" href="../../../static/img/scissors.ico" type="image/x-icon" th:href="@{../../../img/scissors.ico}"/>
+    <link rel="icon" href="../../../static/img/scissors.ico" type="image/x-icon"
+          th:href="@{../../../img/scissors.ico}"/>
     <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -22,7 +23,8 @@
     <!––navigation bar for the page––>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
         <a class="navbar-brand" href="#"><img src="../../../static/img/scissors.png" width="30" height="30"
-                                              class="d-inline-block align-top" alt="" th:src="@{../../../img/scissors.png}">
+                                              class="d-inline-block align-top" alt=""
+                                              th:src="@{../../../img/scissors.png}">
             AoCSalon</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,16 +57,20 @@
             </div>
             <div class="container">
                 <p>Type email of hairdresser, and new surname.</p>
-                <form th:object="${newUser}" th:action="@{/user/admin/changeHdsSurname}" method="POST" class="form-signin">
-                    <label for="inputEmail"><h1>Email</h1></label>
-                    <select  class="mdb-select md-form form-control" id="inputEmail" >
+                <form th:object="${newUser}" th:action="@{/user/admin/changeHdsSurname}" method="POST"
+                      class="form-signin">
+                    <label for="inputEmail"><h1>Hairdresser</h1></label>
+                    <select class="mdb-select md-form form-control" id="inputEmail">
                         <option value="" disabled selected>Choose hairdresser</option>
-                        <option th:value="${hd.getEmail()}" th:field="*{email}" th:each="hd : ${listHds}" th:text="${hd.getEmail()}">One</option>
-                    </select >
+                        <option th:value="${hd.getEmail()}" th:field="*{email}" th:each="hd : ${listHds}"
+                                th:text="${hd.getName()+' '+hd.getSurname()}">One
+                        </option>
+                    </select>
 
                     <div class="form-group">
                         <label for="inputEmail"><h1>Surname</h1></label>
-                        <input type="text" class="form-control" th:field="*{surname}" id="inputName" placeholder="Surname">
+                        <input type="text" class="form-control" th:field="*{surname}" id="inputName"
+                               placeholder="Surname">
                     </div>
 
                     <div class="form-group">

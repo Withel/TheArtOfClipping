@@ -132,6 +132,17 @@
                 <a onclick="moveForward()"> <i class="fa fa-arrow-right" id="next" aria-hidden="true"
                                                style="font-size:34px;"></i></a>
             </div>
+            <div class="container" th:if="${not #lists.isEmpty(listHds)}">
+            <!--<form th:object="${hairdresser}" th:action="@{/}" method="POST" class="form-signin">-->
+
+                <!--<label for="inputEmail"><h2>Hairdresser:</h2></label>-->
+                <!--<select class="mdb-select md-form form-control" th:field="*{email}"  id="inputEmail" onchange="this.form.submit()">-->
+                    <!--<option value="" disabled selected>Choose hairdresser</option>-->
+                    <!--<option th:value="${hd.getName()+' '+hd.getSurname()}"  th:each="hd:${listHds}" th:text="${hd.getName()+' '+hd.getSurname()}">One</option>-->
+                <!--</select>-->
+
+            <!--</form>-->
+            </div>
         </div>
 
     </article>

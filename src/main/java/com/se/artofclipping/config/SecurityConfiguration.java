@@ -34,7 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final String[] WHITELIST = {
             "/js/**",
             "/css/**",
-            "/images/**",
+            "/img/**",
             "/webjars/**",
             "/h2-console/**",
             "/",
@@ -43,6 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/registration",
             //@TODO change for correct loggin in later...
             "/rsvr/**",
+            "/confirmation",
     };
 
     @Override
