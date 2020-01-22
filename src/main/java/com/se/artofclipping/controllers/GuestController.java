@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
@@ -73,14 +72,4 @@ public class GuestController {
         }
     }
 
-    //@TODO remove later
-    // function that after loggin redirect us to our "secretpage"
-
-    @RequestMapping("secretpage")
-    public String showSecretPage(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = guestService.findUserByEmail(auth.getName());
-        model.addAttribute("user",user);
-        return "secretpage";
-    }
 }

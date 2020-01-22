@@ -39,6 +39,8 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    List<User> hairdressers = new ArrayList<>();
+
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -56,12 +58,78 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
         List<Visit> visits = new ArrayList<>();
 
+//        User hds = new User();
+//
+//        Role userRole = roleRepository.findByRole("EMPLOYEE");
+//        hds.setRoles(new HashSet<>(Arrays.asList(userRole)));
+//
+//        hds.setEmail("asd@asd.com");
+//        hds.setName("hhh");
+
         Visit visit = new Visit();
 //        visit.setClient(new User());
 //        visit.setHairDresser(new User());
         visit.setIsAvailable(true);
-        visit.setDay("12-12-12");
+        visit.setDay("22-1-2020");
         visit.setTime("10:30");
+        visit.setHairDresser(hairdressers.get(0));
+
+        visits.add(visit);
+
+        visit = new Visit();
+//        visit.setClient(new User());
+//        visit.setHairDresser(new User());
+        visit.setIsAvailable(true);
+        visit.setDay("22-1-2020");
+        visit.setTime("11:30");
+        visit.setHairDresser(hairdressers.get(0));
+
+        visits.add(visit);
+
+
+        visit = new Visit();
+//        visit.setClient(new User());
+//        visit.setHairDresser(new User());
+        visit.setIsAvailable(true);
+        visit.setDay("22-1-2020");
+        visit.setTime("12:30");
+        visit.setHairDresser(hairdressers.get(0));
+
+        visits.add(visit);
+
+
+        visit = new Visit();
+//        visit.setClient(new User());
+//        visit.setHairDresser(new User());
+        visit.setIsAvailable(true);
+        visit.setDay("22-1-2020");
+        visit.setTime("13:30");
+        visit.setHairDresser(hairdressers.get(0));
+
+        visits.add(visit);
+
+
+        visit = new Visit();
+//        visit.setClient(new User());
+//        visit.setHairDresser(new User());
+        visit.setIsAvailable(true);
+        visit.setDay("22-1-2020");
+        visit.setTime("14:30");
+        visit.setHairDresser(hairdressers.get(0));
+
+
+        visits.add(visit);
+        //==================
+        //another name
+
+
+        visit = new Visit();
+//        visit.setClient(new User());
+//        visit.setHairDresser(new User());
+        visit.setIsAvailable(true);
+        visit.setDay("22-1-2020");
+        visit.setTime("15:30");
+        visit.setHairDresser(hairdressers.get(1));
 
         visits.add(visit);
 
@@ -130,7 +198,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     }
 
     private List<User> getHairdressers() {
-        List<User> hairdressers = new ArrayList<>();
+
 
         User hairdresser = new User();
         hairdresser.setEmail("hhh@hhh.com");
