@@ -206,15 +206,15 @@ public class AdminController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User userExists = adminService.findUserByEmail(user.getEmail());
         if (userExists == null) {
-            model.addAttribute("listHds",adminService.listHairdressers());
             model.addAttribute("newUser",new User());
+            model.addAttribute("listHds",adminService.listHairdressers());
             return "user/admin/adminChangeHdsSurname";
         }
 
         else if(!adminService.changeHdsSurname(userExists,user.getPassword(),auth.getName(),user.getSurname()))
         {
-            model.addAttribute("listHds",adminService.listHairdressers());
             model.addAttribute("newUser",new User());
+            model.addAttribute("listHds",adminService.listHairdressers());
             return "user/admin/adminChangeHdsSurname";
         }
         return "user/admin/adminpage";

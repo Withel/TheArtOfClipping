@@ -60,7 +60,8 @@
                     <label for="inputEmail"><h1>Hairdresser</h1></label>
                     <select class="mdb-select md-form form-control" th:field="*{email}"  id="inputEmail">
                         <option value="" disabled selected>Choose hairdresser</option>
-                       <option th:value="${hd.getEmail()}"  th:each="hd : ${listHds}" th:text="${hd.getName()+' '+hd.getSurname()}">One</option>
+                       <option th:value="${hd.getEmail()}" th:each="hd : ${listHds}"
+                               th:text="${hd.getName()+' '+hd.getSurname()}">One</option>
                     </select >
 
                     <div class="form-group">
