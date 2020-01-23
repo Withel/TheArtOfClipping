@@ -160,7 +160,6 @@ public class VisitController {
         model.addAttribute("timeVisit", new Visit());
 
         User hds = adminService.findUserByEmail(hairdresser.getEmail());
-
         model.addAttribute("hairdresser", hds);
 
         tempVisit.setHairDresser(hds);

@@ -2,34 +2,86 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8"/>
+    <title> The art of clipping salon. </title>
 
-    <!-- Bootstrap CSS -->
+    <link rel="icon" href="../../static/img/scissors.ico" type="image/x-icon" th:href="@{img/scissors.ico}"/>
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--Bootstrap 4.4.1-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
-</head>
+    <link rel="stylesheet" href="../../static/css/calendar.css" th:href="@{../../css/calendar.css}">
 
+</head>
 <body>
 
-<h2>Remember that making reservation reqiures logging in!</h2>
-<h2>If youre not logged in after pressing "Make reservation" you will be redirected to login page</h2>
-<h2>Your reservation:</h2>
-<p th:text="${(visit.getDay())}"></p>
-<p th:text="${(visit.getTime())}"></p>
-<p th:text="${(visit.getHairDresser().getEmail())}"></p>
-<p th:text="${(visit.getService().getName())}"></p>
-<!--probably wont be here-->
-<!--<p th:text="${(visit.getClient().getEmail())}"></p>-->
 
-<p><a href="/37shbdngh8b67sdnas86vb5">Make Reservation</a>
-</p>
+<header>
+    <!––navigation bar for the page––>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
+        <a class="navbar-brand" href="#"><img src="../../static/img/scissors.png" width="30" height="30"
+                                              class="d-inline-block align-top" alt="" th:src="@{img/scissors.png}">
+            AoCSalon</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon pull-left"></span>
+        </button>
 
-<p><a href="/">RETURN TO MAIN PAGE</a>
-</p>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">About</a>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <a class="btn btn-secondary pull-right accountButton" href="/user">
+                <h3><i class="fa fa-user-circle-o" aria-hidden="true"></i>Account</h3>
+            </a>
+
+        </div>
+    </nav>
+    <!––header, title of the page––>
+    <div class="page-header">
+        <h1>The art of clipping salon.</h1>
+        <h2>Making reservation reqiures logging in!</h2>
+        <h2>"Make reservation" will redirect You to login page.</h2>
+    </div>
+</header>
+
+<main>
+    <article>
+        <div class="container mainContainer">
+            <p>Please check your reservation:</p>
+
+            <table class="table">
+                <tr>
+                    <td style="font-weight:bold">Date: </td>
+                    <td th:text="${(visit.getDay())}"></td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Time: </td>
+                    <td th:text="${(visit.getTime())}"></td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Hairdresser: </td>
+                    <td th:text="${(visit.getHairDresser().getName() + ' '+visit.getHairDresser().getSurname())}"></td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Service: </td>
+                    <td th:text="${(visit.getService().getName())}"></td>
+                </tr>
+            </table>
+
+            <div class="container">
+             <a class = "btn btn-secondary rsvrBtn" href="/37shbdngh8b67sdnas86vb5">Make Reservation</a>
+                <a href="/"><i class="fa fa-home home" aria-hidden="true"></i></a>
+                <br>
+            </div>
+        </div>
+
 
 
 <!-- Optional JavaScript -->

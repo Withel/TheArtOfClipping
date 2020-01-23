@@ -1,54 +1,75 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8"/>
+    <title> The art of clipping salon. </title>
+    <link rel="icon" href="../../../static/img/scissors.ico" type="image/x-icon" th:href="@{../../img/scissors.ico}"/>
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Bootstrap CSS -->
+    <!--Bootstrap 4.4.1-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <link rel="stylesheet" href="../../../static/css/clientStyles.css" th:href="@{../../css/clientStyles.css}">
 </head>
 
 <body>
+<header>
+    <!––navigation bar for the page––>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
+        <a class="navbar-brand" href="#"><img src="../../../static/img/scissors.png" width="30" height="30"
+                                              class="d-inline-block align-top" alt="" th:src="@{../../img/scissors.png}">
+            AoCSalon</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon pull-left"></span>
+        </button>
 
-<div class="container-fluid" style="margin-top: 20px">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-primary">
-                <div class="panel-body">
-                    <div class="table-responsive" th:if="${not #lists.isEmpty(services)}">
-                        <table class="table table-hover">
-                            <thead class="thead-inverse">
-                            <tr>
-                                <th>ID</th>
-                                <th>Type</th>
-                                <th>Is Active?</th>
-                                <th>Name</th>
-                                <th>Update</th>
-                                <th>Delete</th>
-                            </tr>
-                            </thead>
-                            <tr th:each="service : ${services}">
-                                <td th:text="${service.id}"></td>
-                                <td th:text="${service.getType()}"></td>
-                                <td th:text="${service.getIsActive()}"></td>
-                                <td th:text="${service.name}"></td>
-                                <td><a href="#" th:href="@{'/user/admin/manageservices/service/' + ${service.id} + '/delete'}">Update</a></td>
-                                <td><a href="#" th:href="@{'/user/admin/manageservices/service/' + ${service.id} + '/delete'}">Delete</a></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/static">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">About</a>
             </div>
         </div>
-    </div>
-</div>
+        <div class="navbar-right">
+            <a class="btn btn-secondary pull-right accountButton" href="/user">
+                <h3><i class="fa fa-user-circle-o" aria-hidden="true"></i>Account</h3>
+            </a>
 
+        </div>
+    </nav>
+</header>
 
+<main>
+    <article>
+        <div class="container mainContainer" style="margin-top: 20px">
+            <div class="row">
+                <div class="table-responsive" th:if="${not #lists.isEmpty(services)}">
+                    <table class="table table-hover">
+                        <thead class="thead-inverse">
+                        <tr>
+                            <th>Type</th>
+                            <th>Is Active?</th>
+                            <th>Name</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tr th:each="service : ${services}">
+                            <td th:text="${service.getType()}"></td>
+                            <td th:text="${service.getIsActive()}"></td>
+                            <td th:text="${service.name}"></td>
+                            <td><a class="btn btn-secondary" href="#" th:href="@{'/user/admin/manageservices/service/' + ${service.id} + '/delete'}">Update</a></td>
+                            <td><a class="btn btn-secondary"  href="#" th:href="@{'/user/admin/manageservices/service/' + ${service.id} + '/delete'}">Delete</a></td>
+                        </tr>
+                    </table>
+            </div>
+        </div>
+        </div>
+        <br>
+    </article>
+</main>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -35,6 +35,18 @@ p
 	margin-bottom:25px;
 	margin-top:5px;
 }
+a:hover {
+	color: #454545;
+	text-decoration: blink;
+	font-weight: bold;
+}
+a:link {
+	text-decoration: none;
+	color: black;
+}
+a:visited {
+	color: black;
+}
 .accountButton
 {
 	background-color: #E9EBEE;
@@ -143,3 +155,4 @@ input[type="submit"]
 	filter: brightness(100%);
 	border: 2px solid #c3c5c8;
 }
+

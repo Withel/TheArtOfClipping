@@ -19,10 +19,10 @@ h1
 
 
 h2{
-	font-size: calc(17px + (35 - 17) * ((100vw - 300px) / (1600 - 300)));
+	font-size: calc(17px + (30 - 17) * ((100vw - 300px) / (1600 - 300)));
 	text-align: center;
 	letter-spacing:  1px;
-	margin-bottom:0px;
+	margin-bottom:5px;
 	margin-top:2px;
 }
 
@@ -39,7 +39,7 @@ p
 	text-align: center;
 	letter-spacing:  2px;
 	margin-bottom:25px;
-	margin-top:5px;
+	margin-top:15px;
 }
 .accountButton
 {
@@ -62,10 +62,56 @@ p
 	min-height: 400px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 15px;
 	text-align: center;
 	background-color: #FFFFFF;
 	border: 1px solid #000000;
 	border-radius: 10px;
+}
+
+.rsvrBtn{
+	font-size: calc(15px + (23 - 15) * ((100vw - 300px) / (1600 - 300)));
+	width: 30%;
+	max-heigt: 60px;
+	text-align: center;
+	margin-right: 15px;
+	margin-left: 15px;
+	border: 1px solid black;
+}
+td{
+	width: 30%;
+	text-align: left;
+}
+a:hover {
+	color: #454545;
+	text-decoration: blink;
+	font-weight: bold;
+}
+a:link {
+	text-decoration: none;
+	color: black;
+}
+a:visited {
+	color: black;
+}
+.home{
+	font-size:35px;
+	color: #454545;
+	float: right;
+	margin-right: 20px;
+}
+
+.home:hover{
+	font-size:35px;
+	color: #747474;
+}
+
+.error{
+	color: #535353;
+}
+
+.rsvrBtn:hover{
+	font-weight: bold;
 }
 
 .day-slider{
