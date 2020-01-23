@@ -206,17 +206,73 @@ public class AdminController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User userExists = adminService.findUserByEmail(user.getEmail());
         if (userExists == null) {
-            model.addAttribute("listHds",adminService.listHairdressers());
             model.addAttribute("newUser",new User());
+            model.addAttribute("listHds",adminService.listHairdressers());
             return "user/admin/adminChangeHdsSurname";
         }
 
         else if(!adminService.changeHdsSurname(userExists,user.getPassword(),auth.getName(),user.getSurname()))
         {
-            model.addAttribute("listHds",adminService.listHairdressers());
             model.addAttribute("newUser",new User());
+            model.addAttribute("listHds",adminService.listHairdressers());
             return "user/admin/adminChangeHdsSurname";
         }
+        return "user/admin/adminpage";
+    }
+
+    @GetMapping("user/admin/changeHdsEmailView")
+    public String adminChangeHdsEmailView(Model model){
+        model.addAttribute("newUser",new User());
+        model.addAttribute("listHds",adminService.listHairdressers());
+        return "user/admin/adminChangeHdsEmail";
+    }
+
+    @PostMapping("user/admin/changeHdsEmail")
+    public String adminChangeHdsEmail(@ModelAttribute User user,Model model) {
+
+        //TODO
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        User userExists = adminService.findUserByEmail(user.getEmail());
+//        if (userExists == null) {
+//            model.addAttribute("newUser",new User());
+//            model.addAttribute("listHds",adminService.listHairdressers());
+//            return "user/admin/adminChangeHdsEmail";
+//        }
+//
+//        else if(!adminService.changeHdsSurname(userExists,user.getPassword(),auth.getName(),user.getSurname()))
+//        {
+//            model.addAttribute("newUser",new User());
+//            model.addAttribute("listHds",adminService.listHairdressers());
+//            return "user/admin/adminChangeHdsEmail";
+//        }
+        return "user/admin/adminpage";
+    }
+
+    @GetMapping("user/admin/changeHdsPasswordView")
+    public String adminChangeHdsPasswordView(Model model){
+        model.addAttribute("newUser",new User());
+        model.addAttribute("listHds",adminService.listHairdressers());
+        return "user/admin/adminChangeHdsPassword";
+    }
+
+    @PostMapping("user/admin/changeHdsPassword")
+    public String adminChangeHdsPassword(@ModelAttribute User user,Model model) {
+
+        //TODO
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        User userExists = adminService.findUserByEmail(user.getEmail());
+//        if (userExists == null) {
+//            model.addAttribute("newUser",new User());
+//            model.addAttribute("listHds",adminService.listHairdressers());
+//            return "user/admin/adminChangeHdsEmail";
+//        }
+//
+//        else if(!adminService.changeHdsSurname(userExists,user.getPassword(),auth.getName(),user.getSurname()))
+//        {
+//            model.addAttribute("newUser",new User());
+//            model.addAttribute("listHds",adminService.listHairdressers());
+//            return "user/admin/adminChangeHdsEmail";
+//        }
         return "user/admin/adminpage";
     }
 

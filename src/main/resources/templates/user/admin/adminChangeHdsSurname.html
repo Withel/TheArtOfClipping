@@ -57,20 +57,18 @@
             </div>
             <div class="container">
                 <p>Type email of hairdresser, and new surname.</p>
-                <form th:object="${newUser}" th:action="@{/user/admin/changeHdsSurname}" method="POST"
-                      class="form-signin">
+                <form th:object="${newUser}" th:action="@{/user/admin/changeHdsSurname}" method="POST" class="form-signin">
+
                     <label for="inputEmail"><h1>Hairdresser</h1></label>
-                    <select class="mdb-select md-form form-control" id="inputEmail">
+                    <select class="mdb-select md-form form-control" th:field="*{email}" id="inputEmail">
                         <option value="" disabled selected>Choose hairdresser</option>
-                        <option th:value="${hd.getEmail()}" th:field="*{email}" th:each="hd : ${listHds}"
-                                th:text="${hd.getName()+' '+hd.getSurname()}">One
-                        </option>
+                        <option th:value="${hd.getEmail()}" th:each="hd : ${listHds}"
+                                th:text="${hd.getName()+' '+hd.getSurname()}">One</option>
                     </select>
 
                     <div class="form-group">
-                        <label for="inputEmail"><h1>Surname</h1></label>
-                        <input type="text" class="form-control" th:field="*{surname}" id="inputName"
-                               placeholder="Surname">
+                        <label for="inputHdsSurname"><h1>Surname</h1></label>
+                        <input type="text" class="form-control" th:field="*{surname}" id="inputHdsSurname" placeholder="HdsSurname">
                     </div>
 
                     <div class="form-group">
@@ -79,7 +77,7 @@
                                placeholder="Password">
                     </div>
                     <div class="buttonContainer">
-                        <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Change Name">
+                        <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Change Surname">
                     </div>
                 </form>
             </div>
