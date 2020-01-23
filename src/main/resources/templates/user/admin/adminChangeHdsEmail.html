@@ -55,18 +55,18 @@
             </div>
             <div class="container">
                 <p>Type email of hairdresser, and new name.</p>
-                <form th:object="${newUser}" th:action="@{/user/admin/changeHdsName}" method="POST" class="form-signin">
+                <form th:object="${newUser}" th:action="@{/user/admin/changeHdsEmail}" method="POST" class="form-signin">
 
                     <label for="inputEmail"><h1>Hairdresser</h1></label>
                     <select class="mdb-select md-form form-control" th:field="*{email}"  id="inputEmail">
                         <option value="" disabled selected>Choose hairdresser</option>
-                       <option th:value="${hd.getEmail()}" th:each="hd : ${listHds}"
-                               th:text="${hd.getName()+' '+hd.getSurname()}">One</option>
+                        <option th:value="${hd.getEmail()}" th:each="hd : ${listHds}"
+                                th:text="${hd.getName()+' '+hd.getSurname()}">One</option>
                     </select >
 
                     <div class="form-group">
-                        <label for="inputHdsName"><h1>Name</h1></label>
-                        <input type="text" class="form-control" th:field="*{name}" id="inputHdsName" placeholder="HdsName">
+                        <label for="inputHdsEmail"><h1>Email</h1></label>
+                        <input type="text" class="form-control" th:field="*{email}" id="inputHdsEmail" placeholder="HdsEmail">
                     </div>
 
                     <div class="form-group">
@@ -75,7 +75,7 @@
                                placeholder="Password">
                     </div>
                     <div class="buttonContainer">
-                        <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Change Name">
+                        <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Change Email">
                     </div>
                 </form>
             </div>
