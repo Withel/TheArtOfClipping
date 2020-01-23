@@ -1,7 +1,9 @@
 package com.se.artofclipping.controllers;
 
+import com.se.artofclipping.model.Service;
 import com.se.artofclipping.model.User;
 import com.se.artofclipping.services.AdminService;
+import com.se.artofclipping.services.ServiceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -10,23 +12,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Controller
 public class AdminController {
 
     AdminService adminService;
+    ServiceService serviceService;
 
-    public AdminController(AdminService adminService) {
+    public AdminController(AdminService adminService, ServiceService serviceService) {
         this.adminService = adminService;
+        this.serviceService = serviceService;
     }
 
     @GetMapping("user/admin/adminpage")
     public String adminPage(){
         return "user/admin/adminpage";
     }
-
 
     @GetMapping("user/admin/manage")
     public String adminManageHds(Model model){
@@ -37,6 +44,28 @@ public class AdminController {
     public String addHairdresser(Model model){
         model.addAttribute("user", new User());
         return "user/admin/adminAddHairdresser";
+    }
+
+    @GetMapping("user/admin/manageservices")
+    public String manageServices(Model model){
+
+        List<Service> services = new ArrayList<>();
+
+        serviceService.listService('F').iterator().forEachRemaining(services::add);
+        serviceService.listService('M').iterator().forEachRemaining(services::add);
+
+        model.addAttribute("services", services);
+
+        return "user/admin/manageServices";
+    }
+
+    @GetMapping("/user/admin/manageservices/service/{id}/delete")
+    public String deleteById(@PathVariable String id){
+
+        log.debug("Deleting id: " + id);
+
+        serviceService.deprecateService(Long.valueOf(id));
+        return "redirect:/user/admin/manageservices";
     }
 
     @PostMapping("admin/register")

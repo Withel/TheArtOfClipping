@@ -2,6 +2,7 @@ package com.se.artofclipping.services;
 
 import com.se.artofclipping.model.Service;
 import com.se.artofclipping.repositories.ServiceRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class ServiceServiceImpl implements ServiceService {
     public List<Service> listService(Character type) {
         List<Service> services = new ArrayList<>();
 
+        //@TODO list only active services
 //        serviceRepository.findAll().iterator().forEachRemaining(services::add);
         serviceRepository.findAllByType(type).iterator().forEachRemaining(services::add);
 
@@ -29,6 +31,11 @@ public class ServiceServiceImpl implements ServiceService {
     @Override
     public Service findById(Long id) {
         Optional<Service> serviceOptional = serviceRepository.findById(id);
+
+        if(!serviceOptional.isPresent()){
+            throw new RuntimeException("Service Not Found");
+        }
+
         return serviceOptional.get();
     }
 
@@ -52,8 +59,12 @@ public class ServiceServiceImpl implements ServiceService {
 
     }
 
+    @Transactional
     @Override
-    public void deprecateService(Service service) {
+    public void deprecateService(Long id) {
+        Service serviceToDeprecate = findById(id);
 
+        serviceToDeprecate.setIsActive(false);
+        serviceRepository.save(serviceToDeprecate);
     }
 }

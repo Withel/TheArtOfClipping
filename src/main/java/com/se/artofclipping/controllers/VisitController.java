@@ -96,7 +96,6 @@ public class VisitController {
 
         List<Visit> availableVisits = visitService.findByDay(tempVisit.getDay());
 
-
         System.out.println("ALL VISITS THIS DAY");
         for(Visit visit : availableVisits){
             System.out.println("============================");
@@ -106,7 +105,6 @@ public class VisitController {
         }
 
         List<Visit> visitsToRemove = new ArrayList<>();
-
 
         // removing visits for another hairdressers
         for(Visit visit : availableVisits){
@@ -172,9 +170,16 @@ public class VisitController {
         return "calendar/calendarSitePost";
     }
 
+    @PostMapping("rsvr/timechosen")
+    public String timeChosen(@ModelAttribute Visit timeVisit, Model model){
 
-    @PostMapping("confirmation")
-    public String confirmation(@ModelAttribute Visit timeVisit, Model model){
+        tempVisit.setTime(timeVisit.getTime());
+
+        return "redirect:/confirmation";
+    }
+
+    @GetMapping("/confirmation")
+    public String confirmation(Model model){
 
 
 //        System.out.println(tempVisit.getTemp1());
@@ -184,24 +189,43 @@ public class VisitController {
 //        System.out.println(todos.get(1));
 //        System.out.println(todos.get(1));
 
-        tempVisit.setTime(timeVisit.getTime());
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        User user = adminService.findUserByEmail(auth.getName());
+//        tempVisit.setClient(user);
+
         Visit newVisit = tempVisit.convertToVisit();
 
         System.out.println(newVisit.getHairDresser().getEmail());
         System.out.println(newVisit.getDay());
         System.out.println(newVisit.getTime());
         System.out.println(newVisit.getService().getName());
+//        System.out.println(newVisit.getClient().getEmail());
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = adminService.findUserByEmail(auth.getName());
-        newVisit.setClient(user);
 
-        visitService.addNewVisit(newVisit);
 
         model.addAttribute("visit", newVisit);
 
 //        visitService.addNewVisit(visit);
 
         return "calendar/confirmation";
+    }
+
+    @GetMapping("/37shbdngh8b67sdnas86vb5")
+    public String reserve(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = adminService.findUserByEmail(auth.getName());
+        tempVisit.setClient(user);
+
+        Visit newVisit = tempVisit.convertToVisit();
+        visitService.addNewVisit(newVisit);
+
+        tempVisit.setTime(null);
+        tempVisit.setHairDresser(null);
+        tempVisit.setService(null);
+        tempVisit.setClient(null);
+        tempVisit.setDay(null);
+
+        //@TODO change to redirection to user's visits
+        return "redirect:/";
     }
 }

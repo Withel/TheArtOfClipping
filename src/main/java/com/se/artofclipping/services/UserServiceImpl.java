@@ -1,30 +1,29 @@
 package com.se.artofclipping.services;
 
-import com.se.artofclipping.model.Role;
 import com.se.artofclipping.model.User;
 import com.se.artofclipping.repositories.RoleRepository;
 import com.se.artofclipping.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 @Service
 public class UserServiceImpl implements UserService {
 
     protected UserRepository userRepository;
     protected BCryptPasswordEncoder bCryptPasswordEncoder;
-    RoleRepository roleRepository;
+    protected RoleRepository roleRepository;
 
-    public UserServiceImpl(){
+
+    public UserServiceImpl() {
 
     }
 
-    public UserServiceImpl(UserRepository userRepository,
-                           BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
+                           RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.roleRepository = roleRepository;
+
     }
 
 

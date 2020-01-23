@@ -1,6 +1,7 @@
 package com.se.artofclipping.controllers;
 
 import com.se.artofclipping.model.User;
+import com.se.artofclipping.model.Visit;
 import com.se.artofclipping.services.HairdresserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @Controller
 public class HairdresserController {
@@ -20,6 +24,19 @@ public class HairdresserController {
 
     public HairdresserController(HairdresserService hairdresserService) {
         this.hairdresserService = hairdresserService;
+    }
+
+    @GetMapping("user/hairdresser/showvisits")
+    public String showVisits(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User hairdresser = hairdresserService.findUserByEmail(auth.getName());
+        List<Visit> hairdresserVisits = new ArrayList<>();
+
+        hairdresserService.listVisits(hairdresser).iterator().forEachRemaining(hairdresserVisits::add);
+
+        model.addAttribute("hairdresserVisits", hairdresserVisits);
+
+        return "user/hairdresser/hairdresserShowVisits";
     }
 
     @GetMapping("user/hairdresser/modify")

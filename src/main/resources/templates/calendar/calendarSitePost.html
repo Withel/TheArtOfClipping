@@ -149,7 +149,7 @@
             </div>
 
             <div class="container" th:if="${not #lists.isEmpty(times)}">
-                <form th:object="${timeVisit}" th:action="@{/confirmation}" method="POST" class="form-signin">
+                <form th:object="${timeVisit}" th:action="@{/rsvr/timechosen}" method="POST" class="form-signin">
 
                     <label for="inputTime"><h2>Time</h2></label>
                     <select class="mdb-select md-form form-control" th:field="*{time}" id="inputTime"
