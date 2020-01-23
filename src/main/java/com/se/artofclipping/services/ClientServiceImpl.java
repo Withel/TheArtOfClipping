@@ -2,15 +2,19 @@ package com.se.artofclipping.services;
 
 import com.se.artofclipping.model.Role;
 import com.se.artofclipping.model.User;
+import com.se.artofclipping.model.Visit;
 import com.se.artofclipping.repositories.RoleRepository;
 import com.se.artofclipping.repositories.UserRepository;
+import com.se.artofclipping.repositories.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 //@TODO probably will have to split this into more interfaces
 
@@ -21,18 +25,31 @@ public class ClientServiceImpl  extends UserServiceImpl implements ClientService
     //protected UserRepository userRepository;
    // protected BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    VisitRepository visitRepository;
+
     @Autowired
     public ClientServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
-                            BCryptPasswordEncoder bCryptPasswordEncoder) {
+                             BCryptPasswordEncoder bCryptPasswordEncoder, VisitRepository visitRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.visitRepository = visitRepository;
     }
 
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
+    @Override
+    public List<Visit> listVisits(User client) {
+
+        List<Visit> visits = new ArrayList<>();
+        visitRepository.findByClient(client).iterator().forEachRemaining(visits::add);
+
+        return visits;
+    }
+
+    //@TODO to clean
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);

@@ -1,6 +1,7 @@
 package com.se.artofclipping.controllers;
 
 import com.se.artofclipping.model.User;
+import com.se.artofclipping.model.Visit;
 import com.se.artofclipping.services.ClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @Controller
 public class ClientController {
@@ -19,6 +23,20 @@ public class ClientController {
 
     public ClientController(ClientService clientService) {
         this.clientService = clientService;
+    }
+
+    @GetMapping("user/managevisits")
+    public String manageVisits(Model model){
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User client = clientService.findUserByEmail(auth.getName());
+        List<Visit> userVisits = new ArrayList<>();
+
+        clientService.listVisits(client).iterator().forEachRemaining(userVisits::add);
+
+        model.addAttribute("userVisits", userVisits);
+
+        return "user/client/clientManageVisits";
     }
 
     @GetMapping("user/client/modify")

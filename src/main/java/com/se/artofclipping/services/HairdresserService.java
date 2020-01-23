@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface HairdresserService extends UserService {
     User findUserByEmail(String email);
-    List<Visit> listVisits(User user);
+    List<Visit> listVisits(User hairdresser);
 }

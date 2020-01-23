@@ -39,7 +39,8 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    List<User> hairdressers = new ArrayList<>();
+    private List<User> hairdressers = new ArrayList<>();
+    private List<User> customers = new ArrayList<>();
 
     @Override
     @Transactional
@@ -73,6 +74,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         visit.setDay("22-1-2020");
         visit.setTime("10:30");
         visit.setHairDresser(hairdressers.get(0));
+        visit.setClient(customers.get(0));
 
         visits.add(visit);
 
@@ -83,6 +85,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         visit.setDay("22-1-2020");
         visit.setTime("11:30");
         visit.setHairDresser(hairdressers.get(0));
+        visit.setClient(customers.get(0));
 
         visits.add(visit);
 
@@ -94,6 +97,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         visit.setDay("22-1-2020");
         visit.setTime("12:30");
         visit.setHairDresser(hairdressers.get(0));
+        visit.setClient(customers.get(0));
 
         visits.add(visit);
 
@@ -105,6 +109,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         visit.setDay("22-1-2020");
         visit.setTime("13:30");
         visit.setHairDresser(hairdressers.get(0));
+        visit.setClient(customers.get(0));
 
         visits.add(visit);
 
@@ -116,6 +121,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         visit.setDay("22-1-2020");
         visit.setTime("14:30");
         visit.setHairDresser(hairdressers.get(0));
+        visit.setClient(customers.get(0));
 
 
         visits.add(visit);
@@ -130,6 +136,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         visit.setDay("22-1-2020");
         visit.setTime("15:30");
         visit.setHairDresser(hairdressers.get(1));
+        visit.setClient(customers.get(0));
 
         visits.add(visit);
 
@@ -180,7 +187,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     }
 
     private List<User> getCustomers() {
-        List<User> customers = new ArrayList<>();
+
 
         User customer = new User();
         customer.setEmail("aaa@aaa.com");

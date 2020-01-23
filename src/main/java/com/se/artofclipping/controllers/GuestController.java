@@ -1,5 +1,6 @@
 package com.se.artofclipping.controllers;
 
+import com.se.artofclipping.model.TempVisit;
 import com.se.artofclipping.model.User;
 import com.se.artofclipping.services.GuestService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,36 +19,56 @@ public class GuestController {
 
     //@Autowired
     private GuestService guestService;
+    private TempVisit tempVisit;
 
-    public GuestController(GuestService guestService) {
+    public GuestController(GuestService guestService, TempVisit tempVisit) {
         this.guestService = guestService;
+        this.tempVisit = tempVisit;
     }
 
     //@TODO change this name to smething relevant
     @GetMapping("user")
-    public String goTo(Model model){
+    public String goTo(Model model) {
         //@TODO change it for query with admin role
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = guestService.findUserByEmail(auth.getName());
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
 
-
-        if(guestService.checkIfAdmin(auth.getName())){
+        if (guestService.checkIfAdmin(auth.getName())) {
             return "user/admin/adminpage";
-        }else if(guestService.checkIfHairdresser(auth.getName())){
-            return "user/hairdresser/hairdresserPage";
-        } else {
-            return "user/client";
         }
+
+        if (guestService.checkIfHairdresser(auth.getName())) {
+            return "user/hairdresser/hairdresserPage";
+        }
+
+//        System.out.println(tempVisit.getDay());
+//        System.out.println(tempVisit.getHairDresser().getEmail());
+//        System.out.println(tempVisit.getTime());
+//        System.out.println(tempVisit.getService().getName());
+
+        //@TODO weird shit here remember about backing up
+        // if any of these viarables will be null it will get us to standard user profile
+        if(tempVisit.getDay() == null || tempVisit.getTime() == null || tempVisit.getService() == null
+                            || tempVisit.getService() == null){
+
+//            if(tempVisit.getDay() == null || tempVisit.getTime() == null || tempVisit.getService() == null
+//                    || tempVisit.getService() == null || user != null)
+
+            return "user/client/clientPage";
+        }
+
+        return "redirect:/confirmation";
+
     }
 
     @GetMapping("login")
-    public String login(){
+    public String login() {
         return "user/loginForm";
     }
 
     @GetMapping("register")
-    public String newUser(Model model){
+    public String newUser(Model model) {
         model.addAttribute("user", new User());
 
         return "user/registerForm";
@@ -55,7 +76,7 @@ public class GuestController {
 
     @PostMapping("registration")
     public String createNewUser(@ModelAttribute User user, BindingResult bindingResult,
-                                      Model model) {
+                                Model model) {
         log.debug(user.getEmail());
         User userExists = guestService.findUserByEmail(user.getEmail());
         if (userExists != null) {

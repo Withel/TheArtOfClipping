@@ -15,21 +15,12 @@
 
 <body>
 
-<h2>Remember that making reservation reqiures logging in!</h2>
-<h2>If youre not logged in after pressing "Make reservation" you will be redirected to login page</h2>
-<h2>Your reservation:</h2>
-<p th:text="${(visit.getDay())}"></p>
-<p th:text="${(visit.getTime())}"></p>
-<p th:text="${(visit.getHairDresser().getEmail())}"></p>
-<p th:text="${(visit.getService().getName())}"></p>
-<!--probably wont be here-->
-<!--<p th:text="${(visit.getClient().getEmail())}"></p>-->
-
-<p><a href="/37shbdngh8b67sdnas86vb5">Make Reservation</a>
-</p>
-
-<p><a href="/">RETURN TO MAIN PAGE</a>
-</p>
+<tr th:each="visit : ${userVisits}">
+    <td th:text="${visit.day}"></td>
+    <td th:text="${visit.time}"></td>
+    <td th:text="${visit.getService().getName()}"></td>
+    <td th:text="${visit.getHairDresser().getName() + ' ' + visit.getHairDresser().getSurname()}"></td>
+</tr>
 
 
 <!-- Optional JavaScript -->

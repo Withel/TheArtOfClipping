@@ -12,5 +12,5 @@ public interface ServiceService {
     void changeDuration(Service service);
     void changeName(Service service);
     void changePrice(Service service);
-    void deprecateService(Service service);
+    void deprecateService(Long id);
 }

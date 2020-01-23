@@ -4,6 +4,7 @@ import com.se.artofclipping.model.Role;
 import com.se.artofclipping.model.User;
 import com.se.artofclipping.repositories.RoleRepository;
 import com.se.artofclipping.repositories.UserRepository;
+import com.se.artofclipping.repositories.VisitRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ import java.util.List;
 public class AdminServiceImpl extends ClientServiceImpl implements AdminService {
 
     public AdminServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
-                            RoleRepository roleRepository) {
-        super(userRepository,roleRepository, bCryptPasswordEncoder);
+                            RoleRepository roleRepository, VisitRepository visitRepository) {
+        super(userRepository,roleRepository, bCryptPasswordEncoder, visitRepository);
         this.roleRepository = roleRepository;
     }
 
