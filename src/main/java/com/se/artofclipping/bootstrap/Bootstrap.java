@@ -42,6 +42,9 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private List<User> hairdressers = new ArrayList<>();
     private List<User> customers = new ArrayList<>();
 
+    List<Service> services = new ArrayList<>();
+
+
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -59,22 +62,13 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
         List<Visit> visits = new ArrayList<>();
 
-//        User hds = new User();
-//
-//        Role userRole = roleRepository.findByRole("EMPLOYEE");
-//        hds.setRoles(new HashSet<>(Arrays.asList(userRole)));
-//
-//        hds.setEmail("asd@asd.com");
-//        hds.setName("hhh");
-
         Visit visit = new Visit();
-//        visit.setClient(new User());
-//        visit.setHairDresser(new User());
         visit.setIsAvailable(true);
-        visit.setDay("22-1-2020");
+        visit.setDay("24-1-2020");
         visit.setTime("10:30");
         visit.setHairDresser(hairdressers.get(0));
         visit.setClient(customers.get(0));
+        visit.setService(services.get(0));
 
         visits.add(visit);
 
@@ -82,10 +76,11 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 //        visit.setClient(new User());
 //        visit.setHairDresser(new User());
         visit.setIsAvailable(true);
-        visit.setDay("22-1-2020");
+        visit.setDay("24-1-2020");
         visit.setTime("11:30");
         visit.setHairDresser(hairdressers.get(0));
         visit.setClient(customers.get(0));
+        visit.setService(services.get(0));
 
         visits.add(visit);
 
@@ -94,10 +89,11 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 //        visit.setClient(new User());
 //        visit.setHairDresser(new User());
         visit.setIsAvailable(true);
-        visit.setDay("22-1-2020");
+        visit.setDay("24-1-2020");
         visit.setTime("12:30");
         visit.setHairDresser(hairdressers.get(0));
         visit.setClient(customers.get(0));
+        visit.setService(services.get(0));
 
         visits.add(visit);
 
@@ -106,10 +102,11 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 //        visit.setClient(new User());
 //        visit.setHairDresser(new User());
         visit.setIsAvailable(true);
-        visit.setDay("22-1-2020");
+        visit.setDay("24-1-2020");
         visit.setTime("13:30");
-        visit.setHairDresser(hairdressers.get(0));
+        visit.setHairDresser(hairdressers.get(1));
         visit.setClient(customers.get(0));
+        visit.setService(services.get(0));
 
         visits.add(visit);
 
@@ -118,10 +115,11 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 //        visit.setClient(new User());
 //        visit.setHairDresser(new User());
         visit.setIsAvailable(true);
-        visit.setDay("22-1-2020");
+        visit.setDay("24-1-2020");
         visit.setTime("14:30");
-        visit.setHairDresser(hairdressers.get(0));
+        visit.setHairDresser(hairdressers.get(1));
         visit.setClient(customers.get(0));
+        visit.setService(services.get(0));
 
 
         visits.add(visit);
@@ -133,10 +131,11 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 //        visit.setClient(new User());
 //        visit.setHairDresser(new User());
         visit.setIsAvailable(true);
-        visit.setDay("22-1-2020");
+        visit.setDay("24-1-2020");
         visit.setTime("15:30");
         visit.setHairDresser(hairdressers.get(1));
         visit.setClient(customers.get(0));
+        visit.setService(services.get(0));
 
         visits.add(visit);
 
@@ -206,8 +205,8 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private List<User> getHairdressers() {
 
-
         User hairdresser = new User();
+
         hairdresser.setEmail("hhh@hhh.com");
         hairdresser.setPassword(bCryptPasswordEncoder.encode("hhh"));
         hairdresser.setActive(1);
@@ -234,7 +233,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     }
 
     private List<Service> getServices() {
-        List<Service> services = new ArrayList<>();
+
 
         // Male services
         Service service = new Service();
@@ -288,7 +287,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         // Female services
         service = new Service();
         service.setName("Bang Trim");
-        service.setIsActive(true);
+        service.setIsActive(false);
         service.setDurationMinutes(15);
         service.setPrice(10D);
         service.setType(Character.toUpperCase('F'));
@@ -296,7 +295,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
         service = new Service();
         service.setName("Cut Only");
-        service.setIsActive(true);
+        service.setIsActive(false);
         service.setDurationMinutes(30);
         service.setPrice(20D);
         service.setType(Character.toUpperCase('F'));

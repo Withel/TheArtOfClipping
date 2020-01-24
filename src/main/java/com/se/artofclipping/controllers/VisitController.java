@@ -40,7 +40,7 @@ public class VisitController {
     @GetMapping("rsvr/")
     public String showAvailable(@RequestParam String id,
                                 @RequestParam String date,
-                                @ModelAttribute User user,
+//                                @ModelAttribute User user,
                                 Model model){
 
         Service chosen = serviceService.findById(Long.parseLong(id));
@@ -53,10 +53,19 @@ public class VisitController {
             tempVisit.setService(serviceService.findById(Long.parseLong(id)));
         }
 
+        //@TODO How to write unclean code pt1 at least select works
+        User optionUser = new User();
+        optionUser.setName("Chose");
+        optionUser.setSurname("Hairdresser");
+        optionUser.setEmail("optionUser");
+
+        List<User> hdsAndChoseOption = adminService.listHairdressers();
+        hdsAndChoseOption.add(0, optionUser);
+
         if(!date.equals("")) {
             System.out.println(date);
             tempVisit.setDay(date);
-            model.addAttribute("listHds", adminService.listHairdressers());
+            model.addAttribute("listHds", hdsAndChoseOption);
             model.addAttribute("timeVisit", new Visit());
             return "calendar/calendarSitePost";
         } else {
@@ -71,6 +80,21 @@ public class VisitController {
     public String time(@ModelAttribute User hairdresser,
                        @ModelAttribute Visit timeVisit,
                        Model model){
+
+        //@TODO How to write unclean code pt2
+        if(hairdresser.getEmail().equals("optionUser")){
+            User optionUser = new User();
+            optionUser.setName("Chose");
+            optionUser.setSurname("Hairdresser");
+            optionUser.setEmail("optionUser");
+            tempVisit.setHairDresser(optionUser);
+            List<User> hdsAndChoseOption = adminService.listHairdressers();
+            hdsAndChoseOption.add(0, optionUser);
+            model.addAttribute("listHds", hdsAndChoseOption);
+            model.addAttribute("hairdresser", new User());
+            model.addAttribute("timeVisit", new Visit());
+            return "calendar/calendarSitePost";
+        }
 
         System.out.println("Chosen hairdresser: " + hairdresser.getEmail());
         System.out.println("Chosen time: " + timeVisit.getTime());
@@ -164,13 +188,28 @@ public class VisitController {
 
         tempVisit.setHairDresser(hds);
 
-        model.addAttribute("listHds", adminService.listHairdressers());
+        //@TODO How to write unclean code pt3
+        User optionUser = new User();
+        optionUser.setName("Chose");
+        optionUser.setSurname("Hairdresser");
+        optionUser.setEmail("optionUser");
+
+        List<User> hdsAndChoseOption = adminService.listHairdressers();
+        hdsAndChoseOption.add(0, optionUser);
+        model.addAttribute("listHds", hdsAndChoseOption);
 
         return "calendar/calendarSitePost";
     }
 
     @PostMapping("rsvr/timechosen")
     public String timeChosen(@ModelAttribute Visit timeVisit, Model model){
+
+//        if(tempVisit.getHairDresser().getEmail().equals("optionUser")){
+////            model.addAttribute("")
+//            model.addAttribute("hairdresser", new User());
+//            model.addAttribute("timeVisit", new Visit());
+//            return "calendar/calendarSitePost";
+//        }
 
         tempVisit.setTime(timeVisit.getTime());
 

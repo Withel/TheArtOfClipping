@@ -51,7 +51,7 @@
                         <tr>
                             <th>Date</th>
                             <th>Time</th>
-<!--                            <th>Service</th>-->
+                            <th>Service</th>
                             <th>Hairdresser</th>
                             <th>Delete</th>
                         </tr>
@@ -59,7 +59,7 @@
                         <tr th:each="visit : ${userVisits}">
                             <td th:text="${visit.day}"></td>
                             <td th:text="${visit.time}"></td>
-<!--                            <td th:text="${visit.getService().getName()}"></td>-->
+                            <td th:text="${visit.getService().getName()}"></td>
                             <td th:text="${visit.getHairDresser().getName() + ' ' + visit.getHairDresser().getSurname()}"></td>
                             <td><a class="btn btn-secondary"  href="#">Delete</a></td>
                         </tr>
