@@ -68,6 +68,25 @@ public class AdminController {
         return "redirect:/user/admin/manageservices";
     }
 
+    @GetMapping("/user/admin/manageservices/service/{id}/update")
+    public String updateById(@PathVariable String id, Model model){
+        log.debug("Deleting id: " + id);
+        Service toUpdate = serviceService.findById(Long.valueOf(id));
+        model.addAttribute("serviceToUpdate",toUpdate);
+        return "user/admin/adminUpdateService";
+    }
+
+    @PostMapping("/user/admin/adminServiceUpdated")
+            public String serviceUpdated(@ModelAttribute Service toUpdate, Model model)
+    {
+        Service service = serviceService.findById(toUpdate.getId());
+        serviceService.changeName(service, toUpdate.getName());
+        serviceService.changePrice(service, toUpdate.getPrice());
+        serviceService.changeType(service, toUpdate.getType());
+        serviceService.changeDuration(service, toUpdate.getDurationMinutes());
+        return "redirect:/user/admin/manageservices";
+    }
+
     @PostMapping("admin/register")
     public String register(@ModelAttribute User user, Model model){
         log.debug(user.getEmail());

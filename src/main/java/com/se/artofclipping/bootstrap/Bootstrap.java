@@ -310,6 +310,8 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         services.add(service);
 
         service = new Service();
+
+     
         service.setName("Wash & Cut");
         service.setIsActive(true);
         service.setDurationMinutes(45);
