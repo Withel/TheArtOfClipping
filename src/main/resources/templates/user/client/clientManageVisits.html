@@ -45,7 +45,7 @@
     <article>
         <div class="container mainContainer" style="margin-top: 20px">
             <div class="row">
-                <div class="table-responsive" th:if="${not #lists.isEmpty(userVisits)}">
+                <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="thead-inverse">
                         <tr>
@@ -56,7 +56,7 @@
                             <th>Delete</th>
                         </tr>
                         </thead>
-                        <tr th:each="visit : ${userVisits}">
+                        <tr th:each="visit : ${userVisits}" th:if="${not #lists.isEmpty(userVisits)}">
                             <td th:text="${visit.day}"></td>
                             <td th:text="${visit.time}"></td>
                             <td th:text="${visit.getService().getName()}"></td>
