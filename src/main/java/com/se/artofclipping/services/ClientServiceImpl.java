@@ -1,6 +1,5 @@
 package com.se.artofclipping.services;
 
-import com.se.artofclipping.model.Role;
 import com.se.artofclipping.model.User;
 import com.se.artofclipping.model.Visit;
 import com.se.artofclipping.repositories.RoleRepository;
@@ -11,9 +10,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 //@TODO probably will have to split this into more interfaces
@@ -21,9 +19,6 @@ import java.util.List;
 @Service
 @Primary
 public class ClientServiceImpl  extends UserServiceImpl implements ClientService{
-
-    //protected UserRepository userRepository;
-   // protected BCryptPasswordEncoder bCryptPasswordEncoder;
 
     VisitRepository visitRepository;
 
@@ -49,17 +44,35 @@ public class ClientServiceImpl  extends UserServiceImpl implements ClientService
         return visits;
     }
 
-    //@TODO to clean
-    public void saveUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setActive(1);
-        Role userRole = roleRepository.findByRole("CUSTOMER");
-        user.setRoles(new HashSet<>(Arrays.asList(userRole)));
-        userRepository.save(user);
+    @Override
+    public boolean validatePasswordAndEmail(User rawUser, User encodedUser) {
+
+        if(rawUser.getEmail().equals(encodedUser.getEmail())
+                && bCryptPasswordEncoder.matches(rawUser.getPassword(), encodedUser.getPassword())){
+            return true;
+        }
+
+        return false;
     }
 
+    @Transactional
     @Override
-    public void deleteAccount(User user) {
+    public void deleteAccount(User client) {
 
+        List<Visit> visitsToDelete = new ArrayList<>();
+        visitRepository.findByClient(client).iterator().forEachRemaining(visitsToDelete::add);
+
+        for(Visit toDelete : visitsToDelete){
+            visitRepository.delete(toDelete);
+        }
+
+        client.setActive(0);
+        client.setEmail("deleted");
+        client.setName(null);
+        client.setPassword(null);
+        client.setRoles(null);
+        client.setSurname(null);
+
+        userRepository.save(client);
     }
 }
