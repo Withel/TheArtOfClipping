@@ -37,6 +37,16 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
+    public List<Visit> findByHds(User hds) {
+//        visitRepository.findByDay(day);
+
+        List<Visit> visits = new ArrayList<>();
+        visitRepository.findByHairDresser(hds).iterator().forEachRemaining(visits::add);
+
+        return visits;
+    }
+
+    @Override
     public void addNewVisit(User user, User hd, Long serviceId, String day, String time) {
 
 //        Visit visit = new Visit();

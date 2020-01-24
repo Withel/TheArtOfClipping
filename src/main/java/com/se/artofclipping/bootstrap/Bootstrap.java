@@ -311,10 +311,10 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         services.add(service);
 
         service = new Service();
-        service.setName("Wash & Style");
+        service.setName("Color & Wash & Style");
         service.setIsActive(true);
-        service.setDurationMinutes(45);
-        service.setPrice(35D);
+        service.setDurationMinutes(60);
+        service.setPrice(60D);
         service.setType(Character.toUpperCase('F'));
         services.add(service);
 

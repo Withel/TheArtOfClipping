@@ -2,13 +2,14 @@ package com.se.artofclipping.services;
 
 import com.se.artofclipping.model.Role;
 import com.se.artofclipping.model.User;
+import com.se.artofclipping.model.Visit;
 import com.se.artofclipping.repositories.RoleRepository;
 import com.se.artofclipping.repositories.UserRepository;
 import com.se.artofclipping.repositories.VisitRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import com.se.artofclipping.services.VisitServiceImpl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;

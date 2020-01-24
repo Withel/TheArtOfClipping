@@ -1,11 +1,15 @@
 package com.se.artofclipping.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@Getter
+@Setter
 @Table(name = "services")
 public class Service {
 

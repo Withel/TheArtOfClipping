@@ -45,18 +45,34 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
-    public void changeDuration(Service service) {
+    public void changeDuration(Service service, Integer newDuration) {
+        Service serviceToUpdate = findById(service.getId());
 
+        serviceToUpdate.setDurationMinutes(newDuration);
+        serviceRepository.save(serviceToUpdate);
     }
 
     @Override
-    public void changeName(Service service) {
+    public void changeType(Service service, Character newType) {
+        Service serviceToUpdate = findById(service.getId());
 
+        serviceToUpdate.setType(newType);
+        serviceRepository.save(serviceToUpdate);
     }
 
     @Override
-    public void changePrice(Service service) {
+    public void changeName(Service service, String newName) {
+        Service serviceToUpdate = findById(service.getId());
+        serviceToUpdate.setName(newName);
+        serviceRepository.save(serviceToUpdate);
+    }
 
+    @Override
+    public void changePrice(Service service, Double newPrice) {
+        Service serviceToUpdate = findById(service.getId());
+
+        serviceToUpdate.setPrice(newPrice);
+        serviceRepository.save(serviceToUpdate);
     }
 
     @Transactional
