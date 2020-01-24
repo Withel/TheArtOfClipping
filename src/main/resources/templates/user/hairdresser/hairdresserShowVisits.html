@@ -53,13 +53,14 @@
                         <tr>
                             <th>Date</th>
                             <th>Time</th>
+                            <th>Visits</th>
                             <th>Client</th>
                         </tr>
                         </thead>
                         <tr th:each="visit : ${hairdresserVisits}">
                             <td th:text="${visit.day}"></td>
                             <td th:text="${visit.time}"></td>
-<!--                            <td th:text="${visit.getService().getName()}"></td>-->
+                            <td th:text="${visit.getService().getName()}"></td>
                             <td th:text="${visit.getClient().getName() + ' '+visit.getClient().getSurname() }"></td>
                         </tr>
                     </table>

@@ -16,8 +16,8 @@ public class IndexController {
 
     @GetMapping({"", "/", "/index"})
     public String home(Model model){
-        model.addAttribute("servicesF", serviceService.listService('F'));
-        model.addAttribute("servicesM", serviceService.listService('M'));
+        model.addAttribute("servicesF", serviceService.listServiceByTypeAndavailability('F', true));
+        model.addAttribute("servicesM", serviceService.listServiceByTypeAndavailability('M', true));
         return "index";
     }
 }

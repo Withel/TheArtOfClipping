@@ -29,6 +29,16 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
+    public List<Service> listServiceByTypeAndavailability(Character type, Boolean isAvailable) {
+        List<Service> services = new ArrayList<>();
+
+        serviceRepository.findByTypeAndIsActive(type, isAvailable).iterator().forEachRemaining(services::add);
+//        serviceRepository.findAllByType(type).iterator().forEachRemaining(services::add);
+
+        return services;
+    }
+
+    @Override
     public Service findById(Long id) {
         Optional<Service> serviceOptional = serviceRepository.findById(id);
 

@@ -9,5 +9,6 @@ public interface ClientService extends UserService {
 
     User findUserByEmail(String email);
     List<Visit> listVisits(User client);
-    void deleteAccount(User user);
+    void deleteAccount(User client);
+    boolean validatePasswordAndEmail(User user1, User user2);
 }

@@ -10,4 +10,5 @@ import java.util.List;
 public interface ServiceRepository extends CrudRepository<Service, Long> {
 
     List<Service> findAllByType(Character type);
+    List<Service> findByTypeAndIsActive(Character type, Boolean isActive);
 }
