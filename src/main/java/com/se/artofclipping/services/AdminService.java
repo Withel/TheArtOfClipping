@@ -10,6 +10,8 @@ public interface AdminService extends ClientService {
     boolean delHairdresser(User hairdresser, String adminPassword, String adminEmail);
     boolean changeHdsName(User hairdresser, String adminPassword, String adminEmail, String newName);
     boolean changeHdsSurname(User hairdresser, String adminPassword, String adminEmail, String newSurname);
+    boolean changeHdsEmail(User hairdresser, String adminPassword, String adminEmail, String newEmail);
+    boolean changeHdsPassword(User hairdresser, String adminPassword, String adminEmail, String newPassword);
     List<User> listHairdressers();
     User findUserByEmail(String email);
 }

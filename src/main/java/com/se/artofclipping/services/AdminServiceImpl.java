@@ -73,6 +73,29 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
     }
 
     @Override
+    public boolean changeHdsEmail(User hairdresser, String adminPassword, String adminEmail, String newEmail) {
+        User user = userRepository.findByEmail(adminEmail);
+
+        if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword()) ) {
+
+            hairdresser.setEmail(newEmail);;
+            userRepository.save(hairdresser);
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public boolean changeHdsPassword(User hairdresser, String adminPassword, String adminEmail, String newPassword) {
+        User user = userRepository.findByEmail(adminEmail);
+
+        if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword()) ) {
+            hairdresser.setPassword(bCryptPasswordEncoder.encode(newPassword));
+            userRepository.save(hairdresser);
+            return true;
+        }
+        return false;
+    }
+    @Override
     public List<User> listHairdressers() {
 
         List<User> hairdressers = new ArrayList<>();

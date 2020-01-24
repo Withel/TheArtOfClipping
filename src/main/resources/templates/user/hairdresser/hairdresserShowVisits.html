@@ -1,26 +1,74 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8"/>
+    <title> The art of clipping salon. </title>
+    <link rel="icon" href="../../../static/img/scissors.ico" type="image/x-icon" th:href="@{../../img/scissors.ico}"/>
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Bootstrap CSS -->
+    <!--Bootstrap 4.4.1-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <link rel="stylesheet" href="../../../static/css/clientStyles.css" th:href="@{../../css/clientStyles.css}">
 </head>
 
 <body>
+<header>
+    <!––navigation bar for the page––>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
+        <a class="navbar-brand" href="#"><img src="../../../static/img/scissors.png" width="30" height="30"
+                                              class="d-inline-block align-top" alt="" th:src="@{../../img/scissors.png}">
+            AoCSalon</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon pull-left"></span>
+        </button>
 
-<tr th:each="visit : ${hairdresserVisits}">
-    <td th:text="${visit.day}"></td>
-    <td th:text="${visit.time}"></td>
-    <!--<td th:text="${visit.getService().getName()}"></td>-->
-    <td th:text="${visit.getClient().getName()}"></td>
-</tr>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/static">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">About</a>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <a class="btn btn-secondary pull-right accountButton" href="/user">
+                <h3><i class="fa fa-user-circle-o" aria-hidden="true"></i>Account</h3>
+            </a>
+
+        </div>
+    </nav>
+</header>
+
+<main>
+    <article>
+        <br>
+        <p><i class="fa fa-bars" aria-hidden="true"></i>Your personal visit schedule:</p>
+        <div class="container mainContainer" style="margin-top: 20px">
+            <div class="row">
+                <div class="table-responsive" th:if="${not #lists.isEmpty(hairdresserVisits)}">
+                    <table class="table table-hover">
+                        <thead class="thead-inverse">
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Client</th>
+                        </tr>
+                        </thead>
+                        <tr th:each="visit : ${hairdresserVisits}">
+                            <td th:text="${visit.day}"></td>
+                            <td th:text="${visit.time}"></td>
+<!--                            <td th:text="${visit.getService().getName()}"></td>-->
+                            <td th:text="${visit.getClient().getName() + ' '+visit.getClient().getSurname() }"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br>
+    </article>
+</main>
 
 
 <!-- Optional JavaScript -->

@@ -87,10 +87,6 @@ a:hover {
 	text-decoration: blink;
 	font-weight: bold;
 }
-a:link {
-	text-decoration: none;
-	color: black;
-}
 a:visited {
 	color: black;
 }
