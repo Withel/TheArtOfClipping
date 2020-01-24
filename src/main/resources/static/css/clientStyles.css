@@ -1,7 +1,10 @@
 body
 {
 	margin: 0;
-	background-color: #E9EBEE;
+	background-image: url("bg.png");
+	background-size: cover;
+	min-height: 600px;
+	background-attachment: fixed;
 	color: 	#000000;
 	font-family: 'Poiret One', serif;
 	font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));

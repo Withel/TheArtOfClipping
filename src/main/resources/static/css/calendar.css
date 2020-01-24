@@ -1,20 +1,26 @@
 body
 {
 	margin: 0;
-	background-color: #E9EBEE;
 	color: 	#000000;
 	font-family: 'Poiret One', serif;
 	font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+	background-image: url("bg.png");
+	background-size: cover;
+	min-height: 600px;
+	background-attachment: fixed;
 }
 
 h1
 {
 	font-size: calc(40px + (70 - 40) * ((100vw - 300px) / (1600 - 300)));
+	width:70%;
 	font-weight: bold;
+	padding-bottom: 10px;
 	text-align: center;
 	letter-spacing:  5px;
-	margin-bottom:0px;
-	margin-top:10px;
+	margin: 10px auto 0px;
+	border-radius: 15px;
+	background: #FFFFFF;
 }
 
 
@@ -22,8 +28,10 @@ h2{
 	font-size: calc(17px + (30 - 17) * ((100vw - 300px) / (1600 - 300)));
 	text-align: center;
 	letter-spacing:  1px;
-	margin-bottom:5px;
-	margin-top:2px;
+	border-radius: 15px;
+	background: #FFFFFF;
+	margin: 5px auto 10px;
+	width:50%;
 }
 
 h3{
@@ -35,11 +43,13 @@ h3{
 
 p
 {
+	border-radius: 15px;
+	background: #FFFFFF;
 	font-weight: bold;
 	text-align: center;
 	letter-spacing:  2px;
-	margin-bottom:25px;
-	margin-top:15px;
+	margin: 5px auto 20px;
+	width: 50%;
 }
 .accountButton
 {
