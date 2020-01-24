@@ -133,7 +133,7 @@
                                                style="font-size:34px;"></i></a>
             </div>
             <div class="container" th:if="${not #lists.isEmpty(listHds)}">
-                <form th:object="${hairdresser}" th:action="@{/rsvr/chosetime}" method="POST" class="form-signin">
+                <form id="hdsForm" th:object="${hairdresser}" th:action="@{/rsvr/chosetime}" method="POST" class="form-signin">
 
                     <label for="inputEmail"><h2>Hairdresser:</h2></label>
                     <select th:field="*{email}" class="mdb-select md-form form-control"  id="inputEmail"

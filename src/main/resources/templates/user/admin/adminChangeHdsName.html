@@ -53,7 +53,7 @@
 
             </div>
             <div class="container">
-                <p>Type email of hairdresser, and new name.</p>
+                <p>Choose hairdresser, and type new name.</p>
                 <form th:object="${newUser}" th:action="@{/user/admin/changeHdsName}" method="POST" class="form-signin">
 
                     <label for="inputEmail"><h1>Hairdresser</h1></label>
@@ -65,7 +65,7 @@
 
                     <div class="form-group">
                         <label for="inputHdsName"><h1>Name</h1></label>
-                        <input type="text" class="form-control" th:field="*{name}" id="inputHdsName" placeholder="HdsName">
+                        <input type="text" class="form-control" th:field="*{name}" id="inputHdsName" placeholder="New Name">
                     </div>
 
                     <div class="form-group">
