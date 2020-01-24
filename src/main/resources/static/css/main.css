@@ -52,6 +52,14 @@ a:link {
 a:visited {
 	color: black;
 }
+
+.jumbo{
+	background-image: url("jumbo.jpg");
+	background-size: cover;
+	min-height: 600px;
+	background-attachment: fixed;
+}
+
 .accountButton
 {
 	background-color: #E9EBEE;
