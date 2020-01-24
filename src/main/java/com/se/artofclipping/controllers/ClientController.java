@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,7 @@ import java.util.List;
 public class ClientController {
     ClientService clientService;
 
-    public ClientController(ClientService clientService) {
+    public ClientController(ClientService clientService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.clientService = clientService;
     }
 
@@ -37,6 +38,29 @@ public class ClientController {
         model.addAttribute("userVisits", userVisits);
 
         return "user/client/clientManageVisits";
+    }
+
+    @GetMapping("user/client/deleteaccount")
+    public String deleteAccountForm(Model model){
+
+        model.addAttribute("passwordUser", new User());
+
+        return "user/client/clientDeleteAccount";
+    }
+
+    @PostMapping("/deleteclientaccount")
+    public String deleteAccount(@ModelAttribute User passwordUser, Model model){
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User client = clientService.findUserByEmail(auth.getName());
+
+        if(clientService.validatePasswordAndEmail(passwordUser, client)){
+            clientService.deleteAccount(client);
+            return "redirect:/logout";
+        }
+
+        model.addAttribute("passwordUser", new User());
+        return "user/client/clientDeleteAccount";
     }
 
     @GetMapping("user/client/modify")
