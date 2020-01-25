@@ -76,7 +76,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 //        visit.setClient(new User());
 //        visit.setHairDresser(new User());
         visit.setIsAvailable(true);
-        visit.setDay("24-1-2020");
+        visit.setDay("28-1-2020");
         visit.setTime("11:30");
         visit.setHairDresser(hairdressers.get(0));
         visit.setClient(customers.get(0));
