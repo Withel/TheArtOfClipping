@@ -8,12 +8,25 @@ $(document).ready(function(){
   });
 });
 
+var url = new URL(window.location.href);
+var query_string = url.search;
+var search_params = new URLSearchParams(query_string);
+var urlDate = search_params.get('date');
+
+
+
 var dayNArray = new Array("Sun","Mon","Tue","Wed","Thu","Fri","Sat");
 var monthArray = new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec");
-var href = window.location.href;
 var currDate = new Date();
-var auxDate = new Date();
 var date = new Date();
+
+if(urlDate !== ""){
+	var tab = urlDate.split('-');
+	date.setFullYear(parseInt(tab[2]));
+	date.setMonth(parseInt(tab[1]));
+	date.setDate(parseInt(tab[0]));
+	document.getElementById("date").innerHTML= date.toDateString();
+}
 
 var forward = 0;
 var ifForwardLast = false;
@@ -21,28 +34,24 @@ var ifForwardLast = false;
 for (var i=0;i<dayNArray.length;i++){
 
 	date.setDate(currDate.getDate() + i);
-	var currDay = date.getDay();
+	var currDayOfWeek = date.getDay();
 	var currMonth = date.getMonth();
-
-	$('#dayN'+i).html(dayNArray[currDay]);
+	$('#dayN'+i).html(dayNArray[currDayOfWeek]);
 	$('#day'+i).html(date.getDate());
 	$('#month'+i).html(monthArray[currMonth]);
 	$('#year'+i).html(date.getFullYear());
 }
 
 function moveForward(){
-	console.log(forward);
+	console.log("mF "+forward);
 
 	if(forward < 52){
 		if(ifForwardLast==false){
 			forward++;
 		}
-
-	
-
 		for (var i=0;i<dayNArray.length;i++){
 
-		var d =   new Date();
+		var d =   currDate;
 
 	 	var dd = d.getDate();
 	    var mm = d.getMonth();
@@ -64,7 +73,7 @@ function moveForward(){
 }
 
 function moveBackward(){
-	console.log(forward);
+	console.log("Mb "+forward);
 
 	if(forward>0){
 
@@ -75,8 +84,7 @@ function moveBackward(){
 		forward --;
 
 		for (var i=0;i<dayNArray.length;i++){
-			var d =   new Date();
-
+			var d =  currDate;
 			var dd = d.getDate();
 			var mm = d.getMonth();
 			var yyyy = d.getFullYear();
