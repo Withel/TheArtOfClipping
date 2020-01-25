@@ -11,12 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 //@TODO probably will have to split this into more interfaces
@@ -46,28 +41,9 @@ public class ClientServiceImpl  extends UserServiceImpl implements ClientService
         List<Visit> visits = new ArrayList<>();
         visitRepository.findByClient(client).iterator().forEachRemaining(visits::add);
 
-        List<Visit> visitsToRemove = new ArrayList<>();
-        Date date;
-        Timestamp timestamp = null;
-        for(Visit visit : visits){
-            try {
-                date = new SimpleDateFormat("dd-MM-yyyy").parse(visit.getDay());
-                timestamp = new Timestamp(date.getTime());
-            } catch (ParseException e) {
-                visitsToRemove.add(visit);
-                GregorianCalendar cal = new GregorianCalendar(2000, 1 - 1, 1);
-                timestamp = new Timestamp(cal.getTimeInMillis());
-            }
-            Timestamp temp = new Timestamp(System.currentTimeMillis());
-            if(timestamp.before(temp)){
-                visitsToRemove.add(visit);
-            }
-        }
-
-        visits.removeAll(visitsToRemove);
-
-        return visits;
+        return getFutureVisits(visits);
     }
+
 
     @Override
     public boolean validatePasswordAndEmail(User rawUser, User encodedUser) {
