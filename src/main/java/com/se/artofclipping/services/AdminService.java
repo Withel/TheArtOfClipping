@@ -3,6 +3,7 @@ package com.se.artofclipping.services;
 import com.se.artofclipping.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AdminService extends ClientService {
 
@@ -14,4 +15,5 @@ public interface AdminService extends ClientService {
     boolean changeHdsPassword(User hairdresser, String adminPassword, String adminEmail, String newPassword);
     List<User> listHairdressers();
     User findUserByEmail(String email);
+    User findUserById(Long id);
 }
