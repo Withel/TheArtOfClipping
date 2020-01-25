@@ -14,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -80,8 +82,20 @@ public class VisitController {
     public String time(@ModelAttribute User hairdresser,
                        @ModelAttribute Visit timeVisit,
                        Model model){
+        String sDate1 = tempVisit.getDay();
+        Date date1;
+        try{
+            date1 = new SimpleDateFormat("dd-MM-yyyy").parse(sDate1);
+        }catch(Exception e){
+            return "calendar/calendarSite";
+        }
 
-        //@TODO How to write unclean code pt2
+        String date = date1.toString();
+        String tab[] = date.split(" ");
+
+        String finalDate= tab[0]+" "+tab[1]+" "+tab[2]+ " "+tab[5];
+        model.addAttribute("date", finalDate);
+
         if(hairdresser.getEmail().equals("optionUser")){
             User optionUser = new User();
             optionUser.setName("Chose");

@@ -54,13 +54,13 @@
         <div class="container mainContainer">
             <div class="container day-slider">
                 <br>
-                <div class="container " id="date">
-
+                <div class="container " id="date" >
+                    <label th:text="${date}"></label>
                 </div>
             </div>
             <div class="container" th:if="${not #lists.isEmpty(listHds)}">
                 <form id="hdsForm" th:object="${hairdresser}" th:action="@{/rsvr/chosetime}" method="POST" class="form-signin">
-                    <label for="inputEmail"><h3>Hairdresser:</h3></label>
+                    <label for="inputEmail"><h4>Hairdresser:</h4></label>
                     <select th:field="*{email}" class="form-control"  id="inputEmail"
                             onchange="this.form.submit()">
                         <option  th:value="${hd.getEmail()}" th:each="hd:${listHds}" th:text="${hd.getName()+' '+hd.getSurname()}">One
@@ -71,7 +71,7 @@
 
             <div class="container" th:if="${not #lists.isEmpty(times)}">
                 <form th:object="${timeVisit}" th:action="@{/rsvr/timechosen}" method="POST" class="form-signin">
-                    <label for="inputTime"><h3>Time:</h3></label>
+                    <label for="inputTime"><h4>Time:</h4></label>
                     <select class="form-control" th:field="*{time}" id="inputTime"
                             onchange="this.form.submit()">
                         <option th:value="''" th:text="'Chose Time'"></option>

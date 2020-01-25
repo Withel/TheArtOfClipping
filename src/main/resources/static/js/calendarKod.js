@@ -23,7 +23,7 @@ var date = new Date();
 if(urlDate !== ""){
 	var tab = urlDate.split('-');
 	date.setFullYear(parseInt(tab[2]));
-	date.setMonth(parseInt(tab[1]));
+	date.setMonth(parseInt(tab[1])-1);
 	date.setDate(parseInt(tab[0]));
 	document.getElementById("date").innerHTML= date.toDateString();
 }

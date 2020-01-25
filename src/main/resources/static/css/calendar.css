@@ -35,6 +35,13 @@ h2{
 }
 
 h3{
+	font-size: calc(15px + (24 - 15) * ((100vw - 300px) / (1600 - 300)));
+	text-align: center;
+	letter-spacing:  1px;
+	margin-top:2px;
+}
+
+h4{
 	font-size: calc(18px + (32 - 18) * ((100vw - 300px) / (1600 - 300)));
 	text-align: center;
 	letter-spacing:  1px;
