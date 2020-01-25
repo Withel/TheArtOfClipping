@@ -20,21 +20,14 @@ public class ServiceServiceImpl implements ServiceService {
     @Override
     public List<Service> listService(Character type) {
         List<Service> services = new ArrayList<>();
-
-        //@TODO list only active services
-//        serviceRepository.findAll().iterator().forEachRemaining(services::add);
         serviceRepository.findAllByType(type).iterator().forEachRemaining(services::add);
-
         return services;
     }
 
     @Override
     public List<Service> listServiceByTypeAndavailability(Character type, Boolean isAvailable) {
         List<Service> services = new ArrayList<>();
-
         serviceRepository.findByTypeAndIsActive(type, isAvailable).iterator().forEachRemaining(services::add);
-//        serviceRepository.findAllByType(type).iterator().forEachRemaining(services::add);
-
         return services;
     }
 
@@ -50,8 +43,8 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
-    public void addService() {
-
+    public void addService(Service toAdd) {
+        serviceRepository.save(toAdd);
     }
 
     @Override
@@ -85,11 +78,18 @@ public class ServiceServiceImpl implements ServiceService {
         serviceRepository.save(serviceToUpdate);
     }
 
+    @Override
+    public void changeIsActive(Service service, boolean activity) {
+        Service serviceToUpdate = findById(service.getId());
+
+        serviceToUpdate.setIsActive(activity);
+        serviceRepository.save(serviceToUpdate);
+    }
+
     @Transactional
     @Override
     public void deprecateService(Long id) {
         Service serviceToDeprecate = findById(id);
-
         serviceToDeprecate.setIsActive(false);
         serviceRepository.save(serviceToDeprecate);
     }

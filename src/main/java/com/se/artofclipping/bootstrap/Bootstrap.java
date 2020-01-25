@@ -239,7 +239,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         Service service = new Service();
         service.setName("Clipper Cut");
         service.setIsActive(true);
-        service.setDurationMinutes(15);
+        service.setDurationMinutes(30);
         service.setPrice(18D);
         service.setType(Character.toUpperCase('M'));
         services.add(service);
@@ -255,7 +255,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         service = new Service();
         service.setName("Cut & Beard Trim/Wash");
         service.setIsActive(true);
-        service.setDurationMinutes(45);
+        service.setDurationMinutes(60);
         service.setPrice(25D);
         service.setType(Character.toUpperCase('M'));
         services.add(service);
@@ -287,15 +287,15 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         // Female services
         service = new Service();
         service.setName("Bang Trim");
-        service.setIsActive(false);
-        service.setDurationMinutes(15);
+        service.setIsActive(true);
+        service.setDurationMinutes(30);
         service.setPrice(10D);
         service.setType(Character.toUpperCase('F'));
         services.add(service);
 
         service = new Service();
         service.setName("Cut Only");
-        service.setIsActive(false);
+        service.setIsActive(true);
         service.setDurationMinutes(30);
         service.setPrice(20D);
         service.setType(Character.toUpperCase('F'));
@@ -304,7 +304,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         service = new Service();
         service.setName("Wash & Style");
         service.setIsActive(true);
-        service.setDurationMinutes(45);
+        service.setDurationMinutes(60);
         service.setPrice(35D);
         service.setType(Character.toUpperCase('F'));
         services.add(service);
@@ -314,7 +314,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
      
         service.setName("Wash & Cut");
         service.setIsActive(true);
-        service.setDurationMinutes(45);
+        service.setDurationMinutes(60);
         service.setPrice(40D);
         service.setType(Character.toUpperCase('F'));
         services.add(service);
@@ -322,7 +322,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         service = new Service();
         service.setName("Wash & Cut & Style");
         service.setIsActive(true);
-        service.setDurationMinutes(60);
+        service.setDurationMinutes(90);
         service.setPrice(70D);
         service.setType(Character.toUpperCase('F'));
         services.add(service);
@@ -330,7 +330,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         service = new Service();
         service.setName("Wash & Cut & Color");
         service.setIsActive(true);
-        service.setDurationMinutes(60);
+        service.setDurationMinutes(90);
         service.setPrice(90D);
         service.setType(Character.toUpperCase('F'));
         services.add(service);

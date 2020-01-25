@@ -47,7 +47,7 @@
             <div class="row">
                 <div class="container">
                     <br>
-                    <form th:object="${serviceToUpdate}" th:action="@{/user/admin/adminServiceUpdated}" method="POST" class="form-signin">
+                    <form th:object="${service}" th:action="@{/user/admin/adminServiceAdded}" method="POST" class="form-signin">
                         <input type="text" maxlength="50" class="form-control" th:field="*{id}" id="inputName" placeholder="Name" style="display: none;">
                         <div class="form-group">
                             <label for="inputName"><h1>Name</h1></label>
@@ -80,7 +80,7 @@
                                    placeholder="Duration">
                         </div>
                         <div class="buttonContainer">
-                            <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Update Service">
+                            <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Add Service">
                         </div>
                     </form>
                     <br>

@@ -47,6 +47,13 @@ public class AdminController {
         return "user/admin/adminAddHairdresser";
     }
 
+    @GetMapping("user/admin/addService")
+    public String list(Model model){
+        model.addAttribute("service", new Service());
+
+        return "user/admin/adminAddService";
+    }
+
     @GetMapping("user/admin/manageservices")
     public String manageServices(Model model){
 
@@ -106,7 +113,20 @@ public class AdminController {
         serviceService.changePrice(service, toUpdate.getPrice());
         serviceService.changeType(service, toUpdate.getType());
         serviceService.changeDuration(service, toUpdate.getDurationMinutes());
+        serviceService.changeIsActive(service, toUpdate.getIsActive());
         return "redirect:/user/admin/manageservices";
+    }
+
+    @PostMapping("/user/admin/adminServiceAdded")
+    public String serviceAdded(@ModelAttribute Service added, Model model) {
+
+        if(added.getName().equals("") || added.getPrice()==null ||
+        added.getDurationMinutes() == null){
+            model.addAttribute("service",added);
+            return "/user/admin/adminAddService";
+        }
+        serviceService.addService(added);
+        return "/user/admin/adminpage";
     }
 
     @PostMapping("/user/admin/adminHairdresserUpdated")
@@ -196,13 +216,6 @@ public class AdminController {
             return "user/admin/adminDelHairdresser";
         }
         return "user/admin/adminpage";
-    }
-
-    @GetMapping("user/admin/listhairdressers")
-    public String list(Model model){
-        model.addAttribute("hairdressers", adminService.listHairdressers());
-
-        return "user/admin/adminListHairdressers";
     }
 
     @GetMapping("user/admin/modify")
