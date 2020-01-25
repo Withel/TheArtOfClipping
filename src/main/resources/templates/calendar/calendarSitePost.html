@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title> The art of clipping salon. </title>
 
-    <link rel="icon" href="../../static/img/scissors.ico" type="image/x-icon" th:href="@{img/scissors.ico}"/>
+    <link rel="icon" href="../../static/img/scissors.ico" type="image/x-icon" th:href="@{../img/scissors.ico}"/>
     <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -52,95 +52,17 @@
 <main>
     <article>
         <div class="container mainContainer">
-            <!--<h1 th:text="'Hi you have chosen: ' + ${(service.name)} + ' for a price ' + ${(service.price)}"></h1>-->
             <div class="container day-slider">
-                <a onclick="moveBackward()"> <i class="fa fa-arrow-left" id="prev" aria-hidden="true"
-                                                style="font-size:34px;"></i></a>
-                <div class="container day-wrapper">
-                    <a href="" id="urlId0" onclick="returnDate(0)">
-                        <div class="btn btn-secondary day">
-                            <h3>
-                                <div class="dayN" id="dayN0">2</div>
-                                <div class="dayNb" id="day0">3</div>
-                                <div class="month" id="month0">2</div>
-                                <div class="invisible" id="year0"></div>
-                            </h3>
-                        </div>
-                    </a>
-                    <a href="" id="urlId1" onclick="returnDate(1)">
-                        <div class="btn btn-secondary day">
-                            <h3>
-                                <div class="dayN" id="dayN1">2</div>
-                                <div class="dayNb" id="day1"></div>
-                                <div class="month" id="month1"></div>
-                                <div class="invisible" id="year1"></div>
-                            </h3>
-                        </div>
-                    </a>
-                    <a href="" id="urlId2" onclick="returnDate(2)">
-                        <div class="btn btn-secondary day">
-                            <h3>
-                                <div class="dayN" id="dayN2">3</div>
-                                <div class="dayNb" id="day2"></div>
-                                <div class="month" id="month2"></div>
-                                <div class="invisible" id="year2"></div>
-                            </h3>
-                        </div>
-                    </a>
-                    <a href="" id="urlId3" onclick="returnDate(3)">
-                        <div class="btn btn-secondary day">
-                            <h3>
-                                <div class="dayN" id="dayN3">4</div>
-                                <div class="dayNb" id="day3"></div>
-                                <div class="month" id="month3"></div>
-                                <div class="invisible" id="year3"></div>
-                            </h3>
-                        </div>
-                    </a>
-                    <a href="" id="urlId4" onclick="returnDate(4)">
-                        <div class="btn btn-secondary day">
-                            <h3>
-                                <div class="dayN" id="dayN4">5</div>
-                                <div class="dayNb" id="day4"></div>
-                                <div class="month" id="month4"></div>
-                                <div class="invisible" id="year4"></div>
-                            </h3>
-                        </div>
-                    </a>
-                    <a href="" id="urlId5" onclick="returnDate(5)">
-                        <div class="btn btn-secondary day">
-                            <h3>
-                                <div class="dayN" id="dayN5">6</div>
-                                <div class="dayNb" id="day5"></div>
-                                <div class="month" id="month5"></div>
-                                <div class="invisible" id="year5"></div>
-                            </h3>
-                        </div>
-                    </a>
-                    <a href="" id="urlId6" onclick="returnDate(6)">
-                        <div class="btn btn-secondary day">
-                            <h3>
-                                <div class="dayN" id="dayN6">7</div>
-                                <div class="dayNb" id="day6"></div>
-                                <div class="month" id="month6"></div>
-                                <div class="invisible" id="year6"></div>
-                            </h3>
-                        </div>
-                    </a>
+                <br>
+                <div class="container " id="date">
 
                 </div>
-                <a onclick="moveForward()"> <i class="fa fa-arrow-right" id="next" aria-hidden="true"
-                                               style="font-size:34px;"></i></a>
             </div>
             <div class="container" th:if="${not #lists.isEmpty(listHds)}">
                 <form id="hdsForm" th:object="${hairdresser}" th:action="@{/rsvr/chosetime}" method="POST" class="form-signin">
-
-                    <label for="inputEmail"><h2>Hairdresser:</h2></label>
-                    <select th:field="*{email}" class="mdb-select md-form form-control"  id="inputEmail"
+                    <label for="inputEmail"><h3>Hairdresser:</h3></label>
+                    <select th:field="*{email}" class="form-control"  id="inputEmail"
                             onchange="this.form.submit()">
-                        <!--<option th:value="''" th:text="'Chose Hairdresser'" th:selected="selected" th:disabled="disabled"></option>-->
-                        <!--<option value=""  disabled selected>Choose Hairdresser</option>-->
-                        <!--<option value="" th:selected="true" th:disabled="disabled">Chose Hairdresser</option>-->
                         <option  th:value="${hd.getEmail()}" th:each="hd:${listHds}" th:text="${hd.getName()+' '+hd.getSurname()}">One
                         </option>
                     </select>
@@ -149,9 +71,8 @@
 
             <div class="container" th:if="${not #lists.isEmpty(times)}">
                 <form th:object="${timeVisit}" th:action="@{/rsvr/timechosen}" method="POST" class="form-signin">
-
-                    <label for="inputTime"><h2>Time</h2></label>
-                    <select class="mdb-select md-form form-control" th:field="*{time}" id="inputTime"
+                    <label for="inputTime"><h3>Time:</h3></label>
+                    <select class="form-control" th:field="*{time}" id="inputTime"
                             onchange="this.form.submit()">
                         <option th:value="''" th:text="'Chose Time'"></option>
                         <option th:value="${timeRightNow}" th:each="timeRightNow:${times}" th:text="${timeRightNow}">One
@@ -159,36 +80,6 @@
                     </select>
                 </form>
             </div>
-
-            <!--<div class="container" th:if="${not #lists.isEmpty(times)}">-->
-                <!--<form id="timeForm" th:object="${timeVisit}" th:action="@{/confirmation}" method="POST"-->
-                      <!--class="form-signin">-->
-
-                    <!--&lt;!&ndash;<tr class="list-group list-group-item"  th:if="${not #lists.isEmpty(times)}" th:field="*{time}" th:each="timeEl : ${times}">&ndash;&gt;-->
-
-                    <!--&lt;!&ndash;<td class="btn btn-secondary"  th:value="${timeEl}" &ndash;&gt;-->
-                    <!--&lt;!&ndash;th:text="${timeEl}" onclick="timeForm.submit();"></td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-
-                    <!--<ul class="list-group list-group-item" th:if="${not #lists.isEmpty(times)}" th:each="timeEl : ${times}">-->
-                        <!--<li type="button" class="btn btn-secondary" th:field="*{time}"-->
-                            <!--th:value="${timeEl.getTime()}" th:text="${timeEl.getTime()}" onclick="this.form.submit()">-->
-                            <!--&lt;!&ndash;<button class="btn btn-secondary" type="submit" th:field="*{time}"&ndash;&gt;-->
-                                    <!--&lt;!&ndash;th:value="${timeEl.getTime()}" th:text="${timeEl.getTime()}">&ndash;&gt;-->
-                            <!--&lt;!&ndash;</button>&ndash;&gt;-->
-                        <!--</li>-->
-                    <!--</ul>-->
-
-
-                    <!--&lt;!&ndash;<ul class="list-group list-group-item" th:if="${not #lists.isEmpty(times)}" th:field="*{time}">&ndash;&gt;-->
-
-                    <!--&lt;!&ndash;<li class="btn btn-secondary" th:value="${timeEl}" th:each="timeEl : ${times}"&ndash;&gt;-->
-                    <!--&lt;!&ndash;th:text="${timeEl}" onclick="timeForm.submit();"></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-
-                <!--</form>-->
-            <!--</div>-->
-
         </div>
 
     </article>

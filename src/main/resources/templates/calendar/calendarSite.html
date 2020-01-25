@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title> The art of clipping salon. </title>
 
-    <link rel="icon" href="../../static/img/scissors.ico" type="image/x-icon" th:href="@{img/scissors.ico}"/>
+    <link rel="icon" href="../../static/img/scissors.ico" type="image/x-icon" th:href="@{../img/scissors.ico}"/>
     <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -54,6 +54,7 @@
         <div class="container mainContainer">
             <!--<h1 th:text="'Hi you have chosen: ' + ${(service.name)} + ' for a price ' + ${(service.price)}"></h1>-->
             <div class="container day-slider">
+                <br>
                 <a onclick="moveBackward()"> <i class="fa fa-arrow-left" id="prev" aria-hidden="true" style="font-size:34px;"></i></a>
                 <div class="container day-wrapper">
                     <a id="urlId0" onclick="returnDate(0)">

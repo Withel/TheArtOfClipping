@@ -29,21 +29,28 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changeEmail(User user, String password,String email) {
-       if(bCryptPasswordEncoder.matches(password, user.getPassword())){
-            user.setEmail(email);
-            userRepository.save(user);
-       }
+        if(!email.equals("")) {
+            if (bCryptPasswordEncoder.matches(password, user.getPassword())) {
+                user.setEmail(email);
+                userRepository.save(user);
+            }
+        }
     }
 
     @Override
     public void changeName(User user, String name) {
-        //TODO check if any new name is given
-        user.setName(name);
-        userRepository.save(user);
+        if(!name.equals("")) {
+            user.setName(name);
+            userRepository.save(user);
+        }
     }
 
     @Override
     public boolean changePassword(User user, String oldPassword,String newPassword) {
+        if(newPassword.equals(""))
+        {
+            return false;
+        }
         if(bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
             user.setPassword(bCryptPasswordEncoder.encode(newPassword));
             userRepository.save(user);
@@ -54,7 +61,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changeSurname(User user,String surname) {
-        user.setSurname(surname);
-        userRepository.save(user);
+        if(!surname.equals("")) {
+            user.setSurname(surname);
+            userRepository.save(user);
+        }
     }
 }

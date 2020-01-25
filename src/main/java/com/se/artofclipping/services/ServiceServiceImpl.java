@@ -91,6 +91,7 @@ public class ServiceServiceImpl implements ServiceService {
     public void deprecateService(Long id) {
         Service serviceToDeprecate = findById(id);
         serviceToDeprecate.setIsActive(false);
+        serviceToDeprecate.setType('Q');
         serviceRepository.save(serviceToDeprecate);
     }
 }

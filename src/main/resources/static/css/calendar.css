@@ -35,12 +35,18 @@ h2{
 }
 
 h3{
-	font-size: calc(11px + (24 - 11) * ((100vw - 300px) / (1600 - 300)));
+	font-size: calc(18px + (32 - 18) * ((100vw - 300px) / (1600 - 300)));
 	text-align: center;
 	letter-spacing:  1px;
 	margin-top:2px;
 }
-
+#date{
+	font-size: calc(18px + (32 - 18) * ((100vw - 300px) / (1600 - 300)));
+	text-align: center;
+	letter-spacing:  1px;
+	margin-top:2px;
+	margin-bottom: 10px;
+}
 p
 {
 	border-radius: 15px;
@@ -97,7 +103,6 @@ a:hover {
 	text-decoration: blink;
 	font-weight: bold;
 }
-
 .home{
 	font-size:35px;
 	color: #454545;
@@ -161,8 +166,6 @@ a:hover {
 	top: 50%;
 	right: 4%;
 }
-
-
 .day-slider #prev{
 	position: absolute;
 	top: 50%;
