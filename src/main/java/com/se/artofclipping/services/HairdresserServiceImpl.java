@@ -10,7 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Slf4j
@@ -31,7 +36,25 @@ public class HairdresserServiceImpl extends UserServiceImpl implements Hairdress
 
         List<Visit> visits = new ArrayList<>();
         visitRepository.findByHairDresser(hairdresser).iterator().forEachRemaining(visits::add);
+        List<Visit> visitsToRemove = new ArrayList<>();
+        Date date;
+        Timestamp timestamp = null;
+        for(Visit visit : visits){
+            try {
+                date = new SimpleDateFormat("dd-MM-yyyy").parse(visit.getDay());
+                timestamp = new Timestamp(date.getTime());
+            } catch (ParseException e) {
+                visitsToRemove.add(visit);
+                GregorianCalendar cal = new GregorianCalendar(2000, 1 - 1, 1);
+                timestamp = new Timestamp(cal.getTimeInMillis());
+            }
+            Timestamp temp = new Timestamp(System.currentTimeMillis());
+            if(timestamp.before(temp)){
+                visitsToRemove.add(visit);
+            }
+        }
 
+        visits.removeAll(visitsToRemove);
         return visits;
     }
 
