@@ -3,6 +3,8 @@ package com.se.artofclipping.controllers;
 import com.se.artofclipping.model.User;
 import com.se.artofclipping.model.Visit;
 import com.se.artofclipping.services.ClientService;
+import com.se.artofclipping.services.ServiceService;
+import com.se.artofclipping.services.VisitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
@@ -21,9 +24,11 @@ import java.util.List;
 @Controller
 public class ClientController {
     ClientService clientService;
+    VisitService visitService;
 
-    public ClientController(ClientService clientService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public ClientController(ClientService clientService,VisitService visitService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.clientService = clientService;
+        this.visitService = visitService;
     }
 
     @GetMapping("user/managevisits")
@@ -38,6 +43,20 @@ public class ClientController {
         model.addAttribute("userVisits", userVisits);
 
         return "user/client/clientManageVisits";
+    }
+
+    @GetMapping("/user/client/clientManageVisits/visit/{id}/delete")
+    public String deleteVisit(@PathVariable String id, Model model){
+        Visit toDel = visitService.findById(Long.valueOf(id));
+        visitService.deleteVisit(toDel);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User client = clientService.findUserByEmail(auth.getName());
+        List<Visit> userVisits = new ArrayList<>();
+        clientService.listVisits(client).iterator().forEachRemaining(userVisits::add);
+        model.addAttribute("userVisits", userVisits);
+
+        return "/user/client/clientManageVisits";
     }
 
     @GetMapping("user/client/deleteaccount")

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VisitServiceImpl implements VisitService {
@@ -37,6 +38,17 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
+    public Visit findById(Long id) {
+        Optional<com.se.artofclipping.model.Visit> optional = visitRepository.findById(id);
+
+        if(!optional.isPresent()){
+            throw new RuntimeException("Visit Not Found");
+        }
+
+        return optional.get();
+    }
+
+    @Override
     public List<Visit> findByHds(User hds) {
 //        visitRepository.findByDay(day);
 
@@ -60,6 +72,6 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public void deleteVisit(Visit visit) {
-
+        visitRepository.delete(visit);
     }
 }
