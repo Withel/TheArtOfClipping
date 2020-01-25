@@ -2,6 +2,7 @@ package com.se.artofclipping.services;
 
 import com.se.artofclipping.model.Role;
 import com.se.artofclipping.model.User;
+import com.se.artofclipping.model.Visit;
 import com.se.artofclipping.repositories.RoleRepository;
 import com.se.artofclipping.repositories.UserRepository;
 import com.se.artofclipping.repositories.VisitRepository;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Slf4j
@@ -30,10 +32,17 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
         userRepository.save(hairdresser);
     }
 
+    @Transactional
     @Override
     public boolean delHairdresser(User hairdresser, String adminPassword, String adminEmail) {
        //TODO make successful deletion of hairdressers
         User user = userRepository.findByEmail(adminEmail);
+        List<Visit> visitsToDelete = new ArrayList<>();
+        visitRepository.findByHairDresser(hairdresser).iterator().forEachRemaining(visitsToDelete::add);
+
+        for(Visit toDelete : visitsToDelete){
+            visitRepository.delete(toDelete);
+        }
 
         if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword())) {
             hairdresser.setActive(0);
