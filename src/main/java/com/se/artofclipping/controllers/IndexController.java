@@ -20,4 +20,8 @@ public class IndexController {
         model.addAttribute("servicesM", serviceService.listServiceByTypeAndavailability('M', true));
         return "index";
     }
+    @GetMapping({"/about"})
+    public String about(Model model){
+        return "about";
+    }
 }

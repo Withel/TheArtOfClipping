@@ -157,7 +157,7 @@ public class VisitController {
         for(String currentTime : times){
             for(Visit visit : availableVisits)
                 if(currentTime.equals(visit.getTime())){
-                    timesToRemove.add(currentTime);
+                        timesToRemove.add(currentTime);
                 }
         }
 
