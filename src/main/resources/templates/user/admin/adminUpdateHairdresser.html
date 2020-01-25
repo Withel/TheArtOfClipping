@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../../../static/css/clientStyles.css" th:href="@{../../css/clientStyles.css}">
+    <link rel="stylesheet" href="../../../static/css/clientStyles.css" th:href="@{../../../../../css/clientStyles.css}">
 </head>
 
 <body>
@@ -45,21 +45,44 @@
     <article>
         <div class="container mainContainer" style="margin-top: 20px">
             <div class="row">
-                <div class="table-responsive" >
-                    <table class="table table-hover">
-                        <thead class="thead-inverse">
-                        <tr>
-                            <th>Name</th>
-                            <th>Surname</th>
-                            <th>Manage</th>
-                        </tr>
-                        </thead>
-                        <tr th:if="${not #lists.isEmpty(hairdressers)}" th:each="hairdresser : ${hairdressers}">
-                            <td th:text="${hairdresser.getName()}"></td>
-                            <td th:text="${hairdresser.getSurname()}"></td>
-                            <td><a class="btn btn-secondary" href="#" th:href="@{'/user/admin/manageHairdressers/hairdresser/' + ${hairdresser.getId()} + '/update'}">Manage</a></td>
-                        </tr>
-                    </table>
+                <div class="container">
+                    <br>
+                    <form th:object="${auxVisit}" th:action="@{/user/admin/adminHairdresserUpdated}" method="POST" class="form-signin">
+                        <input  type="text" maxlength="50" class="form-control"
+                               th:field="*{hairDresser.id}" placeholder="Name" style="display: none;">
+                        <div class="form-group">
+                            <label for="inputName"><h1>Name</h1></label>
+                            <input type="text" maxlength="50" class="form-control"
+                                    th:field="*{hairDresser.name}" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSurname"><h1>Surname</h1></label>
+                            <input type="text" maxlength="50" class="form-control"
+                                   th:field="*{hairDresser.surname}" id="inputSurname"
+                                   placeholder="Surname">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail"><h1>Email</h1></label>
+                            <input type="text" maxlength="50" class="form-control"
+                                   th:field="*{hairDresser.email}" id="inputEmail"
+                                   placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword"><h1>Password</h1></label>
+                            <input type="password" class="form-control"
+                                   th:field="*{hairDresser.password}" id="inputPassword"
+                                   placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPasswordA"><h1>Your Password</h1></label>
+                            <input type="password" maxlength="50" class="form-control" th:field="*{client.password}" id="inputPasswordA"
+                                   placeholder="Password">
+                        </div>
+                        <div class="buttonContainer">
+                            <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Update Hairdresser">
+                        </div>
+                    </form>
+                    <br>
                 </div>
             </div>
         </div>

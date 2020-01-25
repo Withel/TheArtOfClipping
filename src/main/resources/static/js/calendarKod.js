@@ -126,6 +126,7 @@ function returnDate(nb)
     $('#urlId'+nb).attr('href', new_url);
 }
 
+
 // function returnDate(nb){
 // 	var dayNb = $('#day'+nb).html();
 // 	var month = $('#month'+nb).html();
