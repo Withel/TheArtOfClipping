@@ -3,8 +3,10 @@ package com.se.artofclipping.controllers;
 import com.se.artofclipping.model.Service;
 import com.se.artofclipping.model.User;
 import com.se.artofclipping.model.Visit;
+import com.se.artofclipping.repositories.VisitRepository;
 import com.se.artofclipping.services.AdminService;
 import com.se.artofclipping.services.ServiceService;
+import com.se.artofclipping.services.VisitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +30,13 @@ public class AdminController {
 
     AdminService adminService;
     ServiceService serviceService;
+    VisitService visitService;
 
-    public AdminController(AdminService adminService, ServiceService serviceService) {
+    public AdminController(AdminService adminService, ServiceService serviceService,
+                           VisitService visitService, VisitRepository visitRepository) {
         this.adminService = adminService;
         this.serviceService = serviceService;
+        this.visitService = visitService;
     }
 
     @GetMapping("user/admin/adminpage")
@@ -45,6 +53,74 @@ public class AdminController {
     public String addHairdresser(Model model){
         model.addAttribute("user", new User());
         return "user/admin/adminAddHairdresser";
+    }
+
+    @GetMapping("user/admin/adddayoff")
+    public String addDayOff(Model model){
+
+        List<User> hairdressers = adminService.listHairdressers();
+
+        model.addAttribute("listHds", hairdressers);
+        model.addAttribute("hairdresser", new User());
+
+        return "user/admin/adminIssueDayOff";
+    }
+
+    @PostMapping("user/admin/executedayoff")
+    public String executeDayOff(@ModelAttribute User date){
+
+        User hairdresser = adminService.findUserByEmail(date.getEmail());
+
+        String beggining = date.getName();
+        String ending = date.getSurname();
+
+        System.out.println(beggining);
+        System.out.println(ending);
+
+        String tab[] = beggining.split("-");
+        String tab2[] = ending.split("-");
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-M-yyyy");
+
+        LocalDate start = LocalDate.of(Integer.valueOf(tab[0]), Integer.valueOf(tab[1]), Integer.valueOf(tab[2]));
+        LocalDate end = LocalDate.of(Integer.valueOf(tab2[0]), Integer.valueOf(tab2[1]), Integer.valueOf(tab2[2]));
+
+        Duration diff = Duration.between(start.atStartOfDay(), end.atStartOfDay());
+        Long numberOfDays = diff.toDays();
+
+        adminService.addDayOff(dtf.format(start), hairdresser);
+
+        for(int i=0;i<=numberOfDays; i++){
+
+            adminService.addDayOff(dtf.format(start.plusDays(i)), hairdresser);
+        }
+
+        return "user/admin/adminpage";
+    }
+
+    @GetMapping("/user/admin/removedayoff")
+    public String removeDaysOff(Model model){
+
+        List<User> hairdressers = adminService.listHairdressers();
+
+        model.addAttribute("listHds", hairdressers);
+        model.addAttribute("hairdresser", new User());
+
+        return "user/admin/adminRemoveDaysOff";
+    }
+
+    @PostMapping("user/admin/executeremovedayoff")
+    public String executeRemoveDayOff(@ModelAttribute User hairdresser){
+
+        User hairdresser2 = adminService.findUserByEmail(hairdresser.getEmail());
+
+        Service service = serviceService.findByName("Day Off");
+
+        List<Visit> visitsToRemove = visitService.findByServiceAndHairdresser(service, hairdresser2);
+
+        visitService.deleteAll(visitsToRemove);
+
+        return "user/admin/adminpage";
     }
 
     @GetMapping("user/admin/addService")

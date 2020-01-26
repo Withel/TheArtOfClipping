@@ -49,7 +49,7 @@
             <h2 style="margin-top: 15px; font-weight: bold;">Issue Day Off</h2>
             <br>
             <div class="container" th:if="${not #lists.isEmpty(listHds)}">
-            <form id="hdsForm" th:object="${hairdresser}" th:action="@{/rsvr/chosetime}" method="POST" class="form-signin">
+            <form id="hdsForm" th:object="${hairdresser}" th:action="@{/user/admin/executedayoff}" method="POST" class="form-signin">
                 <label for="inputEmail"><h2>Hairdresser:</h2></label>
                 <select th:field="*{email}" class="form-control"  id="inputEmail">
                 <option  th:value="${hd.getEmail()}" th:each="hd:${listHds}" th:text="${hd.getName()+' '+hd.getSurname()}">One

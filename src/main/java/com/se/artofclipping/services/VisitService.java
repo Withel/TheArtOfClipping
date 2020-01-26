@@ -1,5 +1,6 @@
 package com.se.artofclipping.services;
 
+import com.se.artofclipping.model.Service;
 import com.se.artofclipping.model.User;
 import com.se.artofclipping.model.Visit;
 
@@ -14,4 +15,6 @@ public interface VisitService {
     Visit findById(Long id);
     List<Visit> findByHds(User hds);
     List<Visit> listVisits();
+    List<Visit> findByServiceAndHairdresser(Service service, User hairdresser);
+    void deleteAll(List<Visit> listToDelete);
 }
