@@ -20,7 +20,7 @@ var monthArray = new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep"
 var currDate = new Date();
 var date = new Date();
 var dateInOneYear = new Date();
-dateInOneYear.setDate(date + 365);
+dateInOneYear.setDate(date.getDate() + 365);
 
 
 if(urlDate !== ""){

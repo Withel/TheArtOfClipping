@@ -80,6 +80,10 @@
                     </select>
                 </form>
             </div>
+
+            <div class="container" th:if="${#lists.isEmpty(times)}">
+                <h2>No available visits.</h2>
+            </div>
         </div>
 
     </article>
