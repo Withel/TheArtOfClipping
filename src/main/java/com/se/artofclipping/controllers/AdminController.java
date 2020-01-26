@@ -144,12 +144,6 @@ public class AdminController {
         hairdressers = adminService.listHairdressers();
         model.addAttribute("hairdressers", hairdressers);
 
-        if(!adminService.changeHdsName(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getName()) ||
-                !adminService.changeHdsSurname(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getSurname()) ||
-                !adminService.changeHdsPassword(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getPassword())){
-            return "user/admin/adminUpdateHairdresser";
-        }
-
         if(changed != null){
             if(old.getEmail().equals(changed.getEmail())){
                 return "/user/admin/adminManageHairdressers";
@@ -162,6 +156,13 @@ public class AdminController {
             if(!adminService.changeHdsEmail(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getEmail()))
                 return "user/admin/adminUpdateHairdresser";
             }
+
+        if(!adminService.changeHdsName(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getName()) ||
+                !adminService.changeHdsSurname(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getSurname()) ||
+                !adminService.changeHdsPassword(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getPassword())){
+            return "user/admin/adminUpdateHairdresser";
+        }
+
         return "/user/admin/adminManageHairdressers";
     }
 
