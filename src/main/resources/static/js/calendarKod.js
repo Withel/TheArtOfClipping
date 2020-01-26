@@ -19,12 +19,19 @@ var dayNArray = new Array("Sun","Mon","Tue","Wed","Thu","Fri","Sat");
 var monthArray = new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec");
 var currDate = new Date();
 var date = new Date();
+var dateInOneYear = new Date();
+dateInOneYear.setDate(date.getDate() + 365);
+
 
 if(urlDate !== ""){
 	var tab = urlDate.split('-');
 	date.setFullYear(parseInt(tab[2]));
 	date.setMonth(parseInt(tab[1])-1);
 	date.setDate(parseInt(tab[0]));
+
+	if(date > dateInOneYear){
+		date = dateInOneYear;
+	}
 	document.getElementById("date").innerHTML= date.toDateString();
 }
 

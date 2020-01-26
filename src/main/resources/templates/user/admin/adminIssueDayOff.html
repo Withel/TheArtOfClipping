@@ -3,18 +3,17 @@
 <head>
     <meta charset="utf-8"/>
     <title> The art of clipping salon. </title>
-    <link rel="icon" href="../../../static/img/scissors.ico" type="image/x-icon" th:href="@{../../../img/scissors.ico}"/>
+
+    <link rel="icon" href="../../static/img/scissors.ico" type="image/x-icon" th:href="@{../img/scissors.ico}"/>
     <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <script type="text/javascript" src="../../../static/js/adminCode.js">
-    </script>
 
     <!--Bootstrap 4.4.1-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../../../static/css/clientStyles.css" th:href="@{../../css/clientStyles.css}">
+    <link rel="stylesheet" href="../../../static/css/clientStyles.css" th:href="@{../../../../../css/clientStyles.css}">
+
 </head>
 
 <body>
@@ -22,7 +21,7 @@
     <!––navigation bar for the page––>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
         <a class="navbar-brand" href="/"><img src="../../../static/img/scissors.png" width="30" height="30"
-                                              class="d-inline-block align-top" alt="" th:src="@{../../../img/scissors.png}">
+                                              class="d-inline-block align-top" alt="" th:src="@{../../img/scissors.png}">
             AoCSalon</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,36 +45,32 @@
 
 <main>
     <article>
-        </br>
-        <div class="container mainContainer">
-            <div class="container accountContainer">
-                <i class="fa fa-user-circle-o" aria-hidden="true" style="margin-top: 10px; font-size:30px;"></i>
+        <div class="container mainContainer" style="margin-top: 20px">
+            <h2 style="margin-top: 15px; font-weight: bold;">Issue Day Off</h2>
+            <br>
+            <div class="container" th:if="${not #lists.isEmpty(listHds)}">
+            <form id="hdsForm" th:object="${hairdresser}" th:action="@{/rsvr/chosetime}" method="POST" class="form-signin">
+                <label for="inputEmail"><h2>Hairdresser:</h2></label>
+                <select th:field="*{email}" class="form-control"  id="inputEmail">
+                <option  th:value="${hd.getEmail()}" th:each="hd:${listHds}" th:text="${hd.getName()+' '+hd.getSurname()}">One
+                </option>
+                </select>
 
-            </div>
-            <div class="container">
-                <p>Type email of hairdresser You want to fire:</p>
+            <div class="container form-signin">
+                <label for="beg"><h2>Beggening:</h2></label>
+                <input class="form-control" type="date" id="beg" min='1899-01-01' max='2000-13-13'>
 
-                <form th:object="${user}" th:action="@{/user/admin/delete}" method="POST" class="form-signin">
-                    <label for="inputEmail"><h1>Email</h1></label>
-                    <select  class="mdb-select md-form form-control" th:field="*{email}" id="inputEmail">
-                        <option value="" disabled selected>Choose hairdresser</option>
-                        <option th:value="${hd.getEmail()}" th:each="hd : ${listHds}" th:text="${hd.getEmail()}">One</option>
-                    </select >
-                    <div class="form-group">
-                        <label for="inputNewPassword"><h1>Your Password</h1></label>
-                        <input type="password" class="form-control" th:field="*{password}" id="inputNewPassword"
-                               placeholder="Password">
-                    </div>
-                    <div class="buttonContainer">
-                        <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Fire hairdresser.">
-                    </div>
-                </form>
+                <label for="end"><h2>End:</h2></label>
+                <input class="form-control" type="date" id="end" min='1899-01-01' max='2000-13-13'>
+                <br>
+                <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Issue Day Off">
             </div>
-            </br>
+            </form>
+                <br>
+        </div>
         </div>
     </article>
 </main>
-
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -88,6 +83,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+
+<script src="../../../static/js/adminCode.js" th:src="@{../../../js/adminCode.js}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
 </body>
 
 </html>
