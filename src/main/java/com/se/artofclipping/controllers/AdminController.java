@@ -67,12 +67,20 @@ public class AdminController {
     }
 
     @PostMapping("user/admin/executedayoff")
-    public String executeDayOff(@ModelAttribute User date){
+    public String executeDayOff(Model model,@ModelAttribute User date){
+        List<User> hairdressers = adminService.listHairdressers();
+
+        model.addAttribute("listHds", hairdressers);
+        model.addAttribute("hairdresser", new User());
 
         User hairdresser = adminService.findUserByEmail(date.getEmail());
 
         String beggining = date.getName();
         String ending = date.getSurname();
+
+        if(beggining.equals("") || ending.equals("")){
+            return "user/admin/adminIssueDayOff";
+        }
 
         System.out.println(beggining);
         System.out.println(ending);
@@ -88,6 +96,10 @@ public class AdminController {
         Duration diff = Duration.between(start.atStartOfDay(), end.atStartOfDay());
         Long numberOfDays = diff.toDays();
 
+        if(numberOfDays < 0)
+        {
+            return "user/admin/adminIssueDayOff";
+        }
         adminService.addDayOff(dtf.format(start), hairdresser);
 
         for(int i=0;i<=numberOfDays; i++){
