@@ -58,10 +58,10 @@
 
             <div class="container form-signin">
                 <label for="beg"><h2>Beggening:</h2></label>
-                <input class="form-control" type="date" id="beg" min='1899-01-01' max='2000-13-13'>
+                <input class="form-control" type="date" th:field="*{name}" id="beg" min='1899-01-01' max='2000-13-13'>
 
                 <label for="end"><h2>End:</h2></label>
-                <input class="form-control" type="date" id="end" min='1899-01-01' max='2000-13-13'>
+                <input class="form-control" type="date" th:field="*{surname}" id="end" min='1899-01-01' max='2000-13-13'>
                 <br>
                 <input type="submit" class="btn btn-secondary btn-lg loginRegButton" value="Issue Day Off">
             </div>
