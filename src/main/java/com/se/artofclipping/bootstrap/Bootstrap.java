@@ -195,6 +195,13 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         customer.setName("aaa");
         customer.setSurname("aaa");
 
+        customer = new User();
+        customer.setEmail("Day Off");
+        customer.setPassword(bCryptPasswordEncoder.encode("Day Off"));
+        customer.setActive(0);
+        customer.setName("Day");
+        customer.setSurname("Off");
+
         Role userRole = roleRepository.findByRole("CUSTOMER");
         customer.setRoles(new HashSet<>(Arrays.asList(userRole)));
 
@@ -333,6 +340,14 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         service.setDurationMinutes(90);
         service.setPrice(90D);
         service.setType(Character.toUpperCase('F'));
+        services.add(service);
+
+        service = new Service();
+        service.setName("Day Off");
+        service.setIsActive(false);
+        service.setDurationMinutes(480);
+        service.setPrice(0.0D);
+        service.setType('F');
         services.add(service);
 
         return services;

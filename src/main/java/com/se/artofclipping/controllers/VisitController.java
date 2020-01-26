@@ -113,7 +113,7 @@ public class VisitController {
         System.out.println("Chosen hairdresser: " + hairdresser.getEmail());
         System.out.println("Chosen time: " + timeVisit.getTime());
 
-        //@TODO WTF IS GOING ON HERE XDDDDD
+        //@TODO WTF IS GOING ON HERE XDDDDD please change it to bean...
         List<String> times = new ArrayList<>();
         times.add("10:00");
         times.add("10:30");
@@ -167,12 +167,47 @@ public class VisitController {
 
         List<String> timesToRemove = new ArrayList<>();
 
-        // removing times for current day and hairdresser
-        for(String currentTime : times){
-            for(Visit visit : availableVisits)
-                if(currentTime.equals(visit.getTime())){
-                        timesToRemove.add(currentTime);
+//         removing times for current day and hairdresser
+//        for(String currentTime : times){
+//            for(Visit visit : availableVisits) {
+//                if (currentTime.equals(visit.getTime())) {
+//                    timesToRemove.add(currentTime);
+//                }
+//            }
+//        }
+
+        Integer currentVisitOffset = 0;
+        Integer chosenVisitOffset = 0;
+
+        for(int i=0; i<times.size(); i++){
+            for(Visit visit : availableVisits) {
+                if (times.get(i).equals(visit.getTime())) {
+                    timesToRemove.add(times.get(i));
+
+                    // removing times ahead for every visit longer than 30 minutes
+                    currentVisitOffset = visit.getService().getDurationMinutes() / 30;
+                    for(int j=0; j<currentVisitOffset; j++){
+                        if(!(i+j > times.size())){
+                            timesToRemove.add(times.get(i+j));
+                        }
+                    }
+
+                    // removing times before for current service time
+                    chosenVisitOffset = tempVisit.getService().getDurationMinutes() / 30;
+                    for(int j=0; j<chosenVisitOffset; j++){
+                        if(!(i-j < 0)) {
+                            timesToRemove.add(times.get(i - j));
+                        }
+                    }
                 }
+            }
+        }
+
+        // removing timest from the end for current service
+        chosenVisitOffset = (tempVisit.getService().getDurationMinutes() / 30)-1;
+
+        for(int j=times.size()-chosenVisitOffset; j<times.size(); j++){
+            timesToRemove.add(times.get(j));
         }
 
         times.removeAll(timesToRemove);
