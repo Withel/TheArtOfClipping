@@ -47,6 +47,16 @@ public class AdminController {
         return "user/admin/adminAddHairdresser";
     }
 
+    @GetMapping("user/admin/adddayoff")
+    public String addDayOff(Model model){
+
+        User user = adminService.findUserByEmail("hhh@hhh.com");
+
+        adminService.addDayOff("27-1-2020", user);
+
+        return "redirect:/";
+    }
+
     @GetMapping("user/admin/addService")
     public String list(Model model){
         model.addAttribute("service", new Service());

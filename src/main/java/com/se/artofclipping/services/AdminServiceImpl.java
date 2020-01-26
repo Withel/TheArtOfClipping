@@ -4,6 +4,7 @@ import com.se.artofclipping.model.Role;
 import com.se.artofclipping.model.User;
 import com.se.artofclipping.model.Visit;
 import com.se.artofclipping.repositories.RoleRepository;
+import com.se.artofclipping.repositories.ServiceRepository;
 import com.se.artofclipping.repositories.UserRepository;
 import com.se.artofclipping.repositories.VisitRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +18,14 @@ import java.util.*;
 @Service
 public class AdminServiceImpl extends ClientServiceImpl implements AdminService {
 
+    ServiceRepository serviceRepository;
+
     public AdminServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
-                            RoleRepository roleRepository, VisitRepository visitRepository) {
+                            RoleRepository roleRepository, VisitRepository visitRepository,
+                            ServiceRepository serviceRepository) {
         super(userRepository,roleRepository, bCryptPasswordEncoder, visitRepository);
         this.roleRepository = roleRepository;
+        this.serviceRepository = serviceRepository;
     }
 
     @Override
@@ -101,6 +106,7 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
         }
         return false;
     }
+
     @Override
     public List<User> listHairdressers() {
 
@@ -130,6 +136,25 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
     public void deleteAccount(User user) {
 
     }
+
+    @Override
+    @Transactional
+    public void addDayOff(String day, User hairdresser) {
+
+        Visit visit = new Visit();
+
+        User user = userRepository.findByEmail("Day Off");
+        com.se.artofclipping.model.Service dayOffService = serviceRepository.findByName("Day Off");
+
+        visit.setDay(day);
+        visit.setClient(user);
+        visit.setHairDresser(hairdresser);
+        visit.setService(dayOffService);
+        visit.setTime("10:00");
+        visitRepository.save(visit);
+    }
+
+
 
     public User findUserById(Long id){
         Optional<com.se.artofclipping.model.User> optional = userRepository.findById(id);

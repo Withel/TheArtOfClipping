@@ -11,4 +11,5 @@ public interface ServiceRepository extends CrudRepository<Service, Long> {
 
     List<Service> findAllByType(Character type);
     List<Service> findByTypeAndIsActive(Character type, Boolean isActive);
+    Service findByName(String name);
 }

@@ -3,7 +3,6 @@ package com.se.artofclipping.services;
 import com.se.artofclipping.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface AdminService extends ClientService {
 
@@ -16,4 +15,5 @@ public interface AdminService extends ClientService {
     List<User> listHairdressers();
     User findUserByEmail(String email);
     User findUserById(Long id);
+    public void addDayOff(String day, User hairdresser);
 }
