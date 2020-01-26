@@ -62,10 +62,11 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
         User user = userRepository.findByEmail(adminEmail);
 
         if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword())) {
-
-            hairdresser.setName(newName);;
-            userRepository.save(hairdresser);
-            return true;
+            if(!newName.equals("")) {
+                hairdresser.setName(newName);
+                userRepository.save(hairdresser);
+                return true;
+            }
         }
         return false;
     }
@@ -75,10 +76,11 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
         User user = userRepository.findByEmail(adminEmail);
 
         if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword()) ) {
-
-            hairdresser.setSurname(newSurname);;
-            userRepository.save(hairdresser);
-            return true;
+            if(!newSurname.equals("")) {
+                hairdresser.setSurname(newSurname);
+                userRepository.save(hairdresser);
+                return true;
+            }
         }
         return false;
     }
@@ -88,10 +90,11 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
         User user = userRepository.findByEmail(adminEmail);
 
         if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword()) ) {
-
-            hairdresser.setEmail(newEmail);;
-            userRepository.save(hairdresser);
-            return true;
+            if(!newEmail.equals("")) {
+                hairdresser.setEmail(newEmail);
+                userRepository.save(hairdresser);
+                return true;
+            }
         }
         return false;
     }
@@ -100,9 +103,14 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
         User user = userRepository.findByEmail(adminEmail);
 
         if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword()) ) {
-            hairdresser.setPassword(bCryptPasswordEncoder.encode(newPassword));
-            userRepository.save(hairdresser);
-            return true;
+            if (!newPassword.equals("")) {
+                hairdresser.setPassword(bCryptPasswordEncoder.encode(newPassword));
+                userRepository.save(hairdresser);
+                return true;
+            }
+            else{
+                return true;
+            }
         }
         return false;
     }
