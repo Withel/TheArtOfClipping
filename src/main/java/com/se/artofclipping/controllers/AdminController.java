@@ -66,6 +66,30 @@ public class AdminController {
         return "user/admin/adminIssueDayOff";
     }
 
+    @GetMapping("user/admin/viewDaysOff")
+    public String viewDaysOff(Model model){
+        List<User> hairdressers = adminService.listHairdressers();
+        model.addAttribute("listHds", hairdressers);
+        model.addAttribute("hairdresser",new User());
+        model.addAttribute("hairdresserDaysOff", new ArrayList<Visit>());
+        return "user/admin/adminViewDaysOff";
+    }
+
+    @PostMapping("user/admin/showDaysOffForHds")
+    public String showDaysOff(Model model, @ModelAttribute  User hds)
+    {
+        User hairdresser = adminService.findUserByEmail(hds.getEmail());
+        Service service = serviceService.findByName("Day Off");
+
+        List<Visit> hairdresserDaysOff = visitService.findByServiceAndHairdresser(service,hairdresser);
+
+        List<User> hairdressers = adminService.listHairdressers();
+        model.addAttribute("listHds", hairdressers);
+        model.addAttribute("hairdresser",new User());
+        model.addAttribute("hairdresserDaysOff",hairdresserDaysOff);
+        return "user/admin/adminViewDaysOff";
+    }
+
     @PostMapping("user/admin/executedayoff")
     public String executeDayOff(Model model,@ModelAttribute User date){
         List<User> hairdressers = adminService.listHairdressers();
@@ -102,8 +126,7 @@ public class AdminController {
         }
         adminService.addDayOff(dtf.format(start), hairdresser);
 
-        for(int i=0;i<=numberOfDays; i++){
-
+        for(int i=1;i<=numberOfDays; i++){
             adminService.addDayOff(dtf.format(start.plusDays(i)), hairdresser);
         }
 
