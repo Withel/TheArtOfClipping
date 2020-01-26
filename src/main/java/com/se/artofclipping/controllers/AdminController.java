@@ -162,7 +162,6 @@ public class AdminController {
                 !adminService.changeHdsPassword(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getPassword())){
             return "user/admin/adminUpdateHairdresser";
         }
-
         return "/user/admin/adminManageHairdressers";
     }
 
