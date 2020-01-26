@@ -188,6 +188,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private List<User> getCustomers() {
 
 
+        Role userRole = roleRepository.findByRole("CUSTOMER");
         User customer = new User();
         customer.setEmail("aaa@aaa.com");
         customer.setPassword(bCryptPasswordEncoder.encode("aaa"));
@@ -195,7 +196,50 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         customer.setName("aaa");
         customer.setSurname("aaa");
 
-        Role userRole = roleRepository.findByRole("CUSTOMER");
+        customer.setRoles(new HashSet<>(Arrays.asList(userRole)));
+
+        customers.add(customer);
+
+        customer = new User();
+        customer.setEmail("Day Off");
+        customer.setPassword(bCryptPasswordEncoder.encode("Day Off"));
+        customer.setActive(0);
+        customer.setName("Day");
+        customer.setSurname("Off");
+
+        customer.setRoles(new HashSet<>(Arrays.asList(userRole)));
+
+        customers.add(customer);
+
+        customer = new User();
+        customer.setEmail("bbb@bbb.com");
+        customer.setPassword(bCryptPasswordEncoder.encode("bbb"));
+        customer.setActive(1);
+        customer.setName("bbb");
+        customer.setSurname("bbb");
+
+        customer.setRoles(new HashSet<>(Arrays.asList(userRole)));
+
+        customers.add(customer);
+
+        customer = new User();
+        customer.setEmail("ccc@ccc.com");
+        customer.setPassword(bCryptPasswordEncoder.encode("ccc"));
+        customer.setActive(1);
+        customer.setName("ccc");
+        customer.setSurname("ccc");
+
+        customer.setRoles(new HashSet<>(Arrays.asList(userRole)));
+
+        customers.add(customer);
+
+        customer = new User();
+        customer.setEmail("ddd@ddd.com");
+        customer.setPassword(bCryptPasswordEncoder.encode("ddd"));
+        customer.setActive(1);
+        customer.setName("ddd");
+        customer.setSurname("ddd");
+
         customer.setRoles(new HashSet<>(Arrays.asList(userRole)));
 
         customers.add(customer);
@@ -224,6 +268,50 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         hairdresser.setActive(1);
         hairdresser.setName("ggg");
         hairdresser.setSurname("ggg");
+
+        hairdresser.setRoles(new HashSet<>(Arrays.asList(userRole)));
+
+        hairdressers.add(hairdresser);
+
+        hairdresser = new User();
+        hairdresser.setEmail("jjj@jjj.com");
+        hairdresser.setPassword(bCryptPasswordEncoder.encode("jjj"));
+        hairdresser.setActive(1);
+        hairdresser.setName("jjj");
+        hairdresser.setSurname("jjj");
+
+        hairdresser.setRoles(new HashSet<>(Arrays.asList(userRole)));
+
+        hairdressers.add(hairdresser);
+
+        hairdresser = new User();
+        hairdresser.setEmail("kkk@kkk.com");
+        hairdresser.setPassword(bCryptPasswordEncoder.encode("kkk"));
+        hairdresser.setActive(1);
+        hairdresser.setName("kkk");
+        hairdresser.setSurname("kkk");
+
+        hairdresser.setRoles(new HashSet<>(Arrays.asList(userRole)));
+
+        hairdressers.add(hairdresser);
+
+        hairdresser = new User();
+        hairdresser.setEmail("lll@lll.com");
+        hairdresser.setPassword(bCryptPasswordEncoder.encode("lll"));
+        hairdresser.setActive(1);
+        hairdresser.setName("lll");
+        hairdresser.setSurname("lll");
+
+        hairdresser.setRoles(new HashSet<>(Arrays.asList(userRole)));
+
+        hairdressers.add(hairdresser);
+
+        hairdresser = new User();
+        hairdresser.setEmail("zzz@zzz.com");
+        hairdresser.setPassword(bCryptPasswordEncoder.encode("zzz"));
+        hairdresser.setActive(1);
+        hairdresser.setName("zzz");
+        hairdresser.setSurname("zzz");
 
         hairdresser.setRoles(new HashSet<>(Arrays.asList(userRole)));
 
@@ -311,7 +399,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
         service = new Service();
 
-     
+
         service.setName("Wash & Cut");
         service.setIsActive(true);
         service.setDurationMinutes(60);
@@ -333,6 +421,14 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         service.setDurationMinutes(90);
         service.setPrice(90D);
         service.setType(Character.toUpperCase('F'));
+        services.add(service);
+
+        service = new Service();
+        service.setName("Day Off");
+        service.setIsActive(false);
+        service.setDurationMinutes(480);
+        service.setPrice(0.0D);
+        service.setType('F');
         services.add(service);
 
         return services;
