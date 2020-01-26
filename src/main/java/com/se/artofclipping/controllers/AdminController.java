@@ -145,10 +145,7 @@ public class AdminController {
         model.addAttribute("hairdressers", hairdressers);
 
         if(changed != null){
-            if(old.getEmail().equals(changed.getEmail())){
-                return "/user/admin/adminManageHairdressers";
-            }
-            else {
+            if(!old.getEmail().equals(changed.getEmail())){
                 return "user/admin/adminUpdateHairdresser";
             }
         }
