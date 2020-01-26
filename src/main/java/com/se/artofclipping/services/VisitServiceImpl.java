@@ -4,8 +4,8 @@ import com.se.artofclipping.model.User;
 import com.se.artofclipping.model.Visit;
 import com.se.artofclipping.repositories.VisitRepository;
 import org.springframework.stereotype.Service;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
+
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +36,20 @@ public class VisitServiceImpl implements VisitService {
         visitRepository.findByDay(day).iterator().forEachRemaining(visits::add);
 
         return visits;
+    }
+
+    @Override
+    public List<Visit> findByServiceAndHairdresser(com.se.artofclipping.model.Service service, User hairdresser) {
+        List<Visit> visits = new ArrayList<>();
+        visitRepository.findByServiceAndHairDresser(service, hairdresser).iterator().forEachRemaining(visits::add);
+
+        return visits;
+    }
+
+    @Transactional
+    @Override
+    public void deleteAll(List<Visit> listToDelete) {
+        visitRepository.deleteAll(listToDelete);
     }
 
     @Override

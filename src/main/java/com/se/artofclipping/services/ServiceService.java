@@ -2,7 +2,6 @@ package com.se.artofclipping.services;
 
 import com.se.artofclipping.model.Service;
 
-import java.nio.DoubleBuffer;
 import java.util.List;
 
 public interface ServiceService {
@@ -17,4 +16,5 @@ public interface ServiceService {
     void changePrice(Service service, Double newPrice);
     void changeIsActive(Service service, boolean activity);
     void deprecateService(Long id);
+    Service findByName(String name);
 }
