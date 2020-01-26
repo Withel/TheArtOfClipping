@@ -154,12 +154,22 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
         User user = userRepository.findByEmail("Day Off");
         com.se.artofclipping.model.Service dayOffService = serviceRepository.findByName("Day Off");
 
+        List<Visit> visits = visitRepository.findByHairDresser(hairdresser);
+        List<Visit> visitsToDelete = new ArrayList<Visit>();
+        for(Visit v : visits){
+            if(v.getDay().equals(day)){
+                visitsToDelete.add(v);
+            }
+        }
+        visitRepository.deleteAll(visitsToDelete);
+
         visit.setDay(day);
         visit.setClient(user);
         visit.setHairDresser(hairdresser);
         visit.setService(dayOffService);
         visit.setTime("10:00");
         visitRepository.save(visit);
+
     }
 
 
