@@ -144,30 +144,24 @@ public class AdminController {
         hairdressers = adminService.listHairdressers();
         model.addAttribute("hairdressers", hairdressers);
 
+        if(!adminService.changeHdsName(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getName()) ||
+                !adminService.changeHdsSurname(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getSurname()) ||
+                !adminService.changeHdsPassword(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getPassword())){
+            return "user/admin/adminUpdateHairdresser";
+        }
+
         if(changed != null){
             if(old.getEmail().equals(changed.getEmail())){
-                if(!adminService.changeHdsName(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getName()) ||
-                !adminService.changeHdsSurname(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getSurname())){
-                    return "user/admin/adminUpdateHairdresser";
-                }
-                else if(!auxVisit.getHairDresser().getPassword().equals("")) {
-                    adminService.changeHdsPassword(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getPassword());
-                }
+                return "/user/admin/adminManageHairdressers";
             }
-            else{
+            else {
                 return "user/admin/adminUpdateHairdresser";
             }
         }
         else{
-            if(!adminService.changeHdsEmail(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getEmail()) ||
-                    !adminService.changeHdsName(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getName()) ||
-                    !adminService.changeHdsSurname(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getSurname())){
+            if(!adminService.changeHdsEmail(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getEmail()))
                 return "user/admin/adminUpdateHairdresser";
             }
-            else if(!auxVisit.getHairDresser().getPassword().equals("")) {
-                adminService.changeHdsPassword(old, auxVisit.getClient().getPassword(),auth.getName(),auxVisit.getHairDresser().getPassword());
-            }
-        }
         return "/user/admin/adminManageHairdressers";
     }
 
