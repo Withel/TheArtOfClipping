@@ -48,6 +48,11 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
+    public Service findByName(String name) {
+        return serviceRepository.findByName(name);
+    }
+
+    @Override
     public void changeDuration(Service service, Integer newDuration) {
         Service serviceToUpdate = findById(service.getId());
 
