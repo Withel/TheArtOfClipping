@@ -428,7 +428,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         service.setIsActive(false);
         service.setDurationMinutes(480);
         service.setPrice(0.0D);
-        service.setType('F');
+        service.setType('Q');
         services.add(service);
 
         return services;
