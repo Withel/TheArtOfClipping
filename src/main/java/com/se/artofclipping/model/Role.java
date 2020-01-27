@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+//@Todo change it to 'roles'
 @Data
 @Entity
 public class Role {

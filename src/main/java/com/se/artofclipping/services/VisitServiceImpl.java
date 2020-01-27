@@ -30,7 +30,6 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public List<Visit> findByDay(String day) {
-//        visitRepository.findByDay(day);
 
         List<Visit> visits = new ArrayList<>();
         visitRepository.findByDay(day).iterator().forEachRemaining(visits::add);
@@ -56,7 +55,7 @@ public class VisitServiceImpl implements VisitService {
     public Visit findById(Long id) {
         Optional<com.se.artofclipping.model.Visit> optional = visitRepository.findById(id);
 
-        if(!optional.isPresent()){
+        if (!optional.isPresent()) {
             throw new RuntimeException("Visit Not Found");
         }
 
@@ -65,7 +64,6 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public List<Visit> findByHds(User hds) {
-//        visitRepository.findByDay(day);
 
         List<Visit> visits = new ArrayList<>();
         visitRepository.findByHairDresser(hds).iterator().forEachRemaining(visits::add);
@@ -74,8 +72,6 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public void addNewVisit(User user, User hd, Long serviceId, String day, String time) {
-
-//        Visit visit = new Visit();
 
     }
 

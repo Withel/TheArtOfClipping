@@ -18,7 +18,7 @@ import java.util.List;
 
 @Service
 @Primary
-public class ClientServiceImpl  extends UserServiceImpl implements ClientService{
+public class ClientServiceImpl extends UserServiceImpl implements ClientService {
 
     VisitRepository visitRepository;
 
@@ -48,8 +48,8 @@ public class ClientServiceImpl  extends UserServiceImpl implements ClientService
     @Override
     public boolean validatePasswordAndEmail(User rawUser, User encodedUser) {
 
-        if(rawUser.getEmail().equals(encodedUser.getEmail())
-                && bCryptPasswordEncoder.matches(rawUser.getPassword(), encodedUser.getPassword())){
+        if (rawUser.getEmail().equals(encodedUser.getEmail())
+                && bCryptPasswordEncoder.matches(rawUser.getPassword(), encodedUser.getPassword())) {
             return true;
         }
 
@@ -63,7 +63,7 @@ public class ClientServiceImpl  extends UserServiceImpl implements ClientService
         List<Visit> visitsToDelete = new ArrayList<>();
         visitRepository.findByClient(client).iterator().forEachRemaining(visitsToDelete::add);
 
-        for(Visit toDelete : visitsToDelete){
+        for (Visit toDelete : visitsToDelete) {
             visitRepository.delete(toDelete);
         }
 

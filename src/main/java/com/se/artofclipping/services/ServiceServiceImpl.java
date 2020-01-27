@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+//@Todo sort these function I mean change their location in file
 @org.springframework.stereotype.Service
 public class ServiceServiceImpl implements ServiceService {
 
@@ -35,7 +36,7 @@ public class ServiceServiceImpl implements ServiceService {
     public Service findById(Long id) {
         Optional<Service> serviceOptional = serviceRepository.findById(id);
 
-        if(!serviceOptional.isPresent()){
+        if (!serviceOptional.isPresent()) {
             throw new RuntimeException("Service Not Found");
         }
 

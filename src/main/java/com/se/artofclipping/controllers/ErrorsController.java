@@ -7,12 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ErrorsController {
 
     @GetMapping("access-denied")
-    public String accessDenied(){
+    public String accessDenied() {
         return "accessDenied";
     }
 
-//    @GetMapping("/error")
-//    public String error(){
-//        return "error";
-//    }
 }
