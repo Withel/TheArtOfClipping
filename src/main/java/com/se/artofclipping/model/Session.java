@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.sql.Date;
 
+//@Todo not used may be usefull in refactoring
 @Data
 @Entity
 @Table(name = "sessions")

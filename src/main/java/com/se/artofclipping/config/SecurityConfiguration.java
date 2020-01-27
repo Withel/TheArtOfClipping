@@ -42,7 +42,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/register",
             "/registration",
             "/about",
-            //@TODO change for correct loggin in later...
             "/rsvr/**",
             "/confirmation",
     };

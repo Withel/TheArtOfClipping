@@ -15,13 +15,15 @@ public class IndexController {
     }
 
     @GetMapping({"", "/", "/index"})
-    public String home(Model model){
+    public String home(Model model) {
         model.addAttribute("servicesF", serviceService.listServiceByTypeAndavailability('F', true));
         model.addAttribute("servicesM", serviceService.listServiceByTypeAndavailability('M', true));
         return "index";
     }
+
+    //@TODO make this into static resources
     @GetMapping({"/about"})
-    public String about(Model model){
+    public String about() {
         return "about";
     }
 }

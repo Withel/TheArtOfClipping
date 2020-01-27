@@ -22,11 +22,10 @@ public class Visit {
     @ManyToOne
     private User hairDresser;
 
+//    @ManyToOne
+//    private Session session;
 
-    //@TODO Discuss this
-    @ManyToOne
-    private Session session;
-
+    //@todo great types for day and time huh?
     private String day;
 
     private String time;

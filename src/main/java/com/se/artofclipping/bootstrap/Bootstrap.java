@@ -9,6 +9,7 @@ import com.se.artofclipping.repositories.ServiceRepository;
 import com.se.artofclipping.repositories.UserRepository;
 import com.se.artofclipping.repositories.VisitRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +20,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+
+// Goal of this class is to populate databae with some "testing" data
+// Works only if profile h2 is selected if not only admin will be added
+// and database will be initialised via data.sql
 
 @Slf4j
 @Component
@@ -44,20 +49,32 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     List<Service> services = new ArrayList<>();
 
+    @Value("${spring.database.name}")
+    private String dataBase;
 
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        log.debug("Loading bootstrap data.");
-        roleRepository.saveAll(getRoles());
-        userRepository.saveAll(getAdmins());
-        userRepository.saveAll(getCustomers());
-        userRepository.saveAll(getHairdressers());
-        serviceRepository.saveAll(getServices());
-        visitRepository.saveAll(getVisits());
+        System.out.println(dataBase);
+        if (dataBase.equals("h2")) {
+            log.debug("Loading bootstrap data.");
+            roleRepository.saveAll(getRoles());
+            userRepository.saveAll(getAdmins());
+            userRepository.saveAll(getCustomers());
+            userRepository.saveAll(getHairdressers());
+            serviceRepository.saveAll(getServices());
+            visitRepository.saveAll(getVisits());
+        }
+
+        //@Todo couldnt find way to encrypt password for pure sql script
+        if (dataBase.equals("postgres")) {
+            User user = userRepository.findByEmail("admin@admin.com");
+            if (user == null) {
+                userRepository.saveAll(getAdmins());
+            }
+        }
     }
 
-    //@TODO for testing purposes remove later
     private List<Visit> getVisits() {
 
         List<Visit> visits = new ArrayList<>();
@@ -73,8 +90,6 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         visits.add(visit);
 
         visit = new Visit();
-//        visit.setClient(new User());
-//        visit.setHairDresser(new User());
         visit.setIsAvailable(true);
         visit.setDay("28-1-2020");
         visit.setTime("11:30");
@@ -86,8 +101,6 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
 
         visit = new Visit();
-//        visit.setClient(new User());
-//        visit.setHairDresser(new User());
         visit.setIsAvailable(true);
         visit.setDay("24-1-2020");
         visit.setTime("12:30");
@@ -99,8 +112,6 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
 
         visit = new Visit();
-//        visit.setClient(new User());
-//        visit.setHairDresser(new User());
         visit.setIsAvailable(true);
         visit.setDay("24-1-2020");
         visit.setTime("13:30");
@@ -112,8 +123,6 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
 
         visit = new Visit();
-//        visit.setClient(new User());
-//        visit.setHairDresser(new User());
         visit.setIsAvailable(true);
         visit.setDay("24-1-2020");
         visit.setTime("14:30");
@@ -121,15 +130,10 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         visit.setClient(customers.get(0));
         visit.setService(services.get(0));
 
-
         visits.add(visit);
-        //==================
-        //another name
 
 
         visit = new Visit();
-//        visit.setClient(new User());
-//        visit.setHairDresser(new User());
         visit.setIsAvailable(true);
         visit.setDay("24-1-2020");
         visit.setTime("15:30");
@@ -322,7 +326,6 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private List<Service> getServices() {
 
-
         // Male services
         Service service = new Service();
         service.setName("Clipper Cut");
@@ -399,7 +402,6 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
         service = new Service();
 
-     
         service.setName("Wash & Cut");
         service.setIsActive(true);
         service.setDurationMinutes(60);

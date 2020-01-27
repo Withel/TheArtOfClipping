@@ -4,12 +4,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+//@Todo remove it later, Visit should be session variable
 @Getter
 @Setter
 @NoArgsConstructor
 public class TempVisit {
 
-    //@TODO change the type of that field
     private Boolean isAvailable;
 
     private User client;
@@ -22,7 +22,7 @@ public class TempVisit {
 
     private Service service;
 
-    public Visit convertToVisit(){
+    public Visit convertToVisit() {
         Visit newVisit = new Visit();
         newVisit.setHairDresser(hairDresser);
         newVisit.setClient(client);

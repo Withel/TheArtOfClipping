@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Slf4j
 public class GuestController {
 
-    //@Autowired
     private GuestService guestService;
     private TempVisit tempVisit;
 
@@ -29,7 +28,7 @@ public class GuestController {
     //@TODO change this name to smething relevant
     @GetMapping("user")
     public String goTo(Model model) {
-        //@TODO change it for query with admin role
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = guestService.findUserByEmail(auth.getName());
         model.addAttribute("user", user);
@@ -42,18 +41,10 @@ public class GuestController {
             return "user/hairdresser/hairdresserPage";
         }
 
-//        System.out.println(tempVisit.getDay());
-//        System.out.println(tempVisit.getHairDresser().getEmail());
-//        System.out.println(tempVisit.getTime());
-//        System.out.println(tempVisit.getService().getName());
-
-        //@TODO weird shit here remember about backing up
+        //@TODO
         // if any of these viarables will be null it will get us to standard user profile
-        if(tempVisit.getDay() == null || tempVisit.getTime() == null || tempVisit.getService() == null
-                            || tempVisit.getService() == null){
-
-//            if(tempVisit.getDay() == null || tempVisit.getTime() == null || tempVisit.getService() == null
-//                    || tempVisit.getService() == null || user != null)
+        if (tempVisit.getDay() == null || tempVisit.getTime() == null || tempVisit.getService() == null
+                || tempVisit.getService() == null) {
 
             return "user/client/clientPage";
         }
@@ -92,5 +83,4 @@ public class GuestController {
             return "user/loginForm";
         }
     }
-
 }

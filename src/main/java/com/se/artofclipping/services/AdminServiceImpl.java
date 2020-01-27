@@ -23,7 +23,7 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
     public AdminServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
                             RoleRepository roleRepository, VisitRepository visitRepository,
                             ServiceRepository serviceRepository) {
-        super(userRepository,roleRepository, bCryptPasswordEncoder, visitRepository);
+        super(userRepository, roleRepository, bCryptPasswordEncoder, visitRepository);
         this.roleRepository = roleRepository;
         this.serviceRepository = serviceRepository;
     }
@@ -40,16 +40,16 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
     @Transactional
     @Override
     public boolean delHairdresser(User hairdresser, String adminPassword, String adminEmail) {
-       //TODO make successful deletion of hairdressers
+        //TODO make successful deletion of hairdressers
         User user = userRepository.findByEmail(adminEmail);
         List<Visit> visitsToDelete = new ArrayList<>();
         visitRepository.findByHairDresser(hairdresser).iterator().forEachRemaining(visitsToDelete::add);
 
-        for(Visit toDelete : visitsToDelete){
+        for (Visit toDelete : visitsToDelete) {
             visitRepository.delete(toDelete);
         }
 
-        if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword())) {
+        if (bCryptPasswordEncoder.matches(adminPassword, user.getPassword())) {
             hairdresser.setActive(0);
             userRepository.save(hairdresser);
             return true;
@@ -61,8 +61,8 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
     public boolean changeHdsName(User hairdresser, String adminPassword, String adminEmail, String newName) {
         User user = userRepository.findByEmail(adminEmail);
 
-        if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword())) {
-            if(!newName.equals("")) {
+        if (bCryptPasswordEncoder.matches(adminPassword, user.getPassword())) {
+            if (!newName.equals("")) {
                 hairdresser.setName(newName);
                 userRepository.save(hairdresser);
                 return true;
@@ -75,8 +75,8 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
     public boolean changeHdsSurname(User hairdresser, String adminPassword, String adminEmail, String newSurname) {
         User user = userRepository.findByEmail(adminEmail);
 
-        if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword()) ) {
-            if(!newSurname.equals("")) {
+        if (bCryptPasswordEncoder.matches(adminPassword, user.getPassword())) {
+            if (!newSurname.equals("")) {
                 hairdresser.setSurname(newSurname);
                 userRepository.save(hairdresser);
                 return true;
@@ -89,8 +89,8 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
     public boolean changeHdsEmail(User hairdresser, String adminPassword, String adminEmail, String newEmail) {
         User user = userRepository.findByEmail(adminEmail);
 
-        if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword()) ) {
-            if(!newEmail.equals("")) {
+        if (bCryptPasswordEncoder.matches(adminPassword, user.getPassword())) {
+            if (!newEmail.equals("")) {
                 hairdresser.setEmail(newEmail);
                 userRepository.save(hairdresser);
                 return true;
@@ -98,17 +98,17 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
         }
         return false;
     }
+
     @Override
     public boolean changeHdsPassword(User hairdresser, String adminPassword, String adminEmail, String newPassword) {
         User user = userRepository.findByEmail(adminEmail);
 
-        if(bCryptPasswordEncoder.matches(adminPassword, user.getPassword()) ) {
+        if (bCryptPasswordEncoder.matches(adminPassword, user.getPassword())) {
             if (!newPassword.equals("")) {
                 hairdresser.setPassword(bCryptPasswordEncoder.encode(newPassword));
                 userRepository.save(hairdresser);
                 return true;
-            }
-            else{
+            } else {
                 return true;
             }
         }
@@ -121,14 +121,12 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
         List<User> hairdressers = new ArrayList<>();
         List<User> users = new ArrayList<>();
 
-        //@TODO make this correct query for finding only hairdressers
         userRepository.findAll().iterator().forEachRemaining(users::add);
 
         Role userRole = roleRepository.findByRole("EMPLOYEE");
 
-        for(User user : users){
-            if(user.getRoles().equals(new HashSet<>(Arrays.asList(userRole))) && user.getActive() == 1)
-            {
+        for (User user : users) {
+            if (user.getRoles().equals(new HashSet<>(Arrays.asList(userRole))) && user.getActive() == 1) {
                 hairdressers.add(user);
             }
         }
@@ -163,11 +161,10 @@ public class AdminServiceImpl extends ClientServiceImpl implements AdminService 
     }
 
 
-
-    public User findUserById(Long id){
+    public User findUserById(Long id) {
         Optional<com.se.artofclipping.model.User> optional = userRepository.findById(id);
 
-        if(!optional.isPresent()){
+        if (!optional.isPresent()) {
             throw new RuntimeException("User Not Found");
         }
 

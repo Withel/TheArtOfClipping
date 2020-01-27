@@ -22,7 +22,7 @@ public class User {
     private String surname;
     private String email;
     private String password;
-    //@TODO discover why this fucking shit doesnt work without this FFS
+
     // field is for checking if user is active in our database
     private int active;
 

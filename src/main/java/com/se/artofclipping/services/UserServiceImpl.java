@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void changeEmail(User user, String password,String email) {
-        if(!email.equals("")) {
+    public void changeEmail(User user, String password, String email) {
+        if (!email.equals("")) {
             if (bCryptPasswordEncoder.matches(password, user.getPassword())) {
                 user.setEmail(email);
                 userRepository.save(user);
@@ -48,19 +48,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changeName(User user, String name) {
-        if(!name.equals("")) {
+        if (!name.equals("")) {
             user.setName(name);
             userRepository.save(user);
         }
     }
 
     @Override
-    public boolean changePassword(User user, String oldPassword,String newPassword) {
-        if(newPassword.equals(""))
-        {
+    public boolean changePassword(User user, String oldPassword, String newPassword) {
+        if (newPassword.equals("")) {
             return false;
         }
-        if(bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
+        if (bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
             user.setPassword(bCryptPasswordEncoder.encode(newPassword));
             userRepository.save(user);
             return true;
@@ -69,8 +68,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changeSurname(User user,String surname) {
-        if(!surname.equals("")) {
+    public void changeSurname(User user, String surname) {
+        if (!surname.equals("")) {
             user.setSurname(surname);
             userRepository.save(user);
         }
@@ -81,7 +80,7 @@ public class UserServiceImpl implements UserService {
         List<Visit> visitsToRemove = new ArrayList<>();
         Date date;
         Timestamp timestamp = null;
-        for(Visit visit : visits){
+        for (Visit visit : visits) {
             try {
                 date = new SimpleDateFormat("dd-MM-yyyy").parse(visit.getDay());
                 timestamp = new Timestamp(date.getTime());
@@ -91,7 +90,7 @@ public class UserServiceImpl implements UserService {
                 timestamp = new Timestamp(cal.getTimeInMillis());
             }
             Timestamp temp = new Timestamp(System.currentTimeMillis());
-            if(timestamp.before(temp)){
+            if (timestamp.before(temp)) {
                 visitsToRemove.add(visit);
             }
         }

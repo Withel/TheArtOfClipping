@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.ArrayList;
 import java.util.List;
 
+//@Todo also check if every authentitacion is needed
 @Slf4j
 @Controller
 public class HairdresserController {
@@ -27,7 +28,7 @@ public class HairdresserController {
     }
 
     @GetMapping("user/hairdresser/showvisits")
-    public String showVisits(Model model){
+    public String showVisits(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User hairdresser = hairdresserService.findUserByEmail(auth.getName());
         List<Visit> hairdresserVisits = new ArrayList<>();
@@ -40,110 +41,110 @@ public class HairdresserController {
     }
 
     @GetMapping("user/hairdresser/modify")
-    public String hairdresserModify(Model model){
+    public String hairdresserModify(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = hairdresserService.findUserByEmail(auth.getName());
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "user/hairdresser/hairdresserModifyProfile";
     }
+
     @GetMapping("user/hairdresser/changeNameView")
-    public String hairdresserChangeNameView(Model model){
+    public String hairdresserChangeNameView(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = hairdresserService.findUserByEmail(auth.getName());
-        model.addAttribute("user",user);
-        model.addAttribute("newUser",new User());
+        model.addAttribute("user", user);
+        model.addAttribute("newUser", new User());
         return "user/hairdresser/hairdresserChangeName";
     }
 
     @PostMapping("user/hairdresser/changeName")
-    public String hairdresserChangeName(@ModelAttribute User newUser,Model model) {
+    public String hairdresserChangeName(@ModelAttribute User newUser, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = hairdresserService.findUserByEmail(auth.getName());
 
-        hairdresserService.changeName(currentUser,newUser.getName());
-        model.addAttribute("user",currentUser);
+        hairdresserService.changeName(currentUser, newUser.getName());
+        model.addAttribute("user", currentUser);
         return "user/hairdresser/hairdresserModifyProfile";
     }
 
     @GetMapping("user/hairdresser/changeSurnameView")
-    public String hairdresserChangeSurnameView(Model model){
+    public String hairdresserChangeSurnameView(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = hairdresserService.findUserByEmail(auth.getName());
-        model.addAttribute("user",user);
-        model.addAttribute("newUser",new User());
+        model.addAttribute("user", user);
+        model.addAttribute("newUser", new User());
         return "user/hairdresser/hairdresserChangeSurname";
     }
 
     @PostMapping("user/hairdresser/changeSurname")
-    public String hairdresserChangeSurname(@ModelAttribute User newUser,Model model) {
+    public String hairdresserChangeSurname(@ModelAttribute User newUser, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = hairdresserService.findUserByEmail(auth.getName());
-        hairdresserService.changeSurname(currentUser,newUser.getSurname());
-        model.addAttribute("user",currentUser);
+        hairdresserService.changeSurname(currentUser, newUser.getSurname());
+        model.addAttribute("user", currentUser);
         return "user/hairdresser/hairdresserModifyProfile";
     }
 
     @GetMapping("user/hairdresser/changeEmailView")
-    public String hairdresserChangeEmailView(Model model){
+    public String hairdresserChangeEmailView(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = hairdresserService.findUserByEmail(auth.getName());
-        model.addAttribute("user",user);
-        model.addAttribute("newUser",new User());
+        model.addAttribute("user", user);
+        model.addAttribute("newUser", new User());
         return "user/hairdresser/hairdresserChangeEmail";
     }
 
     @PostMapping("user/hairdresser/changeEmail")
-    public String hairdresserChangeEmail(@ModelAttribute User newUser,Model model) {
+    public String hairdresserChangeEmail(@ModelAttribute User newUser, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = hairdresserService.findUserByEmail(auth.getName());
 
         User userExists = hairdresserService.findUserByEmail(newUser.getEmail());
         if (userExists != null) {
-            model.addAttribute("user",currentUser);
-            model.addAttribute("newUser",new User());
+            model.addAttribute("user", currentUser);
+            model.addAttribute("newUser", new User());
             return "user/hairdresser/hairdresserChangeEmail";
         }
 
-        hairdresserService.changeEmail(currentUser,newUser.getPassword(),newUser.getEmail());
+        hairdresserService.changeEmail(currentUser, newUser.getPassword(), newUser.getEmail());
 
-        if(!currentUser.getEmail().equals(newUser.getEmail()) )
-        {
-            model.addAttribute("user",currentUser);
-            model.addAttribute("newUser",new User());
+        if (!currentUser.getEmail().equals(newUser.getEmail())) {
+            model.addAttribute("user", currentUser);
+            model.addAttribute("newUser", new User());
             return "user/hairdresser/hairdresserChangeEmail";
         }
         Authentication result = new UsernamePasswordAuthenticationToken(currentUser.getEmail(), currentUser.getPassword());
         SecurityContextHolder.getContext().setAuthentication(result);
 
-        model.addAttribute("user",currentUser);
+        model.addAttribute("user", currentUser);
         return "user/loginForm";
     }
 
     @GetMapping("user/hairdresser/changePasswordView")
-    public String hairdresserChangePasswordView(Model model){
+    public String hairdresserChangePasswordView(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = hairdresserService.findUserByEmail(auth.getName());
-        model.addAttribute("user",user);
-        model.addAttribute("newUser",new User());
+        model.addAttribute("user", user);
+        model.addAttribute("newUser", new User());
         return "user/hairdresser/hairdresserChangePassword";
     }
 
     @PostMapping("user/hairdresser/changePassword")
-    public String hairdresserChangePassword(@ModelAttribute User newUser,Model model) {
+    public String hairdresserChangePassword(@ModelAttribute User newUser, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = hairdresserService.findUserByEmail(auth.getName());
         String oldPassword = newUser.getName();
 
-        if(!hairdresserService.changePassword(currentUser,oldPassword,newUser.getPassword())){
-            model.addAttribute("user",currentUser);
-            model.addAttribute("newUser",new User());
+        if (!hairdresserService.changePassword(currentUser, oldPassword, newUser.getPassword())) {
+            model.addAttribute("user", currentUser);
+            model.addAttribute("newUser", new User());
             return "user/hairdresser/hairdresserChangePassword";
         }
 
         Authentication result = new UsernamePasswordAuthenticationToken(currentUser.getEmail(), currentUser.getPassword());
         SecurityContextHolder.getContext().setAuthentication(result);
 
-        model.addAttribute("user",currentUser);
+        model.addAttribute("user", currentUser);
         return "user/loginForm";
     }
 }

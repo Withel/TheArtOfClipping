@@ -42,20 +42,19 @@ public class GuestServiceImpl implements GuestService {
         userRepository.save(user);
     }
 
-    public boolean checkIfAdmin(String email){
+    public boolean checkIfAdmin(String email) {
         Role userRole = roleRepository.findByRole("ADMIN");
         User user = userRepository.findByEmail(email);
-        if(user.getRoles().contains(userRole)) {
+        if (user.getRoles().contains(userRole)) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
-    public boolean checkIfHairdresser(String email){
+
+    public boolean checkIfHairdresser(String email) {
         Role userRole = roleRepository.findByRole("EMPLOYEE");
         User user = userRepository.findByEmail(email);
-        if(user.getRoles().contains(userRole)) {
+        if (user.getRoles().contains(userRole)) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
 }
